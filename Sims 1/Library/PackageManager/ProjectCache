@@ -5,16 +5,16 @@ m_ProjectFiles:
     m_ContentTrackingEnabled: 1
     m_ModificationDate:
       serializedVersion: 2
-      ticks: 637680436456058211
-    m_Hash: 726070672
+      ticks: 637696597249332594
+    m_Hash: 1998714057
   m_LockFileStatus:
     m_FilePath: C:/Users/eduar/Documents/GitHub/simulation-1/Sims 1/Packages/packages-lock.json
     m_PathExists: 1
     m_ContentTrackingEnabled: 1
     m_ModificationDate:
       serializedVersion: 2
-      ticks: 637680436735524493
-    m_Hash: 3708424618
+      ticks: 637696597249332594
+    m_Hash: 3073105869
 m_EmbeddedPackageManifests:
   m_ManifestsStatus: {}
 m_PackageAssets:
@@ -98,19 +98,23 @@ m_PackageAssets:
         - 5.0.5
         - 5.0.6
         - 5.0.7
+        - 5.0.8
         - 6.0.0-pre.1
         - 6.0.0-pre.2
         - 6.0.1
         - 6.0.3
         - 6.0.4
         - 6.0.5
+        - 6.0.7
         - 7.0.0-pre.2
         - 7.0.0-pre.3
         - 7.0.0
+        - 7.0.1
         compatible:
         - 5.0.6
         - 5.0.7
-        verified: 5.0.7
+        - 5.0.8
+        verified: 5.0.8
       dependencies:
       - name: com.unity.2d.common
         version: 4.0.3
@@ -293,18 +297,22 @@ m_PackageAssets:
         - 4.0.1
         - 4.0.2
         - 4.1.0
+        - 4.1.1
         - 5.0.0-pre.1
         - 5.0.0-pre.2
         - 5.0.1
         - 5.0.3
         - 5.0.4
+        - 5.0.6
         - 6.0.0-pre.2
         - 6.0.0-pre.3
         - 6.0.0-pre.4
         - 6.0.0
+        - 6.0.1
         compatible:
         - 4.1.0
-        verified: 4.1.0
+        - 4.1.1
+        verified: 4.1.1
       dependencies:
       - name: com.unity.2d.common
         version: 4.0.3
@@ -480,17 +488,21 @@ m_PackageAssets:
         - 5.1.2
         - 5.1.3
         - 5.1.4
+        - 5.1.5
         - 6.0.0-pre.1
         - 6.0.0-pre.2
         - 6.0.0
         - 6.0.1
+        - 6.0.2
         - 7.0.0-pre.2
         - 7.0.0-pre.3
         - 7.0.0
+        - 7.0.2
         compatible:
         - 5.1.3
         - 5.1.4
-        verified: 5.1.4
+        - 5.1.5
+        verified: 5.1.5
       dependencies:
       - name: com.unity.mathematics
         version: 1.1.0
@@ -646,6 +658,8 @@ m_PackageAssets:
         - 1.9.0
         - 1.10.2
         - 1.11.2
+        - 1.12.5
+        - 1.13.5
         - 2.0.0-preview.6
         - 2.0.0-preview.8
         - 2.0.0-preview.15
@@ -662,6 +676,8 @@ m_PackageAssets:
         - 1.9.0
         - 1.10.2
         - 1.11.2
+        - 1.12.5
+        - 1.13.5
         - 2.0.0-preview.6
         - 2.0.0-preview.8
         - 2.0.0-preview.15
@@ -3342,9 +3358,33 @@ m_PackageAssets:
       errors: []
       versions:
         all:
+        - 0.0.12-preview.2
+        - 0.0.12-preview.5
+        - 0.0.12-preview.8
+        - 0.0.12-preview.10
+        - 0.0.12-preview.11
+        - 0.0.12-preview.13
+        - 0.0.12-preview.17
+        - 0.0.12-preview.19
+        - 0.0.12-preview.20
+        - 1.0.0-preview.1
+        - 1.0.1
+        - 1.1.0-preview.1
         - 1.1.0
         - 1.2.1
         compatible:
+        - 0.0.12-preview.2
+        - 0.0.12-preview.5
+        - 0.0.12-preview.8
+        - 0.0.12-preview.10
+        - 0.0.12-preview.11
+        - 0.0.12-preview.13
+        - 0.0.12-preview.17
+        - 0.0.12-preview.19
+        - 0.0.12-preview.20
+        - 1.0.0-preview.1
+        - 1.0.1
+        - 1.1.0-preview.1
         - 1.1.0
         - 1.2.1
         verified: 1.2.1
@@ -3364,7 +3404,7 @@ m_PackageAssets:
       entitlements:
         isAllowed: 1
       isAssetStorePackage: 0
-      datePublishedTicks: 0
+      datePublishedTicks: 636984649280000000
       documentationUrl: 
       hasRepository: 1
       repository:
@@ -3393,7 +3433,29 @@ m_PackageAssets:
       errors: []
       versions:
         all:
+        - 1.0.9-preview.1
+        - 1.0.9-preview.2
+        - 1.0.10-preview
+        - 1.0.11-preview.1
+        - 1.1.0-preview.1
+        - 1.1.0-preview.2
+        - 1.2.0-preview.1
+        - 2.0.1
+        - 2.0.2
+        - 2.1.0
+        - 3.0.0
+        - 3.0.1
+        - 4.0.0
+        - 4.0.1
+        - 4.0.2
         - 4.0.3
+        - 5.0.0-pre.1
+        - 5.0.0-pre.2
+        - 5.0.0
+        - 6.0.0-pre.2
+        - 6.0.0-pre.3
+        - 6.0.0-pre.4
+        - 6.0.0
         compatible:
         - 4.0.3
         verified: 4.0.3
@@ -3429,7 +3491,7 @@ m_PackageAssets:
       entitlements:
         isAllowed: 1
       isAssetStorePackage: 0
-      datePublishedTicks: 0
+      datePublishedTicks: 637408843940000000
       documentationUrl: 
       hasRepository: 1
       repository:
@@ -3458,10 +3520,30 @@ m_PackageAssets:
       errors: []
       versions:
         all:
+        - 1.0.0-preview.1
+        - 1.0.0-preview.4
+        - 2.0.1
+        - 2.0.2
+        - 2.0.3
+        - 2.0.4
+        - 2.0.5
+        - 2.0.6
+        - 2.1.0
+        - 2.1.1
+        - 3.0.0
+        - 3.0.1
+        - 3.0.2
+        - 4.0.0
         - 4.0.1
+        - 4.0.2
+        - 5.0.0-pre.1
+        - 5.0.0-pre.2
+        - 5.0.0
+        - 5.0.1
         compatible:
         - 4.0.1
-        verified: 4.0.1
+        - 4.0.2
+        verified: 4.0.2
       dependencies: []
       resolvedDependencies: []
       keywords:
@@ -3479,7 +3561,7 @@ m_PackageAssets:
       entitlements:
         isAllowed: 1
       isAssetStorePackage: 0
-      datePublishedTicks: 0
+      datePublishedTicks: 637328350450000000
       documentationUrl: 
       hasRepository: 1
       repository:
