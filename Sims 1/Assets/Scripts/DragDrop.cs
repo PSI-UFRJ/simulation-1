@@ -29,6 +29,7 @@ public class DragDrop : MonoBehaviour
 
                 if (collider == Physics2D.OverlapPoint(mousePos))
                 {
+                    Debug.Log("Clicou na bolota");
                     canMove = true;
                     CreateTemplate();
                 }
@@ -81,5 +82,18 @@ public class DragDrop : MonoBehaviour
 
         // O atual objeto deixa de ser o template e, agora, podemos movimentá-lo
         this.isTemplate                         = false;
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        Debug.Log("cheguei");
+        if (collision.CompareTag("Workspace"))
+        {
+            Vector2 closetPos = collision.ClosestPoint(new Vector2(this.transform.position.x, this.transform.position.y));
+            Debug.Log("passei no workspace");
+            dragging = false;
+            this.transform.position = new Vector3(closetPos.x, closetPos.y, this.transform.position.z);
+            Debug.Log("Oieee");
+        }
     }
 }
