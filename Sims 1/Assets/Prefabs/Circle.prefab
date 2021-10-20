@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 7031137776401816406}
   - component: {fileID: 7031137776401816407}
   - component: {fileID: 279257302824370562}
-  - component: {fileID: 6345129758870720047}
+  - component: {fileID: 2132604915072414098}
   m_Layer: 0
   m_Name: Circle
   m_TagString: Untagged
@@ -127,6 +127,7 @@ MonoBehaviour:
   scale: {x: 0, y: 0, z: 0}
   baseScale: {x: 1, y: 1, z: 1}
   rb: {fileID: 7031137776401816406}
+  sizeScaler: 1
 --- !u!61 &279257302824370562
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -153,7 +154,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!114 &6345129758870720047
+--- !u!114 &2132604915072414098
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -162,8 +163,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 7031137776401816402}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5ad56c4c78589364aabc19041c5d024c, type: 3}
+  m_Script: {fileID: 11500000, guid: a0700b67e7f2cea49bda403c18140f10, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   prefab: {fileID: 0}
   isTemplate: 0
+  control: {fileID: 0}
+  clickableLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  sizeScrollbar: {fileID: 0}
+  lastScrollbarValue: 0

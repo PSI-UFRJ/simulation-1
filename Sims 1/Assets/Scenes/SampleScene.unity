@@ -332,6 +332,36 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &336527988
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 336527989}
+  m_Layer: 0
+  m_Name: Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &336527989
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 336527988}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.9594152, y: 0.31358042, z: -0.6169951}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &372558223
 GameObject:
   m_ObjectHideFlags: 0
@@ -341,6 +371,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 372558224}
+  - component: {fileID: 372558225}
   m_Layer: 0
   m_Name: Formas
   m_TagString: Untagged
@@ -363,6 +394,24 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &372558225
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 372558223}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 42d2581f29f46ac4eb7fb729fbfd4189, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objectControlled: {fileID: 0}
+  sizeScaler: 4
+  scrollbar: {fileID: 876406693}
+  scale: {x: 0, y: 0, z: 0}
+  baseScale: {x: 1, y: 1, z: 1}
+  rb: {fileID: 0}
 --- !u!1 &496529324
 GameObject:
   m_ObjectHideFlags: 0
@@ -784,8 +833,8 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1053516332}
-        m_TargetAssemblyTypeName: ObjectScaling, Assembly-CSharp
+      - m_Target: {fileID: 372558225}
+        m_TargetAssemblyTypeName: ObjectControlled, Assembly-CSharp
         m_MethodName: ChangeScale
         m_Mode: 0
         m_Arguments:
@@ -1028,17 +1077,6 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 4042795535516109287, guid: ed6e08221cbf0ad4fa747f958ce10bd2, type: 3}
   m_PrefabInstance: {fileID: 7031137776641374587}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1053516332 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7031137776401816407, guid: ed6e08221cbf0ad4fa747f958ce10bd2, type: 3}
-  m_PrefabInstance: {fileID: 7031137776641374587}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3c39264e8e0afbf47855afdd278d5951, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1535977193
 GameObject:
   m_ObjectHideFlags: 0
@@ -1238,6 +1276,30 @@ PrefabInstance:
       propertyPath: m_UsedByEffector
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2132604915072414098, guid: ed6e08221cbf0ad4fa747f958ce10bd2, type: 3}
+      propertyPath: prefab
+      value: 
+      objectReference: {fileID: 7031137776401816402, guid: ed6e08221cbf0ad4fa747f958ce10bd2, type: 3}
+    - target: {fileID: 2132604915072414098, guid: ed6e08221cbf0ad4fa747f958ce10bd2, type: 3}
+      propertyPath: control
+      value: 
+      objectReference: {fileID: 372558223}
+    - target: {fileID: 2132604915072414098, guid: ed6e08221cbf0ad4fa747f958ce10bd2, type: 3}
+      propertyPath: scrollbar
+      value: 
+      objectReference: {fileID: 876406693}
+    - target: {fileID: 2132604915072414098, guid: ed6e08221cbf0ad4fa747f958ce10bd2, type: 3}
+      propertyPath: isTemplate
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2132604915072414098, guid: ed6e08221cbf0ad4fa747f958ce10bd2, type: 3}
+      propertyPath: sizeScrollbar
+      value: 
+      objectReference: {fileID: 876406693}
+    - target: {fileID: 2132604915072414098, guid: ed6e08221cbf0ad4fa747f958ce10bd2, type: 3}
+      propertyPath: clickableLayer.m_Bits
+      value: 64
+      objectReference: {fileID: 0}
     - target: {fileID: 4042795535516109287, guid: ed6e08221cbf0ad4fa747f958ce10bd2, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -1342,6 +1404,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Circle
       objectReference: {fileID: 0}
+    - target: {fileID: 7031137776401816402, guid: ed6e08221cbf0ad4fa747f958ce10bd2, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 8065291038224040059, guid: ed6e08221cbf0ad4fa747f958ce10bd2, type: 3}
       propertyPath: canvas
       value: 
@@ -1360,5 +1426,5 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 0}
-    - {fileID: 8065291038224040059, guid: ed6e08221cbf0ad4fa747f958ce10bd2, type: 3}
+    - {fileID: 0}
   m_SourcePrefab: {fileID: 100100000, guid: ed6e08221cbf0ad4fa747f958ce10bd2, type: 3}

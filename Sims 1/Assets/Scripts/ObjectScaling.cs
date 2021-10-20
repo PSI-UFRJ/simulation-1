@@ -8,10 +8,11 @@ public class ObjectScaling : MonoBehaviour
     public Vector3 scale;
     public Vector3 baseScale;
     public Rigidbody2D rb;
+    public int sizeScaler = 1;
 
     public void ChangeScale(float newScale){
         //rb.freezeRotation = true;
-        scale = baseScale + new Vector3(newScale*4, newScale*4, newScale*4);
+        scale = baseScale + new Vector3(newScale * sizeScaler, newScale * sizeScaler, newScale * sizeScaler);
         this.transform.localScale = scale;
         //rb.freezeRotation = false;
     }
@@ -22,7 +23,8 @@ public class ObjectScaling : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update(){
+    void Update()
+    {
         
     }
 }
