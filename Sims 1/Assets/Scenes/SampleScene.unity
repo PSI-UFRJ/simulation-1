@@ -136,7 +136,7 @@ GameObject:
   - component: {fileID: 9661118}
   m_Layer: 0
   m_Name: Background
-  m_TagString: Workspace
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -245,7 +245,7 @@ GameObject:
   - component: {fileID: 47864176}
   m_Layer: 0
   m_Name: ControlPanel
-  m_TagString: Workspace
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -538,11 +538,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   objectControlled: {fileID: 0}
-  sizeScaler: 4
+  rb: {fileID: 0}
   scrollbar: {fileID: 876406693}
   scale: {x: 0, y: 0, z: 0}
   baseScale: {x: 1, y: 1, z: 1}
-  rb: {fileID: 0}
+  sizeScaler: 4
 --- !u!1001 &458260037
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -797,7 +797,7 @@ GameObject:
   - component: {fileID: 548344056}
   m_Layer: 0
   m_Name: ToolsPanel
-  m_TagString: Workspace
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2051,19 +2051,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7031137776401816401, guid: ed6e08221cbf0ad4fa747f958ce10bd2, type: 3}
       propertyPath: m_Color.b
-      value: 0.990566
+      value: 0.99215686
       objectReference: {fileID: 0}
     - target: {fileID: 7031137776401816401, guid: ed6e08221cbf0ad4fa747f958ce10bd2, type: 3}
       propertyPath: m_Color.g
-      value: 0.8245506
+      value: 0.8235294
       objectReference: {fileID: 0}
     - target: {fileID: 7031137776401816401, guid: ed6e08221cbf0ad4fa747f958ce10bd2, type: 3}
       propertyPath: m_Color.r
-      value: 0.4625756
+      value: 0.4627451
       objectReference: {fileID: 0}
     - target: {fileID: 7031137776401816401, guid: ed6e08221cbf0ad4fa747f958ce10bd2, type: 3}
       propertyPath: m_Enabled
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7031137776401816401, guid: ed6e08221cbf0ad4fa747f958ce10bd2, type: 3}
+      propertyPath: m_DrawMode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7031137776401816401, guid: ed6e08221cbf0ad4fa747f958ce10bd2, type: 3}
+      propertyPath: m_MaskInteraction
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7031137776401816402, guid: ed6e08221cbf0ad4fa747f958ce10bd2, type: 3}
       propertyPath: m_Name

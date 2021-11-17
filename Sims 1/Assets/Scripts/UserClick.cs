@@ -7,13 +7,15 @@ public class UserClick : MonoBehaviour
     public GameObject prefab;
     public bool isTemplate;
 
-    private bool canMove;
-    private bool dragging;
+    private bool canMove; // Guarda a informação se pode mover o objeto
+    private bool dragging; // Guarda a informação se o objeto está sendo arrastado
+    private bool enteredWorkspace; // Guarda a informação se o objeto entrou na área de trabalho
 
     private Collider2D collider; // Guarda o collider do Player
 
     [SerializeField]
-    private GameObject control; // Guarda referência para o GameObject pai dos Players
+    private GameObject controlObject; // Guarda referência para o GameObject pai dos Players
+    private ObjectControlled control;
 
     [SerializeField]
     private LayerMask clickableLayer; // Guarda referência para a layer que indica quais objetos são clicáveis
@@ -26,11 +28,13 @@ public class UserClick : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        collider        = GetComponent<Collider2D>();
-        control         = this.transform.parent.gameObject;
-        sizeScrollbar   = GameObject.Find("Scrollbar").GetComponent<UnityEngine.UI.Scrollbar>();
-        canMove         = false;
-        dragging        = false;
+        collider                = GetComponent<Collider2D>();
+        controlObject           = this.transform.parent.gameObject;
+        control                 = controlObject.GetComponent<ObjectControlled>();
+        sizeScrollbar           = GameObject.Find("Scrollbar").GetComponent<UnityEngine.UI.Scrollbar>();
+        canMove                 = false;
+        dragging                = false;
+        enteredWorkspace        = false;
     }
 
     // Update is called once per frame
@@ -43,16 +47,21 @@ public class UserClick : MonoBehaviour
             if (collider == Physics2D.OverlapPoint(mousePos))
             {
                 #region SizeController
-                control.GetComponent<ObjectControlled>().objectControlled = this.gameObject; // Indica para o ObjectControlled que o objeto a ser controlado é este
-                sizeScrollbar.value = lastScrollbarValue; // Altera o scrollbar para o último valor
+                if (enteredWorkspace) // Se o objeto entrou na workspace
+                {
+                    control.SelectObject(this.gameObject); // Informa ao controller que ele é o objeto selecionado e troca a cor do obj
+                    sizeScrollbar.value = lastScrollbarValue; // Altera o scrollbar para o último valor
+                }
+                
                 #endregion
 
                 #region DragAndDrop
                 canMove = true;
                 CreateTemplate();
                 #endregion
+
+
             }
-            #region DragAndDrop
             else
             {
                 canMove = false;
@@ -61,7 +70,7 @@ public class UserClick : MonoBehaviour
             {
                 dragging = true;
             }
-            #endregion
+            
         }
 
         #region DragAndDrop
@@ -74,8 +83,10 @@ public class UserClick : MonoBehaviour
         {
             canMove = false;
             dragging = false;
+            
         }
         #endregion
+
     }
 
     private void CreateTemplate()
@@ -111,6 +122,14 @@ public class UserClick : MonoBehaviour
             Vector2 closetPos = collision.ClosestPoint(new Vector2(this.transform.position.x, this.transform.position.y));
             dragging = false;
             this.transform.position = new Vector3(closetPos.x, closetPos.y, this.transform.position.z);
+        }
+    }
+
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Workspace"))
+        {
+            enteredWorkspace = true;
         }
     }
 }

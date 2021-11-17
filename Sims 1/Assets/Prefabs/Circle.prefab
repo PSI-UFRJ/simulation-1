@@ -174,3 +174,7 @@ MonoBehaviour:
     m_Bits: 0
   sizeScrollbar: {fileID: 0}
   lastScrollbarValue: 0
+  redCol: 85
+  greenCol: 138
+  blueCol: 164
+  clickingAtObject: 0

@@ -5,7 +5,13 @@ using UnityEngine;
 public class ObjectControlled : MonoBehaviour
 {
     public GameObject objectControlled = null; // Guarda o objeto a ser controlado
-    public int        sizeScaler       = 1;
+    [SerializeField]
+    private Rigidbody2D rb; // Guarda o Rigibbody do objeto a ser controlado
+    private Color32 originalObjColor;
+    private int redCol;
+    private int greenCol;
+    private int blueCol;
+
 
     [SerializeField]
     private UnityEngine.UI.Scrollbar scrollbar; // Guarda a instância do scrollbar
@@ -13,9 +19,31 @@ public class ObjectControlled : MonoBehaviour
     private Vector3 scale; // Guarda a escala atual
     [SerializeField]
     private Vector3 baseScale; // Guarda a escala base
-    [SerializeField]
-    private Rigidbody2D rb; // Guarda o Rigibbody do objeto a ser controlado
-    
+    public int sizeScaler = 1;
+
+    public void SelectObject(GameObject selectedObj)
+    {
+        if(selectedObj == null)
+        {
+            return;
+        }
+
+        if(selectedObj != objectControlled) // Se o objeto clicado não é o que já está selecionado
+        {
+            if (objectControlled != null) // Se já foi selecionado algum objeto
+            {
+                objectControlled.GetComponent<SpriteRenderer>().color = originalObjColor; // Reseta a cor inicial dele
+            }
+            originalObjColor = selectedObj.GetComponent<SpriteRenderer>().color; // Pega a cor do novo objeto clicado
+            redCol = originalObjColor.r;
+            greenCol = originalObjColor.g - ((int)originalObjColor.g / 2);
+            blueCol = originalObjColor.b;
+            selectedObj.GetComponent<SpriteRenderer>().color = new Color32((byte)redCol, (byte)greenCol, (byte)blueCol, 255); // Troca para a cor "selecionado"
+            objectControlled = selectedObj; // Guarda a referência para o novo objeto selecionado
+        }
+
+    } 
+
     public void ChangeScale(float newScale)
     {
         if (objectControlled == null)
