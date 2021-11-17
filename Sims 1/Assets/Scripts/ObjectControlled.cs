@@ -58,4 +58,14 @@ public class ObjectControlled : MonoBehaviour
         rb.freezeRotation = false;
         objectControlled.GetComponent<UserClick>().lastScrollbarValue = scrollbar.value; // Guarda no objeto controlado o último valor no scrollbar
     }
+
+    public void DeleteGameObject()
+    {
+        if (objectControlled == null)
+        {
+            return;
+        }
+
+        Destroy(objectControlled);
+    }
 }

@@ -10,6 +10,7 @@ public class UserClick : MonoBehaviour
     private bool canMove; // Guarda a informação se pode mover o objeto
     private bool dragging; // Guarda a informação se o objeto está sendo arrastado
     private bool enteredWorkspace; // Guarda a informação se o objeto entrou na área de trabalho
+    private Vector3 initialPosition;
 
     private Collider2D collider; // Guarda o collider do Player
 
@@ -46,21 +47,21 @@ public class UserClick : MonoBehaviour
         {
             if (collider == Physics2D.OverlapPoint(mousePos))
             {
-                #region SizeController
+                
                 if (enteredWorkspace) // Se o objeto entrou na workspace
                 {
                     control.SelectObject(this.gameObject); // Informa ao controller que ele é o objeto selecionado e troca a cor do obj
+                    #region SizeController
                     sizeScrollbar.value = lastScrollbarValue; // Altera o scrollbar para o último valor
+                    #endregion
+
+                    this.transform.position = new Vector3(this.transform.position.x, this.transform.position.y, initialPosition.z + 1);
                 }
-                
-                #endregion
 
                 #region DragAndDrop
                 canMove = true;
                 CreateTemplate();
                 #endregion
-
-
             }
             else
             {
@@ -76,7 +77,7 @@ public class UserClick : MonoBehaviour
         #region DragAndDrop
         if (dragging)
         {
-            this.transform.position = mousePos;
+            this.transform.position = new Vector3(mousePos.x, mousePos.y, this.transform.position.z);
         }
 
         if (Input.GetMouseButtonUp(0))
@@ -110,6 +111,8 @@ public class UserClick : MonoBehaviour
 
         // O novo objeto passa a ser o template
         obj.GetComponent<UserClick>().isTemplate = true;
+
+        initialPosition = this.transform.position;
 
         // O atual objeto deixa de ser o template e, agora, podemos movimentá-lo
         this.isTemplate = false;
