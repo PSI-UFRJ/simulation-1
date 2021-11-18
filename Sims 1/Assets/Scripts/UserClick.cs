@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class UserClick : MonoBehaviour
 {
@@ -37,6 +38,7 @@ public class UserClick : MonoBehaviour
         controlObject = this.transform.parent.gameObject;
         control = controlObject.GetComponent<ObjectControlled>();
         sizeScrollbar = GameObject.Find("Scrollbar").GetComponent<UnityEngine.UI.Scrollbar>();
+        ActivateModeBtn();
         canMove = false;
         dragging = false;
         enteredWorkspace = false;
@@ -167,5 +169,40 @@ public class UserClick : MonoBehaviour
     public bool GetWorkspaceStatus()
     {
         return enteredWorkspace;
+    }
+
+    public void ActivateModeBtn()
+    {
+        Scene currentScene = SceneManager.GetActiveScene();
+        string sceneName = currentScene.name;
+
+        UnityEngine.UI.Button introBtn = GameObject.Find("Introdução").GetComponent<UnityEngine.UI.Button>();
+        UnityEngine.UI.Button gameBtn = GameObject.Find("Introdução").GetComponent<UnityEngine.UI.Button>();
+        UnityEngine.UI.Button labBtn = GameObject.Find("Introdução").GetComponent<UnityEngine.UI.Button>();
+
+        if (sceneName == "SampleScene")
+        {
+            SetBtnColor(introBtn, Color.yellow);
+        }
+        else
+        {
+            ResetBtnColor(introBtn);
+            ResetBtnColor(gameBtn);
+            ResetBtnColor(labBtn);
+        }
+    }
+
+    private void ResetBtnColor(UnityEngine.UI.Button btn)
+    {
+        UnityEngine.UI.ColorBlock colorBlock = btn.colors;
+        colorBlock.normalColor = Color.white;
+        btn.colors = colorBlock;
+    }
+
+    private void SetBtnColor(UnityEngine.UI.Button btn, Color color)
+    {
+        UnityEngine.UI.ColorBlock colorBlock = btn.colors;
+        colorBlock.normalColor = color;
+        btn.colors = colorBlock;
     }
 }
