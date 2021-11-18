@@ -30,11 +30,18 @@ public class ObjectControlled : MonoBehaviour
 
         if (selectedObj != objectControlled) // Se o objeto clicado não é o que já está selecionado
         {
+            GameObject selectedObjectChild;
             if (objectControlled != null) // Se já foi selecionado algum objeto
             {
                 objectControlled.GetComponent<SpriteRenderer>().color = originalObjColor; // Reseta a cor inicial dele
+                selectedObjectChild = objectControlled.transform.GetChild(0).gameObject;
+                selectedObjectChild.GetComponent<SpriteRenderer>().enabled = false;
             }
             originalObjColor = selectedObj.GetComponent<SpriteRenderer>().color; // Pega a cor do novo objeto clicado
+            
+            selectedObjectChild = selectedObj.transform.GetChild(0).gameObject; // Pega o objeto que da a cor amarela indicando que foi clicado
+            selectedObjectChild.GetComponent<SpriteRenderer>().enabled = true; // Ativa do sprite renderer para aparecer o amarelo
+            
             redCol = originalObjColor.r - 30;
             greenCol = originalObjColor.g - 30;
             blueCol = originalObjColor.b - 30;
@@ -77,6 +84,9 @@ public class ObjectControlled : MonoBehaviour
         }
 
         objectControlled.GetComponent<SpriteRenderer>().color = originalObjColor; // Reseta a cor inicial dele
+
+        GameObject selectedObjectChild = objectControlled.transform.GetChild(0).gameObject;
+        selectedObjectChild.GetComponent<SpriteRenderer>().enabled = false;
 
         objectControlled = null;
     }

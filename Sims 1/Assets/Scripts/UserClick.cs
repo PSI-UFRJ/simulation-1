@@ -113,12 +113,15 @@ public class UserClick : MonoBehaviour
         }
 
         GameObject obj = Instantiate(prefab);
+        GameObject objChild = obj.transform.GetChild(0).gameObject;
 
         // Dentro da hierarquia dos objetos da cena, definimos quem é o seu pai
         obj.transform.SetParent(this.transform.parent);
+        objChild.transform.SetParent(obj.transform);
 
         // Definimos sua posição
         obj.transform.position = this.transform.position;
+        objChild.transform.position = obj.transform.position;
 
         // Definimos os componentes que esse novo objeto precisa ter para que o seu script funcione
         obj.GetComponent<UserClick>().prefab = this.GetComponent<UserClick>().prefab;
