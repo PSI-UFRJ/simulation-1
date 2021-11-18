@@ -909,6 +909,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 336527989}
+  - component: {fileID: 336527990}
   m_Layer: 0
   m_Name: Manager
   m_TagString: Untagged
@@ -930,6 +931,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &336527990
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 336527988}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be7cd2dbfad30d848b5982a55db64524, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &372558223
 GameObject:
   m_ObjectHideFlags: 0
@@ -989,6 +1002,34 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 716372665}
     m_Modifications:
+    - target: {fileID: 4747904943300159393, guid: abec27dafcc7364409b32957ccd1dbb9, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4747904943300159393, guid: abec27dafcc7364409b32957ccd1dbb9, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4747904943300159393, guid: abec27dafcc7364409b32957ccd1dbb9, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 336527990}
+    - target: {fileID: 4747904943300159393, guid: abec27dafcc7364409b32957ccd1dbb9, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4747904943300159393, guid: abec27dafcc7364409b32957ccd1dbb9, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: QuitApplication
+      objectReference: {fileID: 0}
+    - target: {fileID: 4747904943300159393, guid: abec27dafcc7364409b32957ccd1dbb9, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: GameModeManager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 4747904943300159393, guid: abec27dafcc7364409b32957ccd1dbb9, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 4930385241616524967, guid: abec27dafcc7364409b32957ccd1dbb9, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -2821,9 +2862,21 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 713866419}
     - target: {fileID: 962199575553917401, guid: dd45da45795523746b2de3b96ec52120, type: 3}
+      propertyPath: isTemplate
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 962199575553917401, guid: dd45da45795523746b2de3b96ec52120, type: 3}
       propertyPath: sizeScrollbar
       value: 
       objectReference: {fileID: 876406693}
+    - target: {fileID: 962199575553917401, guid: dd45da45795523746b2de3b96ec52120, type: 3}
+      propertyPath: clickableLayer.m_Bits
+      value: 64
+      objectReference: {fileID: 0}
+    - target: {fileID: 1429734535230720543, guid: dd45da45795523746b2de3b96ec52120, type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2943109691337734572, guid: dd45da45795523746b2de3b96ec52120, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -2912,6 +2965,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Diamond
       objectReference: {fileID: 0}
+    - target: {fileID: 8165445293627304729, guid: dd45da45795523746b2de3b96ec52120, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dd45da45795523746b2de3b96ec52120, type: 3}
 --- !u!1001 &4259109936113680595
@@ -2930,9 +2987,17 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 713866419}
     - target: {fileID: 193843248897488728, guid: 314dd4d1dd9de6c40a0eb5163b014d57, type: 3}
+      propertyPath: isTemplate
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 193843248897488728, guid: 314dd4d1dd9de6c40a0eb5163b014d57, type: 3}
       propertyPath: sizeScrollbar
       value: 
       objectReference: {fileID: 876406693}
+    - target: {fileID: 193843248897488728, guid: 314dd4d1dd9de6c40a0eb5163b014d57, type: 3}
+      propertyPath: clickableLayer.m_Bits
+      value: 64
+      objectReference: {fileID: 0}
     - target: {fileID: 2824538348964138797, guid: 314dd4d1dd9de6c40a0eb5163b014d57, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -3020,6 +3085,10 @@ PrefabInstance:
     - target: {fileID: 9132100723960602008, guid: 314dd4d1dd9de6c40a0eb5163b014d57, type: 3}
       propertyPath: m_Name
       value: Square
+      objectReference: {fileID: 0}
+    - target: {fileID: 9132100723960602008, guid: 314dd4d1dd9de6c40a0eb5163b014d57, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 314dd4d1dd9de6c40a0eb5163b014d57, type: 3}

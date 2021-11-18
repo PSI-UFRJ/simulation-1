@@ -11,10 +11,8 @@ public class ObjectScaling : MonoBehaviour
     public int sizeScaler = 1;
 
     public void ChangeScale(float newScale){
-        //rb.freezeRotation = true;
         scale = baseScale + new Vector3(newScale * sizeScaler, newScale * sizeScaler, newScale * sizeScaler);
         this.transform.localScale = scale;
-        //rb.freezeRotation = false;
     }
 
     // Start is called before the first frame update

@@ -34,14 +34,9 @@ public class UserClick : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        collider = GetComponent<Collider2D>();
-        controlObject = this.transform.parent.gameObject;
-        control = controlObject.GetComponent<ObjectControlled>();
-        sizeScrollbar = GameObject.Find("Scrollbar").GetComponent<UnityEngine.UI.Scrollbar>();
-        ActivateModeBtn();
-        canMove = false;
-        dragging = false;
-        enteredWorkspace = false;
+        InitGameObjects();
+        InitComponents();
+        InitStatusVariables();
     }
 
     // Update is called once per frame
@@ -49,61 +44,89 @@ public class UserClick : MonoBehaviour
     {
         Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
-        if (Input.GetMouseButtonDown(0))
-        {
-            if (collider == Physics2D.OverlapPoint(mousePos))
-            {
-                Debug.Log("Objeto entrou na workspace");
+        ExecuteMouseButtonDownActions();
 
-                control.SelectObject(this.gameObject); // Informa ao controller que ele é o objeto selecionado e troca a cor do obj
-                #region SizeController
-                sizeScrollbar.value = lastScrollbarValue; // Altera o scrollbar para o último valor
-                #endregion
-
-                this.transform.position = new Vector3(this.transform.position.x, this.transform.position.y, initialPosition.z + 1);
-
-                #region DragAndDrop
-                canMove = true;
-                CreateTemplate();
-                #endregion
-            }
-            else if (Physics2D.OverlapPoint(mousePos) == workspace.GetComponent<BoxCollider2D>())
-            {
-                Debug.Log("Deselecionando a cor");
-
-                control.UnselectObject();
-            }
-            else
-            {
-                canMove = false;
-            }
-            if (canMove)
-            {
-                dragging = true;
-            }
-        }
-
-        #region DragAndDrop
         if (dragging)
         {
             this.transform.position = new Vector3(mousePos.x, mousePos.y, this.transform.position.z);
         }
 
-        if (Input.GetMouseButtonUp(0))
-        {
-            canMove = false;
-            dragging = false;
+        ExecuteMouseButtonUpActions();
+    }
 
-            if(insideToolsPanel && !isTemplate)
+    #region Auxiliary Methods
+    /// <summary>
+    /// Executa as ações necessárias quando ocorre o clique do mouse
+    /// </summary>
+    private void ExecuteMouseButtonDownActions()
+    {
+        Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+
+        // Sanity check
+        if (!Input.GetMouseButtonDown(0))
+        {
+            return;
+        }
+
+        if (collider == Physics2D.OverlapPoint(mousePos))
+        {
+            Debug.Log("Objeto entrou na workspace");
+
+            control.SelectObject(this.gameObject); // Informa ao controller que ele é o objeto selecionado e troca a cor do obj
+            #region SizeController
+            sizeScrollbar.value = lastScrollbarValue; // Altera o scrollbar para o último valor
+            #endregion
+
+            this.transform.position = new Vector3(this.transform.position.x, this.transform.position.y, initialPosition.z + 1); // Desce um nível do eixo Z
+
+            #region DragAndDrop
+            canMove = true;
+            CreateTemplate();
+            #endregion
+        }
+        else if (Physics2D.OverlapPoint(mousePos) == workspace.GetComponent<BoxCollider2D>()) // Usuário clicou em um espaço vazio do workspace
+        {
+            if(control != null)
             {
-                Collider2D workspaceCollider = workspace.GetComponent<Collider2D>();
-                Vector2 closetPos = workspaceCollider.bounds.center;//workspaceCollider.ClosestPoint(new Vector2(this.transform.position.x, this.transform.position.y));
-                this.transform.position = new Vector3(closetPos.x, closetPos.y, this.transform.position.z);
-                insideToolsPanel = false;
+                Debug.Log("Deselecionando a cor");
+                control.UnselectObject();
             }
         }
-        #endregion
+        else
+        {
+            canMove = false;
+        }
 
+        if (canMove)
+        {
+            dragging = true;
+        }
+    }
+
+    /// <summary>
+    /// Executa as ações necessárias quando ocorre o desclique do mouse
+    /// </summary>
+    private void ExecuteMouseButtonUpActions()
+    {
+        // Sanity check
+        if (!Input.GetMouseButtonUp(0))
+        {
+            return;
+        }
+
+        canMove = false;
+        dragging = false;
+
+        if (!IsInsideWorkspace())
+        {
+            MoveToWorkspaceCenter();
+            insideToolsPanel = false;
+        }
+    }
+
+    private bool IsInsideWorkspace()
+    {
+        return !(insideToolsPanel && !isTemplate);
     }
 
     private void CreateTemplate()
@@ -138,21 +161,51 @@ public class UserClick : MonoBehaviour
         this.isTemplate = false;
     }
 
+    private void InitGameObjects()
+    {
+        controlObject = this.transform.parent.gameObject;
+        sizeScrollbar = GameObject.Find("Scrollbar").GetComponent<UnityEngine.UI.Scrollbar>();
+    }
+
+    private void InitComponents()
+    {
+        collider = GetComponent<Collider2D>();
+        control = controlObject.GetComponent<ObjectControlled>();
+    }
+
+    private void InitStatusVariables()
+    {
+        canMove = false;
+        dragging = false;
+        enteredWorkspace = false;
+    }
+    
+    private void MoveToWorkspaceCenter()
+    {
+        Collider2D workspaceCollider = workspace.GetComponent<Collider2D>();
+        Vector2 closetPos = workspaceCollider.bounds.center;
+        this.transform.position = new Vector3(closetPos.x, closetPos.y, this.transform.position.z); // Transporta o objeto para o centro do workspace
+    }
+
+    private void MoveToClosestWorkspace(Collider2D collision)
+    {
+        Vector2 closetPos = collision.ClosestPoint(new Vector2(this.transform.position.x, this.transform.position.y));
+        this.transform.position = new Vector3(closetPos.x, closetPos.y, this.transform.position.z); // Transporta o objeto para a região mais próxima do workspace
+    }
+    #endregion
+
+    #region Collider Triggers
     private void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.CompareTag("Workspace"))
         {
-            Vector2 closetPos = collision.ClosestPoint(new Vector2(this.transform.position.x, this.transform.position.y));
+            MoveToClosestWorkspace(collision);
             dragging = false;
-            this.transform.position = new Vector3(closetPos.x, closetPos.y, this.transform.position.z);
         }
         else if (collision.CompareTag("WorkspaceContainer"))
         {
-            Collider2D workspaceCollider = workspace.GetComponent<Collider2D>();
-
-            Vector2 closetPos = workspaceCollider.bounds.center;//workspaceCollider.ClosestPoint(new Vector2(this.transform.position.x, this.transform.position.y));
+            MoveToWorkspaceCenter();
             dragging = false;
-            this.transform.position = new Vector3(closetPos.x, closetPos.y, this.transform.position.z);
         }
     }
 
@@ -168,44 +221,12 @@ public class UserClick : MonoBehaviour
             insideToolsPanel = true;
         }
     }
+    #endregion
 
+    #region Helper Methods
     public bool GetWorkspaceStatus()
     {
         return enteredWorkspace;
     }
-
-    public void ActivateModeBtn()
-    {
-        Scene currentScene = SceneManager.GetActiveScene();
-        string sceneName = currentScene.name;
-
-        UnityEngine.UI.Button introBtn = GameObject.Find("Introdução").GetComponent<UnityEngine.UI.Button>();
-        UnityEngine.UI.Button gameBtn = GameObject.Find("Introdução").GetComponent<UnityEngine.UI.Button>();
-        UnityEngine.UI.Button labBtn = GameObject.Find("Introdução").GetComponent<UnityEngine.UI.Button>();
-
-        if (sceneName == "SampleScene")
-        {
-            SetBtnColor(introBtn, Color.yellow);
-        }
-        else
-        {
-            ResetBtnColor(introBtn);
-            ResetBtnColor(gameBtn);
-            ResetBtnColor(labBtn);
-        }
-    }
-
-    private void ResetBtnColor(UnityEngine.UI.Button btn)
-    {
-        UnityEngine.UI.ColorBlock colorBlock = btn.colors;
-        colorBlock.normalColor = Color.white;
-        btn.colors = colorBlock;
-    }
-
-    private void SetBtnColor(UnityEngine.UI.Button btn, Color color)
-    {
-        UnityEngine.UI.ColorBlock colorBlock = btn.colors;
-        colorBlock.normalColor = color;
-        btn.colors = colorBlock;
-    }
+    #endregion
 }
