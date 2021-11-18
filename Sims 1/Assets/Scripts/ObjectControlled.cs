@@ -23,12 +23,12 @@ public class ObjectControlled : MonoBehaviour
 
     public void SelectObject(GameObject selectedObj)
     {
-        if(selectedObj == null)
+        if (selectedObj == null)
         {
             return;
         }
 
-        if(selectedObj != objectControlled) // Se o objeto clicado não é o que já está selecionado
+        if (selectedObj != objectControlled) // Se o objeto clicado não é o que já está selecionado
         {
             if (objectControlled != null) // Se já foi selecionado algum objeto
             {
@@ -42,11 +42,11 @@ public class ObjectControlled : MonoBehaviour
             objectControlled = selectedObj; // Guarda a referência para o novo objeto selecionado
         }
 
-    } 
+    }
 
     public void ChangeScale(float newScale)
     {
-        if (objectControlled == null)
+        if (objectControlled == null || !objectControlled.GetComponent<UserClick>().GetWorkspaceStatus())
         {
             return;
         }
@@ -59,13 +59,25 @@ public class ObjectControlled : MonoBehaviour
         objectControlled.GetComponent<UserClick>().lastScrollbarValue = scrollbar.value; // Guarda no objeto controlado o último valor no scrollbar
     }
 
-    public void DeleteGameObject()
+    public void DeleteObject()
     {
-        if (objectControlled == null)
+        if (objectControlled == null || !objectControlled.GetComponent<UserClick>().GetWorkspaceStatus())
         {
             return;
         }
 
         Destroy(objectControlled);
+    }
+
+    public void UnselectObject()
+    {
+        if (objectControlled == null || !objectControlled.GetComponent<UserClick>().GetWorkspaceStatus())
+        {
+            return;
+        }
+
+        objectControlled.GetComponent<SpriteRenderer>().color = originalObjColor; // Reseta a cor inicial dele
+
+        objectControlled = null;
     }
 }

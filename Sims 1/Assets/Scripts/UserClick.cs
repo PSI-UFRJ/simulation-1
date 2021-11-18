@@ -10,6 +10,7 @@ public class UserClick : MonoBehaviour
     private bool canMove; // Guarda a informação se pode mover o objeto
     private bool dragging; // Guarda a informação se o objeto está sendo arrastado
     private bool enteredWorkspace; // Guarda a informação se o objeto entrou na área de trabalho
+    private bool insideToolsPanel; // Guarda a informação se o objeto se encontra na área de ferramentas
     private Vector3 initialPosition;
 
     private Collider2D collider; // Guarda o collider do Player
@@ -17,6 +18,9 @@ public class UserClick : MonoBehaviour
     [SerializeField]
     private GameObject controlObject; // Guarda referência para o GameObject pai dos Players
     private ObjectControlled control;
+
+    [SerializeField]
+    private GameObject workspace;
 
     [SerializeField]
     private LayerMask clickableLayer; // Guarda referência para a layer que indica quais objetos são clicáveis
@@ -29,13 +33,13 @@ public class UserClick : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        collider                = GetComponent<Collider2D>();
-        controlObject           = this.transform.parent.gameObject;
-        control                 = controlObject.GetComponent<ObjectControlled>();
-        sizeScrollbar           = GameObject.Find("Scrollbar").GetComponent<UnityEngine.UI.Scrollbar>();
-        canMove                 = false;
-        dragging                = false;
-        enteredWorkspace        = false;
+        collider = GetComponent<Collider2D>();
+        controlObject = this.transform.parent.gameObject;
+        control = controlObject.GetComponent<ObjectControlled>();
+        sizeScrollbar = GameObject.Find("Scrollbar").GetComponent<UnityEngine.UI.Scrollbar>();
+        canMove = false;
+        dragging = false;
+        enteredWorkspace = false;
     }
 
     // Update is called once per frame
@@ -47,21 +51,25 @@ public class UserClick : MonoBehaviour
         {
             if (collider == Physics2D.OverlapPoint(mousePos))
             {
-                
-                if (enteredWorkspace) // Se o objeto entrou na workspace
-                {
-                    control.SelectObject(this.gameObject); // Informa ao controller que ele é o objeto selecionado e troca a cor do obj
-                    #region SizeController
-                    sizeScrollbar.value = lastScrollbarValue; // Altera o scrollbar para o último valor
-                    #endregion
+                Debug.Log("Objeto entrou na workspace");
 
-                    this.transform.position = new Vector3(this.transform.position.x, this.transform.position.y, initialPosition.z + 1);
-                }
+                control.SelectObject(this.gameObject); // Informa ao controller que ele é o objeto selecionado e troca a cor do obj
+                #region SizeController
+                sizeScrollbar.value = lastScrollbarValue; // Altera o scrollbar para o último valor
+                #endregion
+
+                this.transform.position = new Vector3(this.transform.position.x, this.transform.position.y, initialPosition.z + 1);
 
                 #region DragAndDrop
                 canMove = true;
                 CreateTemplate();
                 #endregion
+            }
+            else if (Physics2D.OverlapPoint(mousePos) == workspace.GetComponent<BoxCollider2D>())
+            {
+                Debug.Log("Deselecionando a cor");
+
+                control.UnselectObject();
             }
             else
             {
@@ -71,7 +79,6 @@ public class UserClick : MonoBehaviour
             {
                 dragging = true;
             }
-            
         }
 
         #region DragAndDrop
@@ -84,7 +91,14 @@ public class UserClick : MonoBehaviour
         {
             canMove = false;
             dragging = false;
-            
+
+            if(insideToolsPanel && !isTemplate)
+            {
+                Collider2D workspaceCollider = workspace.GetComponent<Collider2D>();
+                Vector2 closetPos = workspaceCollider.bounds.center;//workspaceCollider.ClosestPoint(new Vector2(this.transform.position.x, this.transform.position.y));
+                this.transform.position = new Vector3(closetPos.x, closetPos.y, this.transform.position.z);
+                insideToolsPanel = false;
+            }
         }
         #endregion
 
@@ -108,6 +122,7 @@ public class UserClick : MonoBehaviour
 
         // Definimos os componentes que esse novo objeto precisa ter para que o seu script funcione
         obj.GetComponent<UserClick>().prefab = this.GetComponent<UserClick>().prefab;
+        obj.GetComponent<UserClick>().workspace = this.GetComponent<UserClick>().workspace;
 
         // O novo objeto passa a ser o template
         obj.GetComponent<UserClick>().isTemplate = true;
@@ -126,13 +141,31 @@ public class UserClick : MonoBehaviour
             dragging = false;
             this.transform.position = new Vector3(closetPos.x, closetPos.y, this.transform.position.z);
         }
+        else if (collision.CompareTag("WorkspaceContainer"))
+        {
+            Collider2D workspaceCollider = workspace.GetComponent<Collider2D>();
+
+            Vector2 closetPos = workspaceCollider.bounds.center;//workspaceCollider.ClosestPoint(new Vector2(this.transform.position.x, this.transform.position.y));
+            dragging = false;
+            this.transform.position = new Vector3(closetPos.x, closetPos.y, this.transform.position.z);
+        }
     }
 
     private void OnTriggerStay2D(Collider2D collision)
     {
         if (collision.CompareTag("Workspace"))
         {
+            insideToolsPanel = false;
             enteredWorkspace = true;
         }
+        else if (collision.CompareTag("ToolsPanel"))
+        {
+            insideToolsPanel = true;
+        }
+    }
+
+    public bool GetWorkspaceStatus()
+    {
+        return enteredWorkspace;
     }
 }
