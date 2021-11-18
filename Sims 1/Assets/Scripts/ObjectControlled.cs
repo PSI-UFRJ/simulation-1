@@ -35,9 +35,9 @@ public class ObjectControlled : MonoBehaviour
                 objectControlled.GetComponent<SpriteRenderer>().color = originalObjColor; // Reseta a cor inicial dele
             }
             originalObjColor = selectedObj.GetComponent<SpriteRenderer>().color; // Pega a cor do novo objeto clicado
-            redCol = originalObjColor.r;
-            greenCol = originalObjColor.g - ((int)originalObjColor.g / 2);
-            blueCol = originalObjColor.b;
+            redCol = originalObjColor.r - 30;
+            greenCol = originalObjColor.g - 30;
+            blueCol = originalObjColor.b - 30;
             selectedObj.GetComponent<SpriteRenderer>().color = new Color32((byte)redCol, (byte)greenCol, (byte)blueCol, 255); // Troca para a cor "selecionado"
             objectControlled = selectedObj; // Guarda a referência para o novo objeto selecionado
         }
