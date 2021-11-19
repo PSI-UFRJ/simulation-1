@@ -41,7 +41,7 @@ public class ObjectControlled : MonoBehaviour
         }
 
         ChangeColor(selectedObj); // Muda a cor do objeto selecionado;
-        EnableChieldSprite(selectedObj); // Ativa o realce do contorno
+        EnableChildSprite(selectedObj); // Ativa o realce do contorno
 
         objectControlled = selectedObj; // Guarda a referência para o novo objeto selecionado
     }
@@ -87,13 +87,15 @@ public class ObjectControlled : MonoBehaviour
 
         selectedObjectChild = objectControlled.transform.GetChild(0).gameObject; // Pega o objeto que da a cor amarela indicando qual era o objeto clicado
         selectedObjectChild.GetComponent<SpriteRenderer>().enabled = false; // Desativa o sprite renderer para aparecer o contorno
+        selectedObjectChild.GetComponent<SpriteRenderer>().sortingOrder = selectedObjectChild.GetComponent<SpriteRenderer>().sortingOrder - 2;
+        objectControlled.GetComponent<SpriteRenderer>().sortingOrder = objectControlled.GetComponent<SpriteRenderer>().sortingOrder - 2;
     }
 
     /// <summary>
     /// Habilita o sprite do filho do atual objeto selecionado
     /// </summary>
     /// <param name="selectedObj"></param>
-    private void EnableChieldSprite(GameObject selectedObj)
+    private void EnableChildSprite(GameObject selectedObj)
     {
         GameObject selectedObjectChild;
 
@@ -106,6 +108,8 @@ public class ObjectControlled : MonoBehaviour
 
         selectedObjectChild = selectedObj.transform.GetChild(0).gameObject; // Pega o objeto que da a cor amarela indicando que foi clicado
         selectedObjectChild.GetComponent<SpriteRenderer>().enabled = true; // Ativa o sprite renderer para aparecer o contorno
+        selectedObj.GetComponent<SpriteRenderer>().sortingOrder = selectedObj.GetComponent<SpriteRenderer>().sortingOrder + 2;
+        selectedObjectChild.GetComponent<SpriteRenderer>().sortingOrder = selectedObjectChild.GetComponent<SpriteRenderer>().sortingOrder + 2;
     }
 
     /// <summary>

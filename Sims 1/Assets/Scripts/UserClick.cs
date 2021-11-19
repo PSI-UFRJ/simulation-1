@@ -10,7 +10,8 @@ public class UserClick : MonoBehaviour
 
     private bool canMove; // Guarda a informação se pode mover o objeto
     private bool dragging; // Guarda a informação se o objeto está sendo arrastado
-    private bool enteredWorkspace; // Guarda a informação se o objeto entrou na área de trabalho
+    private bool isInWorkspace; // Guarda a informação se o objeto que está na área de trabalho
+    private bool enteredWorkspace; // Guarda a informação se o objeto que entrou na área de trabalho
     private bool insideToolsPanel; // Guarda a informação se o objeto se encontra na área de ferramentas
     private Vector3 initialPosition;
 
@@ -70,14 +71,20 @@ public class UserClick : MonoBehaviour
 
         if (collider == Physics2D.OverlapPoint(mousePos))
         {
-            Debug.Log("Objeto entrou na workspace");
 
+            if (enteredWorkspace)
+            {
+                Debug.Log("Objeto entrou na workspace");
+
+                this.GetComponent<SpriteRenderer>().sortingOrder = workspace.GetComponent<SpriteRenderer>().sortingOrder + 2;
+                Debug.Log("userClick - pai: " + this.GetComponent<SpriteRenderer>().sortingOrder);
+                this.transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().sortingOrder = workspace.GetComponent<SpriteRenderer>().sortingOrder + 1;
+                Debug.Log("userClick - filho: " + this.transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().sortingOrder);
+            }
             control.SelectObject(this.gameObject); // Informa ao controller que ele é o objeto selecionado e troca a cor do obj
             #region SizeController
             sizeScrollbar.value = lastScrollbarValue; // Altera o scrollbar para o último valor
             #endregion
-
-            this.transform.position = new Vector3(this.transform.position.x, this.transform.position.y, initialPosition.z + 1); // Desce um nível do eixo Z
 
             #region DragAndDrop
             canMove = true;
@@ -177,6 +184,7 @@ public class UserClick : MonoBehaviour
     {
         canMove = false;
         dragging = false;
+        isInWorkspace = false;
         enteredWorkspace = false;
     }
     
@@ -214,11 +222,20 @@ public class UserClick : MonoBehaviour
         if (collision.CompareTag("Workspace"))
         {
             insideToolsPanel = false;
-            enteredWorkspace = true;
+            isInWorkspace = true;
         }
         else if (collision.CompareTag("ToolsPanel"))
         {
             insideToolsPanel = true;
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Workspace"))
+        {
+            Debug.Log("mamae cheguei");
+            enteredWorkspace = true;
         }
     }
     #endregion
@@ -226,7 +243,7 @@ public class UserClick : MonoBehaviour
     #region Helper Methods
     public bool GetWorkspaceStatus()
     {
-        return enteredWorkspace;
+        return isInWorkspace;
     }
     #endregion
 }
