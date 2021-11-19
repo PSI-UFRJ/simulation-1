@@ -191,8 +191,26 @@ public class UserClick : MonoBehaviour
     private void MoveToWorkspaceCenter()
     {
         Collider2D workspaceCollider = workspace.GetComponent<Collider2D>();
-        Vector2 closetPos = workspaceCollider.bounds.center;
-        this.transform.position = new Vector3(closetPos.x, closetPos.y, this.transform.position.z); // Transporta o objeto para o centro do workspace
+        Vector3 workspaceCenterPos = workspaceCollider.bounds.center;
+
+        //Fix axis Z
+        workspaceCenterPos.z = this.transform.position.z;
+
+        StartCoroutine(MoveSmoothly(workspaceCenterPos));
+    }
+
+    IEnumerator MoveSmoothly(Vector3 destination)
+    {
+        float currentMovementTime = 0f;
+        float totalMovementTime = 0.5f;
+        Vector3 origin = transform.position;
+
+        while (transform.position.x != destination.x && transform.position.y != destination.y)
+        {
+            currentMovementTime += Time.deltaTime;
+            transform.position = Vector3.Lerp(origin, destination, currentMovementTime / totalMovementTime);
+            yield return null;
+        }
     }
 
     private void MoveToClosestWorkspace(Collider2D collision)
