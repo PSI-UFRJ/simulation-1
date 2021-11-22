@@ -21,6 +21,17 @@ public class ObjectControlled : MonoBehaviour
     private Vector3 baseScale; // Guarda a escala base
     public int sizeScaler = 1;
 
+    public void Update()
+    {
+        float area = CalculateArea();
+        
+        if(area != -1)
+        {
+            Debug.Log("Area do objeto selecionado: " + area);
+        }
+        
+    }
+
     public void SelectObject(GameObject selectedObj)
     {
         // Sanity check
@@ -158,4 +169,90 @@ public class ObjectControlled : MonoBehaviour
 
         Destroy(objectControlled);
     }
+
+    /// <summary>
+    /// Calcula a área do objeto controlado
+    /// </summary>
+    public float CalculateArea()
+    {
+        if (objectControlled == null || !objectControlled.GetComponent<UserClick>().GetWorkspaceStatus()) // Verifica se há algum obj selecionado e se sim, se está no workspace
+        {
+            return -1;
+        }
+
+        float result;
+
+        if (objectControlled.GetComponent<CircleCollider2D>() != null) // Verifica se a forma é um círculo
+        {
+            float radius = objectControlled.GetComponent<CircleCollider2D>().radius; // Pega o raio do círculo do collider
+            result = CalculateAreaCircle(radius);
+        }
+        else if (objectControlled.GetComponent<PolygonCollider2D>() != null) // Verifica se a forma é um polígono
+        {
+            Vector2[] points = objectControlled.GetComponent<PolygonCollider2D>().points; // Pega os pontos que foram o collider do polígono
+            result = CalculateAreaPolygon(points);
+        }
+        else
+        {
+            return -1;
+        }
+
+        return result;
+    }
+
+    /// <summary>
+    /// Calcula a área de um polígono
+    /// </summary>
+    /// <param name="v"></param>
+    private float CalculateAreaPolygon(Vector2[] v)
+    {
+        float temp = 0;
+        float result = 0;
+
+        Debug.Log("vertices do obj controlado: " + v.GetValue(0));
+
+        Vector2[] vertices = (Vector2[])v.Clone();
+
+        for(int i = 0; i < vertices.Length; i++) // Escalona o objeto pra ter os pontos "reais"
+        {
+            vertices[i].x = vertices[i].x * objectControlled.transform.localScale.x;
+            vertices[i].y = vertices[i].y * objectControlled.transform.localScale.y;
+        }
+
+        Debug.Log("vertices do obj controlado: " + vertices.GetValue(0));
+
+        for (int i = 0; i < vertices.Length; i++) // Faz o cálculo da área de um polígono regular qualquer
+        {   
+            if (i != vertices.Length - 1)
+            {
+                float mulA = vertices[i].x * vertices[i + 1].y;
+                float mulB = vertices[i + 1].x * vertices[i].y;
+                temp = temp + (mulA - mulB);
+            }
+            else
+            {
+                float mulA = vertices[i].x * vertices[0].y;
+                float mulB = vertices[0].x * vertices[i].y;
+                temp = temp + (mulA - mulB);
+            }
+        }
+        temp *= 0.5f;
+        result = Mathf.Abs(temp); // Deixa positivo
+
+        return result;
+    }
+
+    /// <summary>
+    /// Calcula a área de um círculo
+    /// </summary>
+    /// <param name="v"></param>
+    private float CalculateAreaCircle(float radius)
+    {
+        
+        float relativeRadius = radius * objectControlled.transform.localScale.x; // Calcula o raio baseado na escala
+        Debug.Log("raio relativo do obj controlado: " + relativeRadius);
+        Debug.Log("raio do obj controlado: " + radius);
+        return Mathf.PI * relativeRadius * relativeRadius;
+    }
+
 }
