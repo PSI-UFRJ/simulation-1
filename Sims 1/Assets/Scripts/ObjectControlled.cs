@@ -8,18 +8,34 @@ public class ObjectControlled : MonoBehaviour
     [SerializeField]
     private Rigidbody2D rb; // Guarda o Rigibbody do objeto a ser controlado
     private Color32 originalObjColor;
+    private int colorSelectedOffset = 30;
+
+    [SerializeField]
+    private Color32[] possibleObjColors;
     private int redCol;
     private int greenCol;
     private int blueCol;
 
 
     [SerializeField]
-    private UnityEngine.UI.Scrollbar scrollbar; // Guarda a instância do scrollbar
+    //private UnityEngine.UI.Scrollbar scrollbar; // Guarda a instância do scrollbar
+    private UnityEngine.UI.Slider sizeSlider; // Guarda a instância do slider
+    [SerializeField]
+    private UnityEngine.UI.Text changeSizeText;
+
+    private UnityEngine.UI.Image colorDisplayImg;
+
+
     [SerializeField]
     private Vector3 scale; // Guarda a escala atual
-    [SerializeField]
+    //[SerializeField]
     private Vector3 baseScale; // Guarda a escala base
     public int sizeScaler = 1;
+
+    private void Start()
+    {
+        colorDisplayImg = GameObject.Find("ColorPickerImg").GetComponent<UnityEngine.UI.Image>();
+    }
 
     public void Update()
     {
@@ -27,7 +43,7 @@ public class ObjectControlled : MonoBehaviour
         
         if(area != -1)
         {
-            Debug.Log("Area do objeto selecionado: " + area);
+            //Debug.Log("Area do objeto selecionado: " + area);
         }
         
     }
@@ -51,10 +67,11 @@ public class ObjectControlled : MonoBehaviour
             UnableChildSprite(); // Desativa o realce do contorno
         }
 
-        ChangeColor(selectedObj); // Muda a cor do objeto selecionado;
+        ChangeColorSelected(selectedObj); // Muda a cor do objeto selecionado;
         EnableChildSprite(selectedObj); // Ativa o realce do contorno
 
         objectControlled = selectedObj; // Guarda a referência para o novo objeto selecionado
+        baseScale = selectedObj.GetComponent<UserClick>().prefab.transform.localScale;
     }
 
     /// <summary>
@@ -127,13 +144,14 @@ public class ObjectControlled : MonoBehaviour
     /// Muda a cor do objeto selecionado
     /// </summary>
     /// <param name="selectedObj"></param>
-    private void ChangeColor(GameObject selectedObj)
+    private void ChangeColorSelected(GameObject selectedObj)
     {
         originalObjColor = selectedObj.GetComponent<SpriteRenderer>().color; // Pega a cor do novo objeto clicado
-        redCol = originalObjColor.r - 30;
-        greenCol = originalObjColor.g - 30;
-        blueCol = originalObjColor.b - 30;
+        redCol = originalObjColor.r - colorSelectedOffset;
+        greenCol = originalObjColor.g - colorSelectedOffset;
+        blueCol = originalObjColor.b - colorSelectedOffset;
         selectedObj.GetComponent<SpriteRenderer>().color = new Color32((byte)redCol, (byte)greenCol, (byte)blueCol, 255); // Troca para a cor "selecionado"
+        colorDisplayImg.color = originalObjColor;
     }
 
     /// <summary>
@@ -147,13 +165,18 @@ public class ObjectControlled : MonoBehaviour
         {
             return;
         }
-
+        
         rb = objectControlled.GetComponent<Rigidbody2D>();
+
         rb.freezeRotation = true; // Impede que o objeto rotacione enquanto é escalado
-        scale = baseScale + new Vector3(newScale * sizeScaler, newScale * sizeScaler, newScale * sizeScaler); // Gera a nova escala baseado na movimentação do scrollbar (value)
+
+        scale = baseScale + new Vector3(newScale * sizeScaler, newScale * sizeScaler, newScale * sizeScaler); // Gera a nova escala baseado na movimentação do slider (value)
         objectControlled.transform.localScale = scale; // Muda a escala local do objeto controlado
+        changeSizeText.text = "" + (sizeSlider.value + 1);
+
         rb.freezeRotation = false;
-        objectControlled.GetComponent<UserClick>().lastScrollbarValue = scrollbar.value; // Guarda no objeto controlado o último valor no scrollbar
+
+        objectControlled.GetComponent<UserClick>().lastSliderValue = sizeSlider.value; // Guarda no objeto controlado o último valor no slider
     }
 
     /// <summary>
@@ -209,7 +232,7 @@ public class ObjectControlled : MonoBehaviour
         float temp = 0;
         float result = 0;
 
-        Debug.Log("vertices do obj controlado: " + v.GetValue(0));
+        //Debug.Log("vertices do obj controlado: " + v.GetValue(0));
 
         Vector2[] vertices = (Vector2[])v.Clone();
 
@@ -219,7 +242,7 @@ public class ObjectControlled : MonoBehaviour
             vertices[i].y = vertices[i].y * objectControlled.transform.localScale.y;
         }
 
-        Debug.Log("vertices do obj controlado: " + vertices.GetValue(0));
+        //Debug.Log("vertices do obj controlado: " + vertices.GetValue(0));
 
         for (int i = 0; i < vertices.Length; i++) // Faz o cálculo da área de um polígono regular qualquer
         {   
@@ -245,14 +268,83 @@ public class ObjectControlled : MonoBehaviour
     /// <summary>
     /// Calcula a área de um círculo
     /// </summary>
-    /// <param name="v"></param>
+    /// <param name="radius"></param>
     private float CalculateAreaCircle(float radius)
     {
         
         float relativeRadius = radius * objectControlled.transform.localScale.x; // Calcula o raio baseado na escala
-        Debug.Log("raio relativo do obj controlado: " + relativeRadius);
-        Debug.Log("raio do obj controlado: " + radius);
+        //Debug.Log("raio relativo do obj controlado: " + relativeRadius);
+        //Debug.Log("raio do obj controlado: " + radius);
         return Mathf.PI * relativeRadius * relativeRadius;
     }
 
+    /// <summary>
+    /// Muda a cor da forma selecionada através do color controller (subindo na lista de cores)
+    /// </summary>
+    public void ChangeColorPickerUp()
+    {
+
+        if (isColorsEqual(possibleObjColors[0], originalObjColor)) // Se a cor já for a primeira da lista
+        {
+            return;
+        }
+
+        int colorIndex = possibleObjColors.Length - 1;
+
+        for (int i = 0; i < possibleObjColors.Length; i++) // Encontra o index da cor atual na lista
+        {
+            if (isColorsEqual(possibleObjColors[i], originalObjColor))
+            {
+                colorIndex = i;
+                break;
+            }
+        }
+
+        originalObjColor = possibleObjColors[colorIndex - 1]; // Troca o valor da cor original para a cor selecionada
+        redCol = originalObjColor.r - colorSelectedOffset;
+        greenCol = originalObjColor.g - colorSelectedOffset;
+        blueCol = originalObjColor.b - colorSelectedOffset;
+        objectControlled.GetComponent<SpriteRenderer>().color = new Color32((byte)redCol, (byte)greenCol, (byte)blueCol, 255); // Troca para a cor selecionada no picker mas no estado "selecionado"
+        colorDisplayImg.color = originalObjColor; // Coloca a cor selecionada no visor do picker
+
+    }
+
+    /// <summary>
+    /// Muda a cor da forma selecionada através do color controller (descendo na lista de cores)
+    /// </summary>
+    public void ChangeColorPickerDown()
+    {
+        if (isColorsEqual(possibleObjColors[possibleObjColors.Length - 1], originalObjColor)) // Se a cor já for a última da lista
+        {
+            return;
+        }
+
+        int colorIndex = 0;
+
+        for (int i = 0; i < possibleObjColors.Length; i++) // Encontra o index da cor atual na lista
+        {
+            if (isColorsEqual(possibleObjColors[i], originalObjColor))
+            {
+                colorIndex = i;
+                break;
+            }
+        }
+        
+        originalObjColor = possibleObjColors[colorIndex + 1]; // Troca o valor da cor original para a cor selecionada
+        redCol = originalObjColor.r - colorSelectedOffset;
+        greenCol = originalObjColor.g - colorSelectedOffset;
+        blueCol = originalObjColor.b - colorSelectedOffset;
+        objectControlled.GetComponent<SpriteRenderer>().color = new Color32((byte)redCol, (byte)greenCol, (byte)blueCol, 255); // Troca para a cor selecionada no picker mas no estado "selecionado"
+        colorDisplayImg.color = originalObjColor; // Coloca a cor selecionada no visor do picker
+    }
+
+    /// <summary>
+    /// Verifica se duas cores são iguais comparando os valores RGB (o valor alfa não é comparado)
+    /// </summary>
+    /// <param name="c1"></param>
+    /// <param name="c2"></param>
+    private bool isColorsEqual(Color32 c1, Color32 c2)
+    {
+        return (c1.r == c2.r) && (c1.g == c2.g) && (c1.b == c2.b);
+    }
 }

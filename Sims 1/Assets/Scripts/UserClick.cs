@@ -28,9 +28,13 @@ public class UserClick : MonoBehaviour
     private LayerMask clickableLayer; // Guarda referência para a layer que indica quais objetos são clicáveis
 
     [SerializeField]
-    private UnityEngine.UI.Scrollbar sizeScrollbar; // Guarda referência para o scrollbar
+    //private UnityEngine.UI.Scrollbar sizeScrollbar; // Guarda referência para o scrollbar
+    private UnityEngine.UI.Slider sizeSlider; // Guarda referência para o slider
+    [SerializeField]
+    private UnityEngine.UI.Text sizeText;
 
-    public float lastScrollbarValue; // Guarda o valor do scrollbar na última vez que este Player foi escalonado
+    //public float lastScrollbarValue; // Guarda o valor do scrollbar na última vez que este Player foi escalonado
+    public float lastSliderValue; // Guarda o valor do scrollbar na última vez que este Player foi escalonado
 
     // Start is called before the first frame update
     void Start()
@@ -83,8 +87,10 @@ public class UserClick : MonoBehaviour
             }
             control.SelectObject(this.gameObject); // Informa ao controller que ele é o objeto selecionado e troca a cor do obj
             #region SizeController
-            sizeScrollbar.value = lastScrollbarValue; // Altera o scrollbar para o último valor
+            sizeSlider.value = lastSliderValue; // Altera o slider para o último valor
+            sizeText.text = "" + (lastSliderValue+1);
             #endregion
+
 
             #region DragAndDrop
             canMove = true;
@@ -171,7 +177,9 @@ public class UserClick : MonoBehaviour
     private void InitGameObjects()
     {
         controlObject = this.transform.parent.gameObject;
-        sizeScrollbar = GameObject.Find("Scrollbar").GetComponent<UnityEngine.UI.Scrollbar>();
+        //sizeScrollbar = GameObject.Find("Scrollbar").GetComponent<UnityEngine.UI.Scrollbar>();
+        sizeSlider = GameObject.Find("ChangeSizeSlider").GetComponent<UnityEngine.UI.Slider>();
+        sizeText = GameObject.Find("ChangeSizeValueTxt").GetComponent<UnityEngine.UI.Text>();
     }
 
     private void InitComponents()
