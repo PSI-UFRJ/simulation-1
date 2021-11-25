@@ -88,9 +88,8 @@ public class UserClick : MonoBehaviour
             control.SelectObject(this.gameObject); // Informa ao controller que ele é o objeto selecionado e troca a cor do obj
             #region SizeController
             sizeSlider.value = lastSliderValue; // Altera o slider para o último valor
-            sizeText.text = "" + (lastSliderValue+1);
+            sizeText.text = "" + (lastSliderValue + 1);
             #endregion
-
 
             #region DragAndDrop
             canMove = true;
@@ -99,7 +98,7 @@ public class UserClick : MonoBehaviour
         }
         else if (Physics2D.OverlapPoint(mousePos) == workspace.GetComponent<BoxCollider2D>()) // Usuário clicou em um espaço vazio do workspace
         {
-            if(control != null)
+            if (control != null)
             {
                 Debug.Log("Deselecionando a cor");
                 control.UnselectObject();
@@ -195,7 +194,7 @@ public class UserClick : MonoBehaviour
         isInWorkspace = false;
         enteredWorkspace = false;
     }
-    
+
     private void MoveToWorkspaceCenter()
     {
         Collider2D workspaceCollider = workspace.GetComponent<Collider2D>();

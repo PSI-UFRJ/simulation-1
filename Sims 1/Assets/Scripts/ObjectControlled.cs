@@ -194,6 +194,22 @@ public class ObjectControlled : MonoBehaviour
     }
 
     /// <summary>
+    /// Deleta todos as formas
+    /// </summary>
+    public void DeleteAll()
+    {
+        foreach (Transform child in this.transform)
+        {
+            GameObject childGameObj = child.gameObject;
+
+            if (childGameObj.GetComponent<UserClick>() != null && childGameObj.GetComponent<UserClick>().GetWorkspaceStatus())
+            {
+                Destroy(childGameObj);
+            }
+        }
+    }
+
+    /// <summary>
     /// Calcula a área do objeto controlado
     /// </summary>
     public float CalculateArea()
