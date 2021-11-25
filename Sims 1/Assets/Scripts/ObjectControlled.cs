@@ -278,17 +278,12 @@ public class ObjectControlled : MonoBehaviour
         return Mathf.PI * relativeRadius * relativeRadius;
     }
 
+    #region Color Controller
     /// <summary>
     /// Muda a cor da forma selecionada através do color controller (subindo na lista de cores)
     /// </summary>
     public void ChangeColorPickerUp()
     {
-
-        if (isColorsEqual(possibleObjColors[0], originalObjColor)) // Se a cor já for a primeira da lista
-        {
-            return;
-        }
-
         int colorIndex = possibleObjColors.Length - 1;
 
         for (int i = 0; i < possibleObjColors.Length; i++) // Encontra o index da cor atual na lista
@@ -297,10 +292,10 @@ public class ObjectControlled : MonoBehaviour
             {
                 colorIndex = i;
                 break;
-            }
+            } 
         }
 
-        originalObjColor = possibleObjColors[colorIndex - 1]; // Troca o valor da cor original para a cor selecionada
+        originalObjColor = possibleObjColors[mod(colorIndex - 1, possibleObjColors.Length)]; // Troca o valor da cor original para a cor selecionada
         redCol = originalObjColor.r - colorSelectedOffset;
         greenCol = originalObjColor.g - colorSelectedOffset;
         blueCol = originalObjColor.b - colorSelectedOffset;
@@ -314,11 +309,6 @@ public class ObjectControlled : MonoBehaviour
     /// </summary>
     public void ChangeColorPickerDown()
     {
-        if (isColorsEqual(possibleObjColors[possibleObjColors.Length - 1], originalObjColor)) // Se a cor já for a última da lista
-        {
-            return;
-        }
-
         int colorIndex = 0;
 
         for (int i = 0; i < possibleObjColors.Length; i++) // Encontra o index da cor atual na lista
@@ -330,14 +320,41 @@ public class ObjectControlled : MonoBehaviour
             }
         }
         
-        originalObjColor = possibleObjColors[colorIndex + 1]; // Troca o valor da cor original para a cor selecionada
+        originalObjColor = possibleObjColors[mod(colorIndex + 1, possibleObjColors.Length)]; // Troca o valor da cor original para a cor selecionada
         redCol = originalObjColor.r - colorSelectedOffset;
         greenCol = originalObjColor.g - colorSelectedOffset;
         blueCol = originalObjColor.b - colorSelectedOffset;
         objectControlled.GetComponent<SpriteRenderer>().color = new Color32((byte)redCol, (byte)greenCol, (byte)blueCol, 255); // Troca para a cor selecionada no picker mas no estado "selecionado"
         colorDisplayImg.color = originalObjColor; // Coloca a cor selecionada no visor do picker
     }
+    #endregion
 
+    #region Rotation Controller
+    public void RotateLeft()
+    {
+        // Sanity check
+        if (objectControlled == null)
+        {
+            return;
+        }
+
+        objectControlled.transform.eulerAngles += (Vector3.forward * 45);
+    }
+
+    public void RotateRight()
+    {
+        // Sanity check
+        if (objectControlled == null)
+        {
+            return;
+        }
+
+        objectControlled.transform.eulerAngles += (Vector3.forward * -45);
+    }
+
+    #endregion
+
+    #region Auxiliary Methods
     /// <summary>
     /// Verifica se duas cores são iguais comparando os valores RGB (o valor alfa não é comparado)
     /// </summary>
@@ -347,4 +364,16 @@ public class ObjectControlled : MonoBehaviour
     {
         return (c1.r == c2.r) && (c1.g == c2.g) && (c1.b == c2.b);
     }
+
+    /// <summary>
+    /// Calcula o módulo
+    /// </summary>
+    /// <param name="a"></param>
+    /// <param name="b"></param>
+    /// <returns></returns>
+    private int mod(int a, int b)
+    {
+        return (a % b + b) % b;
+    }
+    #endregion
 }
