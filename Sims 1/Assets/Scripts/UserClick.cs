@@ -55,6 +55,17 @@ public class UserClick : MonoBehaviour
         {
             this.transform.position = new Vector3(mousePos.x, mousePos.y, this.transform.position.z);
         }
+        else
+        {
+            
+            if (enteredWorkspace && control.GetObjectControlled() == this.gameObject)
+            {
+                Debug.Log("Objeto entrou na workspace");
+            
+                this.GetComponent<SpriteRenderer>().sortingOrder = workspace.GetComponent<SpriteRenderer>().sortingOrder + 3;
+                this.transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().sortingOrder = workspace.GetComponent<SpriteRenderer>().sortingOrder + 2;
+            }
+        }
 
         ExecuteMouseButtonUpActions();
     }
@@ -76,15 +87,6 @@ public class UserClick : MonoBehaviour
         if (collider == Physics2D.OverlapPoint(mousePos))
         {
 
-            if (enteredWorkspace)
-            {
-                Debug.Log("Objeto entrou na workspace");
-
-                this.GetComponent<SpriteRenderer>().sortingOrder = workspace.GetComponent<SpriteRenderer>().sortingOrder + 2;
-                Debug.Log("userClick - pai: " + this.GetComponent<SpriteRenderer>().sortingOrder);
-                this.transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().sortingOrder = workspace.GetComponent<SpriteRenderer>().sortingOrder + 1;
-                Debug.Log("userClick - filho: " + this.transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().sortingOrder);
-            }
             control.SelectObject(this.gameObject); // Informa ao controller que ele é o objeto selecionado e troca a cor do obj
             #region SizeController
             sizeSlider.value = lastSliderValue; // Altera o slider para o último valor
@@ -269,6 +271,11 @@ public class UserClick : MonoBehaviour
     public bool GetWorkspaceStatus()
     {
         return isInWorkspace;
+    }
+
+    public GameObject GetWorkspace()
+    {
+        return workspace;
     }
     #endregion
 }

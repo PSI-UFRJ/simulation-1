@@ -115,8 +115,8 @@ public class ObjectControlled : MonoBehaviour
 
         selectedObjectChild = objectControlled.transform.GetChild(0).gameObject; // Pega o objeto que da a cor amarela indicando qual era o objeto clicado
         selectedObjectChild.GetComponent<SpriteRenderer>().enabled = false; // Desativa o sprite renderer para aparecer o contorno
-        selectedObjectChild.GetComponent<SpriteRenderer>().sortingOrder = selectedObjectChild.GetComponent<SpriteRenderer>().sortingOrder - 2;
-        objectControlled.GetComponent<SpriteRenderer>().sortingOrder = objectControlled.GetComponent<SpriteRenderer>().sortingOrder - 2;
+        selectedObjectChild.GetComponent<SpriteRenderer>().sortingOrder = objectControlled.GetComponent<UserClick>().GetWorkspace().GetComponent<SpriteRenderer>().sortingOrder;
+        objectControlled.GetComponent<SpriteRenderer>().sortingOrder = objectControlled.GetComponent<UserClick>().GetWorkspace().GetComponent<SpriteRenderer>().sortingOrder;
     }
 
     /// <summary>
@@ -134,9 +134,9 @@ public class ObjectControlled : MonoBehaviour
             return;
         }
 
-        selectedObjectChild = selectedObj.transform.GetChild(0).gameObject; // Pega o objeto que da a cor amarela indicando que foi clicado
+        selectedObjectChild = selectedObj.transform.GetChild(0).gameObject; // Pega o objeto que dar a cor de seleção indicando que foi selecionado
         selectedObjectChild.GetComponent<SpriteRenderer>().enabled = true; // Ativa o sprite renderer para aparecer o contorno
-        selectedObj.GetComponent<SpriteRenderer>().sortingOrder = selectedObj.GetComponent<SpriteRenderer>().sortingOrder + 2;
+        selectedObj.GetComponent<SpriteRenderer>().sortingOrder = selectedObj.GetComponent<SpriteRenderer>().sortingOrder + 3;
         selectedObjectChild.GetComponent<SpriteRenderer>().sortingOrder = selectedObjectChild.GetComponent<SpriteRenderer>().sortingOrder + 2;
     }
 
@@ -390,6 +390,13 @@ public class ObjectControlled : MonoBehaviour
     private int mod(int a, int b)
     {
         return (a % b + b) % b;
+    }
+    #endregion
+
+    #region Helper Methods
+    public GameObject GetObjectControlled()
+    {
+        return objectControlled;
     }
     #endregion
 }
