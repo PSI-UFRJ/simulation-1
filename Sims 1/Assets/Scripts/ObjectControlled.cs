@@ -43,7 +43,7 @@ public class ObjectControlled : MonoBehaviour
         
         if(area != -1)
         {
-            //Debug.Log("Area do objeto selecionado: " + area);
+            Debug.Log("Area do objeto selecionado: " + area);
         }
         
     }
@@ -147,9 +147,9 @@ public class ObjectControlled : MonoBehaviour
     private void ChangeColorSelected(GameObject selectedObj)
     {
         originalObjColor = selectedObj.GetComponent<SpriteRenderer>().color; // Pega a cor do novo objeto clicado
-        redCol = originalObjColor.r - colorSelectedOffset;
-        greenCol = originalObjColor.g - colorSelectedOffset;
-        blueCol = originalObjColor.b - colorSelectedOffset;
+        redCol = originalObjColor.r >= colorSelectedOffset ? originalObjColor.r  - colorSelectedOffset: originalObjColor.r;
+        greenCol = originalObjColor.g >= colorSelectedOffset ? originalObjColor.g - colorSelectedOffset: originalObjColor.g;
+        blueCol = originalObjColor.b >= colorSelectedOffset ? originalObjColor.b - colorSelectedOffset : originalObjColor.b;
         selectedObj.GetComponent<SpriteRenderer>().color = new Color32((byte)redCol, (byte)greenCol, (byte)blueCol, 255); // Troca para a cor "selecionado"
         colorDisplayImg.color = originalObjColor;
     }

@@ -133,6 +133,7 @@ public class UserClick : MonoBehaviour
 
         if (!IsInsideWorkspace())
         {
+            Debug.Log("entrei aquiii", this);
             MoveToWorkspaceCenter();
             insideToolsPanel = false;
         }
@@ -262,6 +263,7 @@ public class UserClick : MonoBehaviour
         if (collision.CompareTag("Workspace"))
         {
             Debug.Log("mamae cheguei");
+            Debug.Log(this.gameObject.name);
             enteredWorkspace = true;
         }
     }
