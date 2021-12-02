@@ -11,6 +11,7 @@ public class Circle : MonoBehaviour, IShape
     private CircleCollider2D collider;
     private Transform transform;
     private SpriteRenderer spriteRenderer;
+    [SerializeField] private Sprite[] sprites;
 
     void Start()
     {
@@ -29,6 +30,15 @@ public class Circle : MonoBehaviour, IShape
 
     public void ChangeSize(float controllerValue)
     {
+
+    }
+
+    public void ChangeSprite(int index)
+    {
+        if((index < sprites.Length) && (index >= 0))
+        {
+            spriteRenderer.sprite = sprites[index];
+        }
 
     }
 

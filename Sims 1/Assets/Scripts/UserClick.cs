@@ -86,8 +86,9 @@ public class UserClick : MonoBehaviour
 
         if (collider == Physics2D.OverlapPoint(mousePos))
         {
-
-            control.SelectObject(this.gameObject); // Informa ao controller que ele é o objeto selecionado e troca a cor do obj
+            //###### TAINA MEXEU AQUI
+            //control.SelectObject(this.gameObject); // Informa ao controller que ele é o objeto selecionado e troca a cor do obj
+            control.SelectObject2(this.gameObject);
             #region SizeController
             sizeSlider.value = lastSliderValue; // Altera o slider para o último valor
             sizeText.text = "" + (lastSliderValue + 1);

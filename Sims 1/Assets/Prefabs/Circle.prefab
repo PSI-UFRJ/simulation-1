@@ -149,6 +149,7 @@ GameObject:
   - component: {fileID: 7031137776401816406}
   - component: {fileID: -3115460647493935526}
   - component: {fileID: 2132604915072414098}
+  - component: {fileID: 2810986424878921426}
   m_Layer: 0
   m_Name: Circle
   m_TagString: Untagged
@@ -286,3 +287,23 @@ MonoBehaviour:
   sizeSlider: {fileID: 0}
   sizeText: {fileID: 0}
   lastSliderValue: 0
+--- !u!114 &2810986424878921426
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7031137776401816402}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 552aedb34f5672e4ca99e1ede5f01485, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sprites:
+  - {fileID: 4681943119262021246, guid: 42c2e064fc12ded449bd92ea48884245, type: 3}
+  - {fileID: 8053335830634984109, guid: 42c2e064fc12ded449bd92ea48884245, type: 3}
+  - {fileID: -1326721971008952335, guid: 42c2e064fc12ded449bd92ea48884245, type: 3}
+  - {fileID: 8970902084478708933, guid: 42c2e064fc12ded449bd92ea48884245, type: 3}
+  - {fileID: 9220636802297074858, guid: 42c2e064fc12ded449bd92ea48884245, type: 3}
+  - {fileID: -7011661907411675331, guid: 42c2e064fc12ded449bd92ea48884245, type: 3}
+  - {fileID: -3868570358151189361, guid: 42c2e064fc12ded449bd92ea48884245, type: 3}

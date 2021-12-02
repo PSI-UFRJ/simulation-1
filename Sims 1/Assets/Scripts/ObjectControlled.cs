@@ -5,6 +5,7 @@ using UnityEngine;
 public class ObjectControlled : MonoBehaviour
 {
     public GameObject objectControlled = null; // Guarda o objeto a ser controlado
+    public IShape objectControlledShape = null;
     [SerializeField]
     private Rigidbody2D rb; // Guarda o Rigibbody do objeto a ser controlado
     private Color32 originalObjColor;
@@ -71,6 +72,35 @@ public class ObjectControlled : MonoBehaviour
         EnableChildSprite(selectedObj); // Ativa o realce do contorno
 
         objectControlled = selectedObj; // Guarda a referência para o novo objeto selecionado
+        baseScale = selectedObj.GetComponent<UserClick>().prefab.transform.localScale;
+    }
+
+    public void SelectObject2(GameObject selectedObj) //################# TAINA MEXEU AQUI
+    {
+        // Sanity check
+        if (selectedObj == null || selectedObj == objectControlled)
+        {
+            return;
+        }
+
+        // ----------------------------------------------- //
+        // - Objeto clicado não é o que está selecionado - //
+        // ----------------------------------------------- //
+
+        // Reseta a cor do objeto que estava selecionado anteriormente
+        if (objectControlled != null)
+        {
+            ResetColor(); // Reseta a cor
+            objectControlledShape.ChangeSprite(0); // Desativa o realce do contorno
+        }
+
+        ChangeColorSelected(selectedObj); // Muda a cor do objeto selecionado;
+        
+        objectControlledShape = selectedObj.GetComponent<IShape>(); // Guarda a classe Shape em específico desse GameObject (Circle, Triangle, etc)
+        objectControlledShape.ChangeSprite(1); // Ativa o realce do contorno
+
+        objectControlled = selectedObj; // Guarda a referência para o novo objeto selecionado
+ 
         baseScale = selectedObj.GetComponent<UserClick>().prefab.transform.localScale;
     }
 
