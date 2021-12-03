@@ -18,7 +18,7 @@ public class UserClick : MonoBehaviour
     private Collider2D collider; // Guarda o collider do Player
 
     [SerializeField]
-    private GameObject controlObject; // Guarda referência para o GameObject pai dos Players
+    private GameObject shape; // Guarda referência para o GameObject pai dos Players
     private ObjectControlled control;
 
     [SerializeField]
@@ -47,23 +47,16 @@ public class UserClick : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-
         ExecuteMouseButtonDownActions();
 
+        Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         if (dragging)
         {
             this.transform.position = new Vector3(mousePos.x, mousePos.y, this.transform.position.z);
-        }
-        else
-        {
-            
             if (enteredWorkspace && control.GetObjectControlled() == this.gameObject)
             {
-                Debug.Log("Objeto entrou na workspace");
-            
+                // Alterar order in layer quando entrar no workspace. Usamos isso para o sprite se manter sobre a estrutura da simulação.
                 this.GetComponent<SpriteRenderer>().sortingOrder = workspace.GetComponent<SpriteRenderer>().sortingOrder + 3;
-                this.transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().sortingOrder = workspace.GetComponent<SpriteRenderer>().sortingOrder + 2;
             }
         }
 
@@ -86,12 +79,12 @@ public class UserClick : MonoBehaviour
 
         if (collider == Physics2D.OverlapPoint(mousePos))
         {
-            //###### TAINA MEXEU AQUI
-            //control.SelectObject(this.gameObject); // Informa ao controller que ele é o objeto selecionado e troca a cor do obj
-            control.SelectObject2(this.gameObject);
+
+            control.UnselectObject(this.gameObject, false);
+            control.SelectObject(this.gameObject); // Informa ao controller que ele é o objeto selecionado e troca a cor do obj
             #region SizeController
             sizeSlider.value = lastSliderValue; // Altera o slider para o último valor
-            sizeText.text = "" + (lastSliderValue + 1);
+            sizeText.text = "" + (lastSliderValue + 1); // Altera o slider para o último texto
             #endregion
 
             #region DragAndDrop
@@ -103,8 +96,7 @@ public class UserClick : MonoBehaviour
         {
             if (control != null)
             {
-                Debug.Log("Deselecionando a cor");
-                control.UnselectObject();
+                control.UnselectObject(this.gameObject, true);
             }
         }
         else
@@ -134,7 +126,6 @@ public class UserClick : MonoBehaviour
 
         if (!IsInsideWorkspace())
         {
-            Debug.Log("entrei aquiii", this);
             MoveToWorkspaceCenter();
             insideToolsPanel = false;
         }
@@ -153,16 +144,15 @@ public class UserClick : MonoBehaviour
             return;
         }
 
+        this.GetComponent<SpriteRenderer>().sortingOrder = this.GetComponent<SpriteRenderer>().sortingOrder + 3;
+
         GameObject obj = Instantiate(prefab);
-        GameObject objChild = obj.transform.GetChild(0).gameObject;
 
         // Dentro da hierarquia dos objetos da cena, definimos quem é o seu pai
         obj.transform.SetParent(this.transform.parent);
-        objChild.transform.SetParent(obj.transform);
 
         // Definimos sua posição
         obj.transform.position = this.transform.position;
-        objChild.transform.position = obj.transform.position;
 
         // Definimos os componentes que esse novo objeto precisa ter para que o seu script funcione
         obj.GetComponent<UserClick>().prefab = this.GetComponent<UserClick>().prefab;
@@ -179,16 +169,15 @@ public class UserClick : MonoBehaviour
 
     private void InitGameObjects()
     {
-        controlObject = this.transform.parent.gameObject;
-        //sizeScrollbar = GameObject.Find("Scrollbar").GetComponent<UnityEngine.UI.Scrollbar>();
+        shape = this.transform.parent.gameObject;;
         sizeSlider = GameObject.Find("ChangeSizeSlider").GetComponent<UnityEngine.UI.Slider>();
         sizeText = GameObject.Find("ChangeSizeValueTxt").GetComponent<UnityEngine.UI.Text>();
     }
 
     private void InitComponents()
     {
-        collider = GetComponent<Collider2D>();
-        control = controlObject.GetComponent<ObjectControlled>();
+        collider = this.GetComponent<Collider2D>();
+        control = shape.GetComponent<ObjectControlled>();
     }
 
     private void InitStatusVariables()

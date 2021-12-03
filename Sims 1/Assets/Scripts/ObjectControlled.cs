@@ -40,58 +40,19 @@ public class ObjectControlled : MonoBehaviour
 
     public void Update()
     {
-        float area = CalculateArea();
-        
-        if(area != -1)
-        {
-            Debug.Log("Area do objeto selecionado: " + area);
-        }
         
     }
 
+    /// <summary>
+    /// Seleciona o objeto controlado
+    /// </summary>
+    /// <param name="selectedObj"></param>
     public void SelectObject(GameObject selectedObj)
     {
         // Sanity check
         if (selectedObj == null || selectedObj == objectControlled)
         {
             return;
-        }
-
-        // ----------------------------------------------- //
-        // - Objeto clicado não é o que está selecionado - //
-        // ----------------------------------------------- //
-
-        // Reseta a cor do objeto que estava selecionado anteriormente
-        if (objectControlled != null)
-        {
-            ResetColor(); // Reseta a cor
-            UnableChildSprite(); // Desativa o realce do contorno
-        }
-
-        ChangeColorSelected(selectedObj); // Muda a cor do objeto selecionado;
-        EnableChildSprite(selectedObj); // Ativa o realce do contorno
-
-        objectControlled = selectedObj; // Guarda a referência para o novo objeto selecionado
-        baseScale = selectedObj.GetComponent<UserClick>().prefab.transform.localScale;
-    }
-
-    public void SelectObject2(GameObject selectedObj) //################# TAINA MEXEU AQUI
-    {
-        // Sanity check
-        if (selectedObj == null || selectedObj == objectControlled)
-        {
-            return;
-        }
-
-        // ----------------------------------------------- //
-        // - Objeto clicado não é o que está selecionado - //
-        // ----------------------------------------------- //
-
-        // Reseta a cor do objeto que estava selecionado anteriormente
-        if (objectControlled != null)
-        {
-            ResetColor(); // Reseta a cor
-            objectControlledShape.ChangeSprite(0); // Desativa o realce do contorno
         }
 
         ChangeColorSelected(selectedObj); // Muda a cor do objeto selecionado;
@@ -107,18 +68,24 @@ public class ObjectControlled : MonoBehaviour
     /// <summary>
     /// Desseleciona o objeto controlado
     /// </summary>
-    public void UnselectObject()
+    /// <param name="selectObject"></param>
+    /// <param name="isWorkspace"></param>
+    public void UnselectObject(GameObject selectObject, bool isWorkspace)
     {
         // Sanity check
-        if (objectControlled == null || !objectControlled.GetComponent<UserClick>().GetWorkspaceStatus())
+        if (objectControlled == null || selectObject == objectControlled || !objectControlled.GetComponent<UserClick>().GetWorkspaceStatus())
         {
             return;
         }
 
         ResetColor(); // Reseta a cor
-        UnableChildSprite(); // Desativa o realce do contorno
+        objectControlledShape.ChangeSprite(0); // Atualiza para a sprite sem contorno
+        objectControlled.GetComponent<SpriteRenderer>().sortingOrder = objectControlled.GetComponent<UserClick>().GetWorkspace().GetComponent<SpriteRenderer>().sortingOrder;//Volta para layer 0
 
-        objectControlled = null; // Desfaz a referência do atual objeto controlado
+        if (isWorkspace)
+        {
+            objectControlled = null; // Desfaz a referência do atual objeto controlado
+        }
     }
 
     /// <summary>
@@ -127,47 +94,6 @@ public class ObjectControlled : MonoBehaviour
     private void ResetColor()
     {
         objectControlled.GetComponent<SpriteRenderer>().color = originalObjColor;
-    }
-
-    /// <summary>
-    /// Desabilita o sprite do filho do objeto controlado
-    /// </summary>
-    private void UnableChildSprite()
-    {
-        GameObject selectedObjectChild;
-
-        // Sanity check
-        if(objectControlled.transform.childCount == 0)
-        {
-            Debug.Log("Objeto não apresenta um filho");
-            return;
-        }
-
-        selectedObjectChild = objectControlled.transform.GetChild(0).gameObject; // Pega o objeto que da a cor amarela indicando qual era o objeto clicado
-        selectedObjectChild.GetComponent<SpriteRenderer>().enabled = false; // Desativa o sprite renderer para aparecer o contorno
-        selectedObjectChild.GetComponent<SpriteRenderer>().sortingOrder = objectControlled.GetComponent<UserClick>().GetWorkspace().GetComponent<SpriteRenderer>().sortingOrder;
-        objectControlled.GetComponent<SpriteRenderer>().sortingOrder = objectControlled.GetComponent<UserClick>().GetWorkspace().GetComponent<SpriteRenderer>().sortingOrder;
-    }
-
-    /// <summary>
-    /// Habilita o sprite do filho do atual objeto selecionado
-    /// </summary>
-    /// <param name="selectedObj"></param>
-    private void EnableChildSprite(GameObject selectedObj)
-    {
-        GameObject selectedObjectChild;
-
-        // Sanity check
-        if (selectedObj.transform.childCount == 0)
-        {
-            Debug.Log("Objeto não apresenta um filho");
-            return;
-        }
-
-        selectedObjectChild = selectedObj.transform.GetChild(0).gameObject; // Pega o objeto que dar a cor de seleção indicando que foi selecionado
-        selectedObjectChild.GetComponent<SpriteRenderer>().enabled = true; // Ativa o sprite renderer para aparecer o contorno
-        selectedObj.GetComponent<SpriteRenderer>().sortingOrder = selectedObj.GetComponent<SpriteRenderer>().sortingOrder + 3;
-        selectedObjectChild.GetComponent<SpriteRenderer>().sortingOrder = selectedObjectChild.GetComponent<SpriteRenderer>().sortingOrder + 2;
     }
 
     /// <summary>
@@ -195,7 +121,7 @@ public class ObjectControlled : MonoBehaviour
         {
             return;
         }
-        
+
         rb = objectControlled.GetComponent<Rigidbody2D>();
 
         rb.freezeRotation = true; // Impede que o objeto rotacione enquanto é escalado
@@ -207,6 +133,22 @@ public class ObjectControlled : MonoBehaviour
         rb.freezeRotation = false;
 
         objectControlled.GetComponent<UserClick>().lastSliderValue = sizeSlider.value; // Guarda no objeto controlado o último valor no slider
+    }
+
+    /// <summary>
+    /// Muda a a aparência do objeto após soltar o slider
+    /// </summary>
+    public void exitSlider()
+    {
+        objectControlledShape.ChangeSprite(1); // Ativa o realce do raio
+    }
+
+    /// <summary>
+    /// Muda a a aparência do objeto após segurar o slider
+    /// </summary>
+    public void enterSlider()
+    {
+        objectControlledShape.ChangeSprite(2); // Ativa o realce do raio
     }
 
     /// <summary>
