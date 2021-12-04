@@ -37,9 +37,9 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -6.12, y: -4.9}
-  m_SizeDelta: {x: 1, y: 1}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -6.56482, y: -4.4}
+  m_SizeDelta: {x: 1.1036, y: 1}
+  m_Pivot: {x: 0.05, y: 1}
 --- !u!212 &9132100723960602011
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -80,7 +80,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 5
-  m_Sprite: {fileID: 21300000, guid: 137fd8032cfde66438afbb154902b7b7, type: 3}
+  m_Sprite: {fileID: 701022369157521235, guid: 8777ff28c15ff6945b3634e9c2878127, type: 3}
   m_Color: {r: 0.4791824, g: 0.99215686, b: 0.46274507, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -125,18 +125,18 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0.49717474, y: -0.5023539}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 2.56, y: 2.56}
+    pivot: {x: 0, y: 1}
+    oldSize: {x: 1.0039062, y: 1.0039062}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.9792843, y: 1.0103583}
   m_EdgeRadius: 0
 --- !u!114 &193843248897488728
 MonoBehaviour:
@@ -173,4 +173,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sprites:
-  - {fileID: 21300000, guid: 137fd8032cfde66438afbb154902b7b7, type: 3}
+  - {fileID: 701022369157521235, guid: 8777ff28c15ff6945b3634e9c2878127, type: 3}
+  - {fileID: 1781944735681251998, guid: 8777ff28c15ff6945b3634e9c2878127, type: 3}
+  - {fileID: -7711299845427162287, guid: 8777ff28c15ff6945b3634e9c2878127, type: 3}
+  - {fileID: 712130302477587645, guid: 8777ff28c15ff6945b3634e9c2878127, type: 3}
+  - {fileID: 1507113435263308803, guid: 8777ff28c15ff6945b3634e9c2878127, type: 3}
+  - {fileID: -6535192884874117730, guid: 8777ff28c15ff6945b3634e9c2878127, type: 3}

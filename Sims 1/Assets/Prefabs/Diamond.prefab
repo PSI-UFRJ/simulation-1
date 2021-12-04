@@ -37,7 +37,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -4.05, y: -4.9}
+  m_AnchoredPosition: {x: -3.0180001, y: -5.835}
   m_SizeDelta: {x: 1, y: 1}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!212 &8165445293627304730
@@ -80,7 +80,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 5
-  m_Sprite: {fileID: 21300000, guid: fcd428a1440f12643b8555b753657c3d, type: 3}
+  m_Sprite: {fileID: 2145292314178624305, guid: 7400469b14b4a2442968509f368c5a8a, type: 3}
   m_Color: {r: 0.99215686, g: 0.46865666, b: 0.46274507, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -128,8 +128,8 @@ PolygonCollider2D:
   m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.96603775, y: 0.9773585}
+    pivot: {x: 0, y: 1}
+    oldSize: {x: 1, y: 1}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -137,10 +137,10 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 0.48246357, y: 0.0018876144}
-      - {x: -0.0013351338, y: 0.2783788}
-      - {x: -0.4822213, y: 0.0021537156}
-      - {x: 0.0007375078, y: -0.27980804}
+    - - {x: 0.99432564, y: -0.49788317}
+      - {x: 0.49843547, y: -0.21333116}
+      - {x: 0.0014277399, y: -0.5056779}
+      - {x: 0.50050825, y: -0.7957003}
 --- !u!114 &962199575553917401
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -176,4 +176,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sprites:
-  - {fileID: 21300000, guid: fcd428a1440f12643b8555b753657c3d, type: 3}
+  - {fileID: 2145292314178624305, guid: 7400469b14b4a2442968509f368c5a8a, type: 3}
+  - {fileID: -7772138003775606183, guid: 7400469b14b4a2442968509f368c5a8a, type: 3}
+  - {fileID: -7839143202364837097, guid: 7400469b14b4a2442968509f368c5a8a, type: 3}
+  - {fileID: 7346244926252459785, guid: 7400469b14b4a2442968509f368c5a8a, type: 3}
+  - {fileID: 5883592776359333415, guid: 7400469b14b4a2442968509f368c5a8a, type: 3}
+  - {fileID: 2954760029499438013, guid: 7400469b14b4a2442968509f368c5a8a, type: 3}
+  - {fileID: 4864191640436840792, guid: 7400469b14b4a2442968509f368c5a8a, type: 3}
