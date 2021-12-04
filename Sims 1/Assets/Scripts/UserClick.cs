@@ -252,8 +252,6 @@ public class UserClick : MonoBehaviour
     {
         if (collision.CompareTag("Workspace"))
         {
-            Debug.Log("mamae cheguei");
-            Debug.Log(this.gameObject.name);
             enteredWorkspace = true;
         }
     }

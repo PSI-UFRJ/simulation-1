@@ -110,30 +110,56 @@ public class ObjectControlled : MonoBehaviour
         colorDisplayImg.color = originalObjColor;
     }
 
+    #region Color Controller
     /// <summary>
-    /// Muda a escala do objeto controlado
+    /// Muda a cor da forma selecionada através do color controller (subindo na lista de cores)
     /// </summary>
-    /// <param name="newScale"></param>
-    public void ChangeScale(float newScale)
+    public void ChangeColorPickerUp()
     {
-        // Sanity check
-        if (objectControlled == null || !objectControlled.GetComponent<UserClick>().GetWorkspaceStatus())
+        int colorIndex = possibleObjColors.Length - 1;
+
+        for (int i = 0; i < possibleObjColors.Length; i++) // Encontra o index da cor atual na lista
         {
-            return;
+            if (isColorsEqual(possibleObjColors[i], originalObjColor))
+            {
+                colorIndex = i;
+                break;
+            }
         }
 
-        rb = objectControlled.GetComponent<Rigidbody2D>();
+        originalObjColor = possibleObjColors[mod(colorIndex - 1, possibleObjColors.Length)]; // Troca o valor da cor original para a cor selecionada
+        redCol = originalObjColor.r >= colorSelectedOffset ? originalObjColor.r - colorSelectedOffset : originalObjColor.r;
+        greenCol = originalObjColor.g >= colorSelectedOffset ? originalObjColor.g - colorSelectedOffset : originalObjColor.g;
+        blueCol = originalObjColor.b >= colorSelectedOffset ? originalObjColor.b - colorSelectedOffset : originalObjColor.b;
+        objectControlled.GetComponent<SpriteRenderer>().color = new Color32((byte)redCol, (byte)greenCol, (byte)blueCol, 255); // Troca para a cor selecionada no picker mas no estado "selecionado"
+        colorDisplayImg.color = originalObjColor; // Coloca a cor selecionada no visor do picker
 
-        rb.freezeRotation = true; // Impede que o objeto rotacione enquanto é escalado
-
-        scale = baseScale + new Vector3(newScale * sizeScaler, newScale * sizeScaler, newScale * sizeScaler); // Gera a nova escala baseado na movimentação do slider (value)
-        objectControlled.transform.localScale = scale; // Muda a escala local do objeto controlado
-        changeSizeText.text = "" + (sizeSlider.value + 1);
-
-        rb.freezeRotation = false;
-
-        objectControlled.GetComponent<UserClick>().lastSliderValue = sizeSlider.value; // Guarda no objeto controlado o último valor no slider
     }
+
+    /// <summary>
+    /// Muda a cor da forma selecionada através do color controller (descendo na lista de cores)
+    /// </summary>
+    public void ChangeColorPickerDown()
+    {
+        int colorIndex = 0;
+
+        for (int i = 0; i < possibleObjColors.Length; i++) // Encontra o index da cor atual na lista
+        {
+            if (isColorsEqual(possibleObjColors[i], originalObjColor))
+            {
+                colorIndex = i;
+                break;
+            }
+        }
+
+        originalObjColor = possibleObjColors[mod(colorIndex + 1, possibleObjColors.Length)]; // Troca o valor da cor original para a cor selecionada
+        redCol = originalObjColor.r >= colorSelectedOffset ? originalObjColor.r - colorSelectedOffset : originalObjColor.r;
+        greenCol = originalObjColor.g >= colorSelectedOffset ? originalObjColor.g - colorSelectedOffset : originalObjColor.g;
+        blueCol = originalObjColor.b >= colorSelectedOffset ? originalObjColor.b - colorSelectedOffset : originalObjColor.b;
+        objectControlled.GetComponent<SpriteRenderer>().color = new Color32((byte)redCol, (byte)greenCol, (byte)blueCol, 255); // Troca para a cor selecionada no picker mas no estado "selecionado"
+        colorDisplayImg.color = originalObjColor; // Coloca a cor selecionada no visor do picker
+    }
+    #endregion
 
     /// <summary>
     /// Muda a a aparência do objeto após soltar o slider
@@ -152,6 +178,22 @@ public class ObjectControlled : MonoBehaviour
     }
 
     /// <summary>
+    /// Deleta todos as formas
+    /// </summary>
+    public void DeleteAll()
+    {
+        foreach (Transform child in this.transform)
+        {
+            GameObject childGameObj = child.gameObject;
+
+            if (childGameObj.GetComponent<UserClick>() != null && childGameObj.GetComponent<UserClick>().GetWorkspaceStatus())
+            {
+                Destroy(childGameObj);
+            }
+        }
+    }
+
+    /// <summary>
     /// Deleta o objeto controlado
     /// </summary>
     public void DeleteObject()
@@ -166,19 +208,28 @@ public class ObjectControlled : MonoBehaviour
     }
 
     /// <summary>
-    /// Deleta todos as formas
+    /// Muda a escala do objeto controlado
     /// </summary>
-    public void DeleteAll()
+    /// <param name="newScale"></param>
+    public void ChangeScale(float newScale)
     {
-        foreach (Transform child in this.transform)
+        // Sanity check
+        if (objectControlled == null || !objectControlled.GetComponent<UserClick>().GetWorkspaceStatus())
         {
-            GameObject childGameObj = child.gameObject;
-
-            if (childGameObj.GetComponent<UserClick>() != null && childGameObj.GetComponent<UserClick>().GetWorkspaceStatus())
-            {
-                Destroy(childGameObj);
-            }
+            return;
         }
+
+        rb = objectControlled.GetComponent<Rigidbody2D>();
+        
+        rb.freezeRotation = true; // Impede que o objeto rotacione enquanto é escalado
+        
+        scale = baseScale + new Vector3(newScale * sizeScaler, newScale * sizeScaler, newScale * sizeScaler); // Gera a nova escala baseado na movimentação do slider (value)
+        objectControlled.transform.localScale = scale; // Muda a escala local do objeto controlado
+        changeSizeText.text = "" + (sizeSlider.value + 1);
+        
+        rb.freezeRotation = false;
+        
+        objectControlled.GetComponent<UserClick>().lastSliderValue = sizeSlider.value; // Guarda no objeto controlado o último valor no slider
     }
 
     /// <summary>
@@ -266,56 +317,7 @@ public class ObjectControlled : MonoBehaviour
         return Mathf.PI * relativeRadius * relativeRadius;
     }
 
-    #region Color Controller
-    /// <summary>
-    /// Muda a cor da forma selecionada através do color controller (subindo na lista de cores)
-    /// </summary>
-    public void ChangeColorPickerUp()
-    {
-        int colorIndex = possibleObjColors.Length - 1;
 
-        for (int i = 0; i < possibleObjColors.Length; i++) // Encontra o index da cor atual na lista
-        {
-            if (isColorsEqual(possibleObjColors[i], originalObjColor))
-            {
-                colorIndex = i;
-                break;
-            } 
-        }
-
-        originalObjColor = possibleObjColors[mod(colorIndex - 1, possibleObjColors.Length)]; // Troca o valor da cor original para a cor selecionada
-        redCol = originalObjColor.r - colorSelectedOffset;
-        greenCol = originalObjColor.g - colorSelectedOffset;
-        blueCol = originalObjColor.b - colorSelectedOffset;
-        objectControlled.GetComponent<SpriteRenderer>().color = new Color32((byte)redCol, (byte)greenCol, (byte)blueCol, 255); // Troca para a cor selecionada no picker mas no estado "selecionado"
-        colorDisplayImg.color = originalObjColor; // Coloca a cor selecionada no visor do picker
-
-    }
-
-    /// <summary>
-    /// Muda a cor da forma selecionada através do color controller (descendo na lista de cores)
-    /// </summary>
-    public void ChangeColorPickerDown()
-    {
-        int colorIndex = 0;
-
-        for (int i = 0; i < possibleObjColors.Length; i++) // Encontra o index da cor atual na lista
-        {
-            if (isColorsEqual(possibleObjColors[i], originalObjColor))
-            {
-                colorIndex = i;
-                break;
-            }
-        }
-        
-        originalObjColor = possibleObjColors[mod(colorIndex + 1, possibleObjColors.Length)]; // Troca o valor da cor original para a cor selecionada
-        redCol = originalObjColor.r - colorSelectedOffset;
-        greenCol = originalObjColor.g - colorSelectedOffset;
-        blueCol = originalObjColor.b - colorSelectedOffset;
-        objectControlled.GetComponent<SpriteRenderer>().color = new Color32((byte)redCol, (byte)greenCol, (byte)blueCol, 255); // Troca para a cor selecionada no picker mas no estado "selecionado"
-        colorDisplayImg.color = originalObjColor; // Coloca a cor selecionada no visor do picker
-    }
-    #endregion
 
     #region Rotation Controller
     public void RotateLeft()
