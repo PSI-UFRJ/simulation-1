@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -36,6 +37,9 @@ public class UserClick : MonoBehaviour
     //public float lastScrollbarValue; // Guarda o valor do scrollbar na última vez que este Player foi escalonado
     public float lastSliderValue; // Guarda o valor do scrollbar na última vez que este Player foi escalonado
 
+    // Item1: offset do eixo x; Item2: offset do eixo y
+    private Tuple<float, float> shapeOffset; //Guarda o cálculo do offset a fim de permitir que o movimento das formas acompanhe de forma mais precisa o mouse
+
     // Start is called before the first frame update
     void Start()
     {
@@ -52,7 +56,9 @@ public class UserClick : MonoBehaviour
         Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         if (dragging)
         {
-            this.transform.position = new Vector3(mousePos.x, mousePos.y, this.transform.position.z);
+            // Desloca o objeto de forma suave baseado no offset calculado
+            this.transform.position = new Vector3(mousePos.x - shapeOffset.Item1, mousePos.y - shapeOffset.Item2, this.transform.position.z);
+
             if (enteredWorkspace && control.GetObjectControlled() == this.gameObject)
             {
                 // Alterar order in layer quando entrar no workspace. Usamos isso para o sprite se manter sobre a estrutura da simulação.
@@ -107,6 +113,8 @@ public class UserClick : MonoBehaviour
         if (canMove)
         {
             dragging = true;
+            // Salva o offset do eixo x e do eixo y
+            shapeOffset = new Tuple<float, float>(mousePos.x - this.transform.position.x, mousePos.y - this.transform.position.y);
         }
     }
 
