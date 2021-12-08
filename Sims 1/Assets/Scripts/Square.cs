@@ -23,20 +23,6 @@ public class Square : MonoBehaviour, IShape
         
     }
 
-    public void ChangeSize(float controllerValue, Vector3 baseScale, Slider sizeSlider, Text changeSizeText)
-    {
-
-    }
-
-    public void ChangeSprite(int index)
-    {
-        if ((index < sprites.Length) && (index >= 0))
-        {
-            spriteRenderer.sprite = sprites[index];
-        }
-
-    }
-
     public void ChangeArea(float a)
     {
 
@@ -57,5 +43,15 @@ public class Square : MonoBehaviour, IShape
     {
         float perimeter = 0;
         return perimeter;
+    }
+
+    public Sprite[] GetSprites()
+    {
+        return sprites;
+    }
+
+    public string GetShapeName()
+    {
+        return this.GetType().Name;
     }
 }

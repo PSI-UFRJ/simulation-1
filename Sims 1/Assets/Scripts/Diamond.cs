@@ -14,26 +14,11 @@ public class Diamond : MonoBehaviour, IShape
     {
         spriteRenderer = this.gameObject.GetComponent<SpriteRenderer>();
         color = spriteRenderer.color;
-
     }
 
     // Update is called once per frame
     void Update()
     {
-
-    }
-
-    public void ChangeSize(float controllerValue, Vector3 baseScale, Slider sizeSlider, Text changeSizeText)
-    {
-
-    }
-
-    public void ChangeSprite(int index)
-    {
-        if ((index < sprites.Length) && (index >= 0))
-        {
-            spriteRenderer.sprite = sprites[index];
-        }
 
     }
 
@@ -59,4 +44,13 @@ public class Diamond : MonoBehaviour, IShape
         return perimeter;
     }
 
+    public Sprite[] GetSprites()
+    {
+        return sprites;
+    }
+
+    public string GetShapeName()
+    {
+        return this.GetType().Name;
+    }
 }

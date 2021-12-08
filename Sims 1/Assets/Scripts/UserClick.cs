@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -17,6 +18,12 @@ public class UserClick : MonoBehaviour
     private Vector3 initialPosition;
 
     private Collider2D collider; // Guarda o collider do Player
+
+    public List<GameObject> controlPanels;
+
+    private Dictionary<string, GameObject> mappedControlPanels = new Dictionary<string, GameObject>();
+
+    private GameObject ownControlPanel;
 
     [SerializeField]
     private GameObject shape; // Guarda referência para o GameObject pai dos Players
@@ -89,7 +96,10 @@ public class UserClick : MonoBehaviour
             control.UnselectObject(this.gameObject, false);
             control.SelectObject(this.gameObject); // Informa ao controller que ele é o objeto selecionado e troca a cor do obj
             #region SizeController
+
+            sizeSlider = ownControlPanel.transform.Find("ShapeSizeController").transform.Find("ChangeSizeSlider").GetComponent<UnityEngine.UI.Slider>();
             sizeSlider.value = lastSliderValue; // Altera o slider para o último valor
+            sizeText = ownControlPanel.transform.Find("ShapeSizeController").transform.Find("ChangeSizeValueTxt").GetComponent<UnityEngine.UI.Text>();
             sizeText.text = "" + (lastSliderValue + 1); // Altera o slider para o último texto
             #endregion
 
@@ -165,6 +175,7 @@ public class UserClick : MonoBehaviour
         // Definimos os componentes que esse novo objeto precisa ter para que o seu script funcione
         obj.GetComponent<UserClick>().prefab = this.GetComponent<UserClick>().prefab;
         obj.GetComponent<UserClick>().workspace = this.GetComponent<UserClick>().workspace;
+        obj.GetComponent<UserClick>().controlPanels = this.GetComponent<UserClick>().controlPanels;
 
         // O novo objeto passa a ser o template
         obj.GetComponent<UserClick>().isTemplate = true;
@@ -177,9 +188,12 @@ public class UserClick : MonoBehaviour
 
     private void InitGameObjects()
     {
-        shape = this.transform.parent.gameObject;;
-        sizeSlider = GameObject.Find("ChangeSizeSlider").GetComponent<UnityEngine.UI.Slider>();
-        sizeText = GameObject.Find("ChangeSizeValueTxt").GetComponent<UnityEngine.UI.Text>();
+        ControlPanelListToDict(mappedControlPanels, controlPanels);
+        shape = this.transform.parent.gameObject;
+
+        string shapeName = this.GetComponent<IShape>().GetShapeName().Trim();
+
+        ownControlPanel = mappedControlPanels[shapeName];
     }
 
     private void InitComponents()
@@ -225,6 +239,20 @@ public class UserClick : MonoBehaviour
     {
         Vector2 closetPos = collision.ClosestPoint(new Vector2(this.transform.position.x, this.transform.position.y));
         this.transform.position = new Vector3(closetPos.x, closetPos.y, this.transform.position.z); // Transporta o objeto para a região mais próxima do workspace
+    }
+
+    private void ControlPanelListToDict(Dictionary<string, GameObject> mappedControlPanels, List<GameObject> controlPanels)
+    {
+        foreach (GameObject gameObj in controlPanels)
+        {
+            mappedControlPanels.Add(gameObj.name.ToString().Replace("ControlPanel", "").Trim(), gameObj);
+        }
+    }
+
+    private GameObject GetOwnControlPanel()
+    {
+        string shapeName = this.GetComponent<IShape>().GetShapeName().Trim();
+        return mappedControlPanels[shapeName];
     }
     #endregion
 
@@ -274,6 +302,11 @@ public class UserClick : MonoBehaviour
     public GameObject GetWorkspace()
     {
         return workspace;
+    }
+
+    public GameObject GetControlPanel()
+    {
+        return ownControlPanel;
     }
     #endregion
 }

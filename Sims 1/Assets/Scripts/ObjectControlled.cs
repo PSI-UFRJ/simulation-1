@@ -17,7 +17,6 @@ public class ObjectControlled : MonoBehaviour
     private int greenCol;
     private int blueCol;
 
-
     [SerializeField]
     //private UnityEngine.UI.Scrollbar scrollbar; // Guarda a instância do scrollbar
     private UnityEngine.UI.Slider sizeSlider; // Guarda a instância do slider
@@ -32,6 +31,8 @@ public class ObjectControlled : MonoBehaviour
     //[SerializeField]
     private Vector3 baseScale; // Guarda a escala base
     public int sizeScaler = 1;
+
+    private GameObject controlPanel;
 
     private void Start()
     {
@@ -55,13 +56,18 @@ public class ObjectControlled : MonoBehaviour
             return;
         }
 
+        controlPanel = selectedObj.GetComponent<UserClick>().GetControlPanel();
+
+        controlPanel.SetActive(true);
+
         ChangeColorSelected(selectedObj); // Muda a cor do objeto selecionado;
         
         objectControlledShape = selectedObj.GetComponent<IShape>(); // Guarda a classe Shape em específico desse GameObject (Circle, Triangle, etc)
-        objectControlledShape.ChangeSprite(1); // Ativa o realce do contorno
 
         objectControlled = selectedObj; // Guarda a referência para o novo objeto selecionado
- 
+
+        this.ChangeSprite(1); // Ativa o realce do contorno
+
         baseScale = selectedObj.GetComponent<UserClick>().prefab.transform.localScale;
     }
 
@@ -79,8 +85,10 @@ public class ObjectControlled : MonoBehaviour
         }
 
         ResetColor(); // Reseta a cor
-        objectControlledShape.ChangeSprite(0); // Atualiza para a sprite sem contorno
+        this.ChangeSprite(0); // Atualiza para a sprite sem contorno
         objectControlled.GetComponent<SpriteRenderer>().sortingOrder = objectControlled.GetComponent<UserClick>().GetWorkspace().GetComponent<SpriteRenderer>().sortingOrder;//Volta para layer 0
+
+        controlPanel.SetActive(false);
 
         if (isWorkspace)
         {
@@ -108,6 +116,22 @@ public class ObjectControlled : MonoBehaviour
         blueCol = originalObjColor.b >= colorSelectedOffset ? originalObjColor.b - colorSelectedOffset : originalObjColor.b;
         selectedObj.GetComponent<SpriteRenderer>().color = new Color32((byte)redCol, (byte)greenCol, (byte)blueCol, 255); // Troca para a cor "selecionado"
         colorDisplayImg.color = originalObjColor;
+    }
+
+    public void ChangeSprite(int index)
+    {
+        Sprite[] sprites = objectControlledShape.GetSprites();
+
+        // Sanity check
+        if(objectControlled == null)
+        {
+            return;
+        }
+
+        if ((index < sprites.Length) && (index >= 0))
+        {
+            objectControlled.GetComponent<SpriteRenderer>().sprite = sprites[index];
+        }
     }
 
     #region Color Controller
@@ -166,7 +190,7 @@ public class ObjectControlled : MonoBehaviour
     /// </summary>
     public void exitSlider()
     {
-        objectControlledShape.ChangeSprite(1); // Ativa o realce do raio
+        this.ChangeSprite(1); // Ativa o realce do raio
     }
 
     /// <summary>
@@ -174,7 +198,7 @@ public class ObjectControlled : MonoBehaviour
     /// </summary>
     public void enterSlider()
     {
-        objectControlledShape.ChangeSprite(2); // Ativa o realce do raio
+        this.ChangeSprite(2); // Ativa o realce do raio
     }
 
     /// <summary>

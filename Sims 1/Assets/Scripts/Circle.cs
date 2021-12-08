@@ -27,30 +27,6 @@ public class Circle : MonoBehaviour, IShape
         color = spriteRenderer.color;
     }
 
-    public void ChangeSize(float controllerValue, Vector3 baseScale, Slider sizeSlider, Text changeSizeText)
-    {
-        rb = this.GetComponent<Rigidbody2D>();
-
-        rb.freezeRotation = true; // Impede que o objeto rotacione enquanto é escalado
-
-        scale = baseScale + new Vector3(controllerValue * sizeScaler, controllerValue * sizeScaler, controllerValue * sizeScaler); // Gera a nova escala baseado na movimentação do slider (value)
-        this.transform.localScale = scale; // Muda a escala local do objeto controlado
-        changeSizeText.text = "" + (sizeSlider.value + 1);
-
-        rb.freezeRotation = false;
-
-        this.GetComponent<UserClick>().lastSliderValue = sizeSlider.value; // Guarda no objeto controlado o último valor no slider
-    }
-
-    public void ChangeSprite(int index)
-    {
-        if((index < sprites.Length) && (index >= 0))
-        {
-            spriteRenderer.sprite = sprites[index];
-        }
-
-    }
-
     public void ChangeArea(float a)
     {
 
@@ -71,5 +47,15 @@ public class Circle : MonoBehaviour, IShape
     {
         float perimeter = 0;
         return perimeter;
+    }
+
+    public Sprite[] GetSprites()
+    {
+        return sprites;
+    }
+
+    public string GetShapeName()
+    {
+        return this.GetType().Name;
     }
 }
