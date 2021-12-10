@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -20,7 +21,7 @@ public class ObjectControlled : MonoBehaviour
     [SerializeField]
     //private UnityEngine.UI.Scrollbar scrollbar; // Guarda a instância do scrollbar
     private UnityEngine.UI.Slider sizeSlider; // Guarda a instância do slider
-    [SerializeField]
+
     private UnityEngine.UI.Text changeSizeText;
 
     private UnityEngine.UI.Image colorDisplayImg;
@@ -215,6 +216,7 @@ public class ObjectControlled : MonoBehaviour
                 Destroy(childGameObj);
             }
         }
+        controlPanel.SetActive(false);
     }
 
     /// <summary>
@@ -227,7 +229,7 @@ public class ObjectControlled : MonoBehaviour
         {
             return;
         }
-
+        controlPanel.SetActive(false);
         Destroy(objectControlled);
     }
 
@@ -240,6 +242,7 @@ public class ObjectControlled : MonoBehaviour
         // Sanity check
         if (objectControlled == null || !objectControlled.GetComponent<UserClick>().GetWorkspaceStatus())
         {
+            
             return;
         }
 
@@ -249,8 +252,13 @@ public class ObjectControlled : MonoBehaviour
         
         scale = baseScale + new Vector3(newScale * sizeScaler, newScale * sizeScaler, newScale * sizeScaler); // Gera a nova escala baseado na movimentação do slider (value)
         objectControlled.transform.localScale = scale; // Muda a escala local do objeto controlado
-        changeSizeText.text = "" + (sizeSlider.value + 1);
-        
+
+        changeSizeText = controlPanel.transform.Find("ShapeSizeController").transform.Find("ChangeSizeValueTxt").GetComponent<UnityEngine.UI.Text>();
+        changeSizeText.text = "" + Math.Round(sizeSlider.value + 1, 2);
+
+        sizeSlider = controlPanel.transform.Find("ShapeSizeController").transform.Find("ChangeSizeSlider").GetComponent<UnityEngine.UI.Slider>();
+
+
         rb.freezeRotation = false;
         
         objectControlled.GetComponent<UserClick>().lastSliderValue = sizeSlider.value; // Guarda no objeto controlado o último valor no slider

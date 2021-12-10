@@ -142,7 +142,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prefab: {fileID: 0}
   isTemplate: 0
-  controlPanels: []
+  controlPanels:
+  - {fileID: 0}
   shape: {fileID: 0}
   workspace: {fileID: 0}
   clickableLayer:

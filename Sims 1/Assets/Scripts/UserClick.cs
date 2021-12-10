@@ -99,6 +99,7 @@ public class UserClick : MonoBehaviour
 
             sizeSlider = ownControlPanel.transform.Find("ShapeSizeController").transform.Find("ChangeSizeSlider").GetComponent<UnityEngine.UI.Slider>();
             sizeSlider.value = lastSliderValue; // Altera o slider para o último valor
+
             sizeText = ownControlPanel.transform.Find("ShapeSizeController").transform.Find("ChangeSizeValueTxt").GetComponent<UnityEngine.UI.Text>();
             sizeText.text = "" + (lastSliderValue + 1); // Altera o slider para o último texto
             #endregion
@@ -193,6 +194,11 @@ public class UserClick : MonoBehaviour
 
         string shapeName = this.GetComponent<IShape>().GetShapeName().Trim();
 
+
+        //foreach (string forma in mappedControlPanels.Keys)
+        //{
+        //    Debug.Log(forma + ": " + mappedControlPanels[forma].ToString());
+        //}
         ownControlPanel = mappedControlPanels[shapeName];
     }
 
