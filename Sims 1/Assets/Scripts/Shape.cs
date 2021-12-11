@@ -5,10 +5,13 @@ using UnityEngine.UI;
 
 public interface IShape 
 {
-    void ChangeArea(float a);
-    void ChangePerimeter(float p);
-    float CalculateArea();
-    float CalculatePerimeter();
+    float CalculateArea(GameObject objectControlled);
+    float CalculatePerimeter(GameObject objectControlled);
     Sprite[] GetSprites();
     string GetShapeName();
+    Dictionary<string, float> GetMetrics(GameObject objectControlled);
+    Dictionary<string, GameObject> GetMappedControllers();
+    void SetMappedControllers(Dictionary<string, GameObject> mappedControllers);
+    Dictionary<string, float> GetLastMetrics();
+    void SetLastMetrics(Dictionary<string, float> lastMetrics);
 }

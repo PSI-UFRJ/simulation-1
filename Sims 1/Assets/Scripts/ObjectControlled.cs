@@ -253,21 +253,47 @@ public class ObjectControlled : MonoBehaviour
         scale = baseScale + new Vector3(newScale * sizeScaler, newScale * sizeScaler, newScale * sizeScaler); // Gera a nova escala baseado na movimentação do slider (value)
         objectControlled.transform.localScale = scale; // Muda a escala local do objeto controlado
 
-        changeSizeText = controlPanel.transform.Find("ShapeSizeController").transform.Find("ChangeSizeValueTxt").GetComponent<UnityEngine.UI.Text>();
-        changeSizeText.text = "" + Math.Round(sizeSlider.value + 1, 2);
-
-        sizeSlider = controlPanel.transform.Find("ShapeSizeController").transform.Find("ChangeSizeSlider").GetComponent<UnityEngine.UI.Slider>();
-
+        UpdateMetrics(); //Atualiza o painel de controle com as novas métricas
 
         rb.freezeRotation = false;
-        
-        objectControlled.GetComponent<UserClick>().lastSliderValue = sizeSlider.value; // Guarda no objeto controlado o último valor no slider
     }
 
     /// <summary>
-    /// Calcula a área do objeto controlado
+    /// 
     /// </summary>
-    public float CalculateArea()
+    /// <param name="newScale"></param>
+    public void UpdateMetrics()
+    {
+        Dictionary<string, GameObject> controllers = objectControlledShape.GetMappedControllers();
+
+        foreach(KeyValuePair<string, GameObject> controller in controllers)
+        {
+            changeSizeText = controller.Value.transform.Find("ChangeSizeValueTxt").GetComponent<UnityEngine.UI.Text>();
+            Dictionary<string, float> metrics = objectControlledShape.GetMetrics(objectControlled);
+            float newValue = metrics[controller.Key];
+            changeSizeText.text = "" + Math.Round(newValue, 2);
+
+            if (controller.Key != "ShapeRadiusSizeController")
+            {
+                sizeSlider = controller.Value.transform.Find("ChangeSizeSlider").GetComponent<UnityEngine.UI.Slider>();
+                sizeSlider.value = newValue; // Altera o slider para o novo valor
+            }
+            objectControlledShape.SetLastMetrics(metrics);
+
+            //objectControlled.GetComponent<UserClick>().lastSliderValue = newValue; // Guarda no objeto controlado o último valor no slider
+        }
+
+        //changeSizeText = controlPanel.transform.Find("ShapeSizeController").transform.Find("ChangeSizeValueTxt").GetComponent<UnityEngine.UI.Text>();
+        //changeSizeText.text = "" + Math.Round(sizeSlider.value + 1, 2);
+        //
+        //sizeSlider = controlPanel.transform.Find("ShapeSizeController").transform.Find("ChangeSizeSlider").GetComponent<UnityEngine.UI.Slider>();
+        //objectControlled.GetComponent<UserClick>().lastSliderValue = sizeSlider.value; // Guarda no objeto controlado o último valor no slider
+    }
+
+        /// <summary>
+        /// Calcula a área do objeto controlado
+        /// </summary>
+        public float CalculateArea()
     {
         if (objectControlled == null || !objectControlled.GetComponent<UserClick>().GetWorkspaceStatus()) // Verifica se há algum obj selecionado e se sim, se está no workspace
         {

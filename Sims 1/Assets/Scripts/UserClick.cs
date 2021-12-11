@@ -95,13 +95,9 @@ public class UserClick : MonoBehaviour
 
             control.UnselectObject(this.gameObject, false);
             control.SelectObject(this.gameObject); // Informa ao controller que ele é o objeto selecionado e troca a cor do obj
-            #region SizeController
 
-            sizeSlider = ownControlPanel.transform.Find("ShapeSizeController").transform.Find("ChangeSizeSlider").GetComponent<UnityEngine.UI.Slider>();
-            sizeSlider.value = lastSliderValue; // Altera o slider para o último valor
-
-            sizeText = ownControlPanel.transform.Find("ShapeSizeController").transform.Find("ChangeSizeValueTxt").GetComponent<UnityEngine.UI.Text>();
-            sizeText.text = "" + (lastSliderValue + 1); // Altera o slider para o último texto
+            #region SizeControllers
+            UpdateControlPanel();
             #endregion
 
             #region DragAndDrop
@@ -126,6 +122,23 @@ public class UserClick : MonoBehaviour
             dragging = true;
             // Salva o offset do eixo x e do eixo y
             shapeOffset = new Tuple<float, float>(mousePos.x - this.transform.position.x, mousePos.y - this.transform.position.y);
+        }
+    }
+
+    private void UpdateControlPanel()
+    {
+
+        Dictionary<string, GameObject> controllers = this.gameObject.GetComponent<IShape>().GetMappedControllers();
+        Dictionary<string, float> lastMetrics = this.gameObject.GetComponent<IShape>().GetLastMetrics();
+
+        foreach (string metricName in lastMetrics.Keys)
+        {
+                
+            sizeSlider = controllers[metricName].transform.Find("ChangeSizeSlider").GetComponent<UnityEngine.UI.Slider>();
+            sizeSlider.value = lastMetrics[metricName]; // Altera o slider para o último valor
+
+            sizeText = controllers[metricName].transform.Find("ChangeSizeValueTxt").GetComponent<UnityEngine.UI.Text>();
+            sizeText.text = "" + (lastMetrics[metricName]); // Altera o slider para o último texto
         }
     }
 
@@ -177,6 +190,7 @@ public class UserClick : MonoBehaviour
         obj.GetComponent<UserClick>().prefab = this.GetComponent<UserClick>().prefab;
         obj.GetComponent<UserClick>().workspace = this.GetComponent<UserClick>().workspace;
         obj.GetComponent<UserClick>().controlPanels = this.GetComponent<UserClick>().controlPanels;
+        obj.GetComponent<IShape>().SetMappedControllers(this.GetComponent<IShape>().GetMappedControllers());
 
         // O novo objeto passa a ser o template
         obj.GetComponent<UserClick>().isTemplate = true;
