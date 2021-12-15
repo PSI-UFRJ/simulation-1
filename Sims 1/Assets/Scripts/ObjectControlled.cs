@@ -26,6 +26,7 @@ public class ObjectControlled : MonoBehaviour
 
     private UnityEngine.UI.Image colorDisplayImg;
 
+    private float newSizeValue;
 
     [SerializeField]
     private Vector3 scale; // Guarda a escala atual
@@ -246,6 +247,10 @@ public class ObjectControlled : MonoBehaviour
             return;
         }
 
+        newScale = newSizeValue;
+
+        Debug.Log($"Fui chamado com o valor : {newScale}");
+
         rb = objectControlled.GetComponent<Rigidbody2D>();
         
         rb.freezeRotation = true; // Impede que o objeto rotacione enquanto é escalado
@@ -257,6 +262,11 @@ public class ObjectControlled : MonoBehaviour
 
         rb.freezeRotation = false;
     }
+
+    public void SetNewScaleValue(float newScale)
+    {
+        newSizeValue = newScale;
+    } 
 
     /// <summary>
     /// 
@@ -273,11 +283,18 @@ public class ObjectControlled : MonoBehaviour
             float newValue = metrics[controller.Key];
             changeSizeText.text = "" + Math.Round(newValue, 2);
 
+
+            
+
             if (controller.Key != "ShapeRadiusSizeController")
             {
                 sizeSlider = controller.Value.transform.Find("ChangeSizeSlider").GetComponent<UnityEngine.UI.Slider>();
+                
+                Debug.Log(newValue);
+            
                 sizeSlider.value = newValue; // Altera o slider para o novo valor
             }
+
             objectControlledShape.SetLastMetrics(metrics);
 
             //objectControlled.GetComponent<UserClick>().lastSliderValue = newValue; // Guarda no objeto controlado o último valor no slider

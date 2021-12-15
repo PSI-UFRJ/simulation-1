@@ -17,11 +17,14 @@ public class Circle : MonoBehaviour, IShape
     [SerializeField] private Vector3 scale; // Guarda a escala atual
     public int sizeScaler = 1;
 
+    public static float initialSizeRadius = 1;
+    public static float initialSizeDiameter = 2;
+
     public List<GameObject> controllers = null;
     public Dictionary<string, GameObject> mappedControllers = new Dictionary<string, GameObject>();
 
     private Dictionary<string, float> lastMetrics = new Dictionary<string, float>() {
-        {"ShapeRadiusSizeController", 0}, { "ShapeDiameterSizeController", 0 }
+        {"ShapeRadiusSizeController", initialSizeRadius }, { "ShapeDiameterSizeController", initialSizeDiameter }
     };
 
     void Start()
