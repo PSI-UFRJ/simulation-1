@@ -5197,6 +5197,7 @@ GameObject:
   - component: {fileID: 1155890428}
   - component: {fileID: 1155890430}
   - component: {fileID: 1155890429}
+  - component: {fileID: 1155890431}
   m_Layer: 5
   m_Name: ChangeSizeSlider
   m_TagString: Untagged
@@ -5242,51 +5243,15 @@ MonoBehaviour:
   - eventID: 3
     callback:
       m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 372558225}
-          m_TargetAssemblyTypeName: ObjectControlled, Assembly-CSharp
-          m_MethodName: exitSlider
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
+        m_Calls: []
   - eventID: 2
     callback:
       m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 372558225}
-          m_TargetAssemblyTypeName: ObjectControlled, Assembly-CSharp
-          m_MethodName: enterSlider
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
+        m_Calls: []
   - eventID: 5
     callback:
       m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 372558225}
-          m_TargetAssemblyTypeName: ObjectControlled, Assembly-CSharp
-          m_MethodName: ChangeScale
-          m_Mode: 4
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
+        m_Calls: []
 --- !u!114 &1155890430
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5337,19 +5302,22 @@ MonoBehaviour:
   m_Value: 1
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 372558225}
-        m_TargetAssemblyTypeName: ObjectControlled, Assembly-CSharp
-        m_MethodName: SetNewScaleValue
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
+--- !u!114 &1155890431
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1155890427}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 75895d0855799fb44b02087e13a19a6f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sizeSlider: {fileID: 1155890430}
+  sliderName: ShapeRadiusSizeController
+  shapes: {fileID: 372558223}
 --- !u!1 &1173233891
 GameObject:
   m_ObjectHideFlags: 0
@@ -7120,6 +7088,7 @@ GameObject:
   - component: {fileID: 1707324515}
   - component: {fileID: 1707324517}
   - component: {fileID: 1707324516}
+  - component: {fileID: 1707324518}
   m_Layer: 5
   m_Name: ChangeSizeSlider
   m_TagString: Untagged
@@ -7165,51 +7134,15 @@ MonoBehaviour:
   - eventID: 3
     callback:
       m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 372558225}
-          m_TargetAssemblyTypeName: ObjectControlled, Assembly-CSharp
-          m_MethodName: exitSlider
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
+        m_Calls: []
   - eventID: 2
     callback:
       m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 372558225}
-          m_TargetAssemblyTypeName: ObjectControlled, Assembly-CSharp
-          m_MethodName: enterSlider
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
+        m_Calls: []
   - eventID: 5
     callback:
       m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 372558225}
-          m_TargetAssemblyTypeName: ObjectControlled, Assembly-CSharp
-          m_MethodName: ChangeScale
-          m_Mode: 4
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
+        m_Calls: []
 --- !u!114 &1707324517
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7260,19 +7193,22 @@ MonoBehaviour:
   m_Value: 2
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 372558225}
-        m_TargetAssemblyTypeName: ObjectControlled, Assembly-CSharp
-        m_MethodName: SetNewScaleValue
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
+--- !u!114 &1707324518
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1707324514}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 75895d0855799fb44b02087e13a19a6f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sizeSlider: {fileID: 1707324517}
+  sliderName: ShapeDiameterSizeController
+  shapes: {fileID: 372558223}
 --- !u!1 &1734502520
 GameObject:
   m_ObjectHideFlags: 0

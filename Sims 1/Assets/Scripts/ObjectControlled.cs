@@ -26,7 +26,9 @@ public class ObjectControlled : MonoBehaviour
 
     private UnityEngine.UI.Image colorDisplayImg;
 
-    private float newSizeValue;
+    private static float newSizeValue;
+
+    private static string currentSliderName;
 
     [SerializeField]
     private Vector3 scale; // Guarda a escala atual
@@ -193,14 +195,21 @@ public class ObjectControlled : MonoBehaviour
     public void exitSlider()
     {
         this.ChangeSprite(1); // Ativa o realce do raio
+        currentSliderName = null;
     }
 
     /// <summary>
     /// Muda a a aparência do objeto após segurar o slider
     /// </summary>
-    public void enterSlider()
+    public void enterSlider(string sliderName, float newScale)
     {
+
+        Debug.Log("Enter Slider esta sendo chamado");
+        Debug.Log("Nome: " + sliderName);
+
+        currentSliderName = sliderName;
         this.ChangeSprite(2); // Ativa o realce do raio
+        ChangeScale(sliderName, newScale);
     }
 
     /// <summary>
@@ -238,16 +247,17 @@ public class ObjectControlled : MonoBehaviour
     /// Muda a escala do objeto controlado
     /// </summary>
     /// <param name="newScale"></param>
-    public void ChangeScale(float newScale)
+    public void ChangeScale(string sliderName, float newScale)
     {
         // Sanity check
-        if (objectControlled == null || !objectControlled.GetComponent<UserClick>().GetWorkspaceStatus())
+        if (objectControlled == null ||
+            !objectControlled.GetComponent<UserClick>().GetWorkspaceStatus() ||
+            currentSliderName == null || 
+            currentSliderName != sliderName)
         {
             
             return;
         }
-
-        newScale = newSizeValue;
 
         Debug.Log($"Fui chamado com o valor : {newScale}");
 
@@ -258,13 +268,20 @@ public class ObjectControlled : MonoBehaviour
         scale = baseScale + new Vector3(newScale * sizeScaler, newScale * sizeScaler, newScale * sizeScaler); // Gera a nova escala baseado na movimentação do slider (value)
         objectControlled.transform.localScale = scale; // Muda a escala local do objeto controlado
 
-        UpdateMetrics(); //Atualiza o painel de controle com as novas métricas
+        UpdateMetrics(sliderName); //Atualiza o painel de controle com as novas métricas
 
         rb.freezeRotation = false;
     }
 
-    public void SetNewScaleValue(float newScale)
+    public static void SetNewScaleValue(float newScale, string sliderName)
     {
+        Debug.Log("Current slider Name: " + currentSliderName);
+
+        //if (currentSliderName != null && currentSliderName == sliderName)
+        //{
+        //    newSizeValue = newScale;
+        //}
+
         newSizeValue = newScale;
     } 
 
@@ -272,30 +289,32 @@ public class ObjectControlled : MonoBehaviour
     /// 
     /// </summary>
     /// <param name="newScale"></param>
-    public void UpdateMetrics()
+    public void UpdateMetrics(string sliderName)
     {
         Dictionary<string, GameObject> controllers = objectControlledShape.GetMappedControllers();
 
         foreach(KeyValuePair<string, GameObject> controller in controllers)
         {
-            changeSizeText = controller.Value.transform.Find("ChangeSizeValueTxt").GetComponent<UnityEngine.UI.Text>();
-            Dictionary<string, float> metrics = objectControlledShape.GetMetrics(objectControlled);
-            float newValue = metrics[controller.Key];
-            changeSizeText.text = "" + Math.Round(newValue, 2);
 
-
-            
-
-            if (controller.Key != "ShapeRadiusSizeController")
+            if(controller.Value.gameObject.name != sliderName)
             {
-                sizeSlider = controller.Value.transform.Find("ChangeSizeSlider").GetComponent<UnityEngine.UI.Slider>();
+                changeSizeText = controller.Value.transform.Find("ChangeSizeValueTxt").GetComponent<UnityEngine.UI.Text>();
+                Dictionary<string, float> metrics = objectControlledShape.GetMetrics(objectControlled);
+                float newValue = metrics[controller.Key];
+                changeSizeText.text = "" + Math.Round(newValue, 2);
+
+                //if (controller.Key != "ShapeRadiusSizeController")
+                //{
+                    sizeSlider = controller.Value.transform.Find("ChangeSizeSlider").GetComponent<UnityEngine.UI.Slider>();
                 
-                Debug.Log(newValue);
-            
-                sizeSlider.value = newValue; // Altera o slider para o novo valor
+                    Debug.Log(newValue);
+                
+                    sizeSlider.value = newValue; // Altera o slider para o novo valor
+                //}
+
+                objectControlledShape.SetLastMetrics(metrics);
             }
 
-            objectControlledShape.SetLastMetrics(metrics);
 
             //objectControlled.GetComponent<UserClick>().lastSliderValue = newValue; // Guarda no objeto controlado o último valor no slider
         }
