@@ -127,16 +127,14 @@ public class UserClick : MonoBehaviour
 
     private void UpdateControlPanel()
     {
-
         Dictionary<string, GameObject> controllers = this.gameObject.GetComponent<IShape>().GetMappedControllers();
         Dictionary<string, float> lastMetrics = this.gameObject.GetComponent<IShape>().GetLastMetrics();
 
         foreach (string metricName in lastMetrics.Keys)
         {
-                
             sizeSlider = controllers[metricName].transform.Find("ChangeSizeSlider").GetComponent<UnityEngine.UI.Slider>();
             sizeSlider.value = lastMetrics[metricName]; // Altera o slider para o último valor
-
+            
             sizeText = controllers[metricName].transform.Find("ChangeSizeValueTxt").GetComponent<UnityEngine.UI.Text>();
             sizeText.text = "" + (lastMetrics[metricName]); // Altera o slider para o último texto
         }

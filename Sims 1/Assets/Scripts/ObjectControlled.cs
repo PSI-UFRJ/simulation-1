@@ -203,10 +203,6 @@ public class ObjectControlled : MonoBehaviour
     /// </summary>
     public void enterSlider(string sliderName, float newScale)
     {
-
-        Debug.Log("Enter Slider esta sendo chamado");
-        Debug.Log("Nome: " + sliderName);
-
         currentSliderName = sliderName;
         this.ChangeSprite(2); // Ativa o realce do raio
         ChangeScale(sliderName, newScale);
@@ -255,20 +251,13 @@ public class ObjectControlled : MonoBehaviour
             currentSliderName == null || 
             currentSliderName != sliderName)
         {
-            
             return;
         }
 
-        Debug.Log($"Fui chamado com o valor : {newScale}");
-
         rb = objectControlled.GetComponent<Rigidbody2D>();
-        
         rb.freezeRotation = true; // Impede que o objeto rotacione enquanto é escalado
-        
-        scale = baseScale + new Vector3(newScale * sizeScaler, newScale * sizeScaler, newScale * sizeScaler); // Gera a nova escala baseado na movimentação do slider (value)
-        objectControlled.transform.localScale = scale; // Muda a escala local do objeto controlado
 
-        UpdateMetrics(sliderName); //Atualiza o painel de controle com as novas métricas
+        UpdateMetrics(sliderName, newScale); //Atualiza o painel de controle com as novas métricas
 
         rb.freezeRotation = false;
     }
@@ -289,47 +278,47 @@ public class ObjectControlled : MonoBehaviour
     /// 
     /// </summary>
     /// <param name="newScale"></param>
-    public void UpdateMetrics(string sliderName)
+    public void UpdateMetrics(string sliderName, float newScale)
     {
         Dictionary<string, GameObject> controllers = objectControlledShape.GetMappedControllers();
+        Dictionary<string, float> metrics;
 
-        foreach(KeyValuePair<string, GameObject> controller in controllers)
+        foreach (KeyValuePair<string, GameObject> controller in controllers)
         {
-
-            if(controller.Value.gameObject.name != sliderName)
+            if (controller.Value.gameObject.name == sliderName)
             {
-                changeSizeText = controller.Value.transform.Find("ChangeSizeValueTxt").GetComponent<UnityEngine.UI.Text>();
-                Dictionary<string, float> metrics = objectControlledShape.GetMetrics(objectControlled);
-                float newValue = metrics[controller.Key];
-                changeSizeText.text = "" + Math.Round(newValue, 2);
-
-                //if (controller.Key != "ShapeRadiusSizeController")
-                //{
-                    sizeSlider = controller.Value.transform.Find("ChangeSizeSlider").GetComponent<UnityEngine.UI.Slider>();
-                
-                    Debug.Log(newValue);
-                
-                    sizeSlider.value = newValue; // Altera o slider para o novo valor
-                //}
-
-                objectControlledShape.SetLastMetrics(metrics);
+                objectControlledShape.SetScale(sliderName, newScale, objectControlled); // Ajusta a escala do objeto controlado
+                metrics = objectControlledShape.GetMetrics(objectControlled); // Recalcula as métricas do objeto
+                objectControlledShape.SetLastMetrics(metrics); //Guarda os novos valores das métricas
             }
-
-
-            //objectControlled.GetComponent<UserClick>().lastSliderValue = newValue; // Guarda no objeto controlado o último valor no slider
         }
 
-        //changeSizeText = controlPanel.transform.Find("ShapeSizeController").transform.Find("ChangeSizeValueTxt").GetComponent<UnityEngine.UI.Text>();
-        //changeSizeText.text = "" + Math.Round(sizeSlider.value + 1, 2);
-        //
-        //sizeSlider = controlPanel.transform.Find("ShapeSizeController").transform.Find("ChangeSizeSlider").GetComponent<UnityEngine.UI.Slider>();
-        //objectControlled.GetComponent<UserClick>().lastSliderValue = sizeSlider.value; // Guarda no objeto controlado o último valor no slider
+        UpdateSliders();
     }
 
-        /// <summary>
-        /// Calcula a área do objeto controlado
-        /// </summary>
-        public float CalculateArea()
+
+    public void UpdateSliders()
+    {
+        Dictionary<string, GameObject> controllers = objectControlledShape.GetMappedControllers();
+        Dictionary<string, float> metrics;
+
+        foreach (KeyValuePair<string, GameObject> controller in controllers)
+        {
+            metrics = objectControlledShape.GetMetrics(objectControlled); // Recalcula as métricas do objeto
+            objectControlledShape.SetLastMetrics(metrics); //Guarda os novos valores das métricas
+
+            changeSizeText = controller.Value.transform.Find("ChangeSizeValueTxt").GetComponent<UnityEngine.UI.Text>();
+            changeSizeText.text = "" + Math.Round(metrics[controller.Key], 2); // Atualiza o texto do slider para o novo valor
+
+            sizeSlider = controller.Value.transform.Find("ChangeSizeSlider").GetComponent<UnityEngine.UI.Slider>();
+            sizeSlider.value = metrics[controller.Key]; // Altera o slider para o novo valor
+        }
+    }
+
+    /// <summary>
+    /// Calcula a área do objeto controlado
+    /// </summary>
+    public float CalculateArea()
     {
         if (objectControlled == null || !objectControlled.GetComponent<UserClick>().GetWorkspaceStatus()) // Verifica se há algum obj selecionado e se sim, se está no workspace
         {

@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class SliderController : MonoBehaviour, IPointerDownHandler
+public class SliderController : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 {
-
     [SerializeField]
     private UnityEngine.UI.Slider sizeSlider;
 
     public string sliderName;
+    public string elementName;
 
     [SerializeField]
     private GameObject shapes;
@@ -18,21 +18,16 @@ public class SliderController : MonoBehaviour, IPointerDownHandler
 
     public void Start()
     {
+        objectControlled = shapes.GetComponent<ObjectControlled>();
+
         //Adds a listener to the main slider and invokes a method when the value changes.
         sizeSlider.onValueChanged.AddListener(delegate { ValueChangeCheck(); });
-
-        objectControlled = shapes.GetComponent<ObjectControlled>();
     }
 
     // Invoked when the value of the slider changes.
     public void ValueChangeCheck()
     {
-
-        Debug.Log("Value Change sliderSize: " + sizeSlider.value);
-        Debug.Log("Value Change sliderName: " + sliderName);
-
         objectControlled.ChangeScale(sliderName, sizeSlider.value);
-        //ObjectControlled.SetNewScaleValue(sizeSlider.value, sliderName);
     }
 
     public void OnPointerDown(PointerEventData eventData)
@@ -40,7 +35,7 @@ public class SliderController : MonoBehaviour, IPointerDownHandler
         objectControlled.enterSlider(sliderName, sizeSlider.value);
     }
 
-    public void OnPointeUp(PointerEventData eventData)
+    public void OnPointerUp(PointerEventData eventData)
     {
         objectControlled.exitSlider();
     }

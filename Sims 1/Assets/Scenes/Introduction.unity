@@ -281,42 +281,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 24221432}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Script: {fileID: 11500000, guid: 75895d0855799fb44b02087e13a19a6f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Delegates:
-  - eventID: 3
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 372558225}
-          m_TargetAssemblyTypeName: ObjectControlled, Assembly-CSharp
-          m_MethodName: exitSlider
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-  - eventID: 2
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 372558225}
-          m_TargetAssemblyTypeName: ObjectControlled, Assembly-CSharp
-          m_MethodName: enterSlider
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
+  sizeSlider: {fileID: 24221435}
+  sliderName: ShapeSideSizeController
+  elementName: Side
+  shapes: {fileID: 372558223}
 --- !u!114 &24221435
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -361,25 +332,13 @@ MonoBehaviour:
   m_FillRect: {fileID: 1200887790}
   m_HandleRect: {fileID: 957209060}
   m_Direction: 0
-  m_MinValue: 0
+  m_MinValue: 1
   m_MaxValue: 4
   m_WholeNumbers: 0
   m_Value: 0
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 372558225}
-        m_TargetAssemblyTypeName: ObjectControlled, Assembly-CSharp
-        m_MethodName: ChangeScale
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!1 &30274431
 GameObject:
   m_ObjectHideFlags: 0
@@ -776,7 +735,7 @@ GameObject:
   m_Component:
   - component: {fileID: 74362622}
   m_Layer: 0
-  m_Name: ShapeSizeController
+  m_Name: ShapeSideSizeController
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1901,7 +1860,7 @@ GameObject:
   m_Component:
   - component: {fileID: 397772572}
   m_Layer: 0
-  m_Name: ShapeSizeController
+  m_Name: ShapeSideSizeController
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3382,42 +3341,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 721449895}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Script: {fileID: 11500000, guid: 75895d0855799fb44b02087e13a19a6f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Delegates:
-  - eventID: 3
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 372558225}
-          m_TargetAssemblyTypeName: ObjectControlled, Assembly-CSharp
-          m_MethodName: exitSlider
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-  - eventID: 2
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 372558225}
-          m_TargetAssemblyTypeName: ObjectControlled, Assembly-CSharp
-          m_MethodName: enterSlider
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
+  sizeSlider: {fileID: 721449898}
+  sliderName: ShapeSideSizeController
+  elementName: Side
+  shapes: {fileID: 372558223}
 --- !u!114 &721449898
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3462,25 +3392,13 @@ MonoBehaviour:
   m_FillRect: {fileID: 1778079619}
   m_HandleRect: {fileID: 1452961564}
   m_Direction: 0
-  m_MinValue: 0
+  m_MinValue: 1
   m_MaxValue: 4
   m_WholeNumbers: 0
   m_Value: 0
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 372558225}
-        m_TargetAssemblyTypeName: ObjectControlled, Assembly-CSharp
-        m_MethodName: ChangeScale
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!1 &742205444
 GameObject:
   m_ObjectHideFlags: 0
@@ -3609,42 +3527,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 762317175}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Script: {fileID: 11500000, guid: 75895d0855799fb44b02087e13a19a6f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Delegates:
-  - eventID: 3
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 372558225}
-          m_TargetAssemblyTypeName: ObjectControlled, Assembly-CSharp
-          m_MethodName: exitSlider
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-  - eventID: 2
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 372558225}
-          m_TargetAssemblyTypeName: ObjectControlled, Assembly-CSharp
-          m_MethodName: enterSlider
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
+  sizeSlider: {fileID: 762317178}
+  sliderName: ShapeSideSizeController
+  elementName: Side
+  shapes: {fileID: 372558223}
 --- !u!114 &762317178
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3689,25 +3578,13 @@ MonoBehaviour:
   m_FillRect: {fileID: 481295604}
   m_HandleRect: {fileID: 236034753}
   m_Direction: 0
-  m_MinValue: 0
+  m_MinValue: 1
   m_MaxValue: 4
   m_WholeNumbers: 0
   m_Value: 0
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 372558225}
-        m_TargetAssemblyTypeName: ObjectControlled, Assembly-CSharp
-        m_MethodName: ChangeScale
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!1 &765947569
 GameObject:
   m_ObjectHideFlags: 0
@@ -4348,7 +4225,7 @@ GameObject:
   m_Component:
   - component: {fileID: 941820215}
   m_Layer: 0
-  m_Name: ShapeSizeController
+  m_Name: ShapeSideSizeController
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4683,42 +4560,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 1007637455}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Script: {fileID: 11500000, guid: 75895d0855799fb44b02087e13a19a6f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Delegates:
-  - eventID: 3
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 372558225}
-          m_TargetAssemblyTypeName: ObjectControlled, Assembly-CSharp
-          m_MethodName: exitSlider
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-  - eventID: 2
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 372558225}
-          m_TargetAssemblyTypeName: ObjectControlled, Assembly-CSharp
-          m_MethodName: enterSlider
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
+  sizeSlider: {fileID: 1007637458}
+  sliderName: ShapeSideSizeController
+  elementName: Side
+  shapes: {fileID: 372558223}
 --- !u!114 &1007637458
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4763,25 +4611,13 @@ MonoBehaviour:
   m_FillRect: {fileID: 1751309222}
   m_HandleRect: {fileID: 146867461}
   m_Direction: 0
-  m_MinValue: 0
+  m_MinValue: 1
   m_MaxValue: 4
   m_WholeNumbers: 0
   m_Value: 0
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 372558225}
-        m_TargetAssemblyTypeName: ObjectControlled, Assembly-CSharp
-        m_MethodName: ChangeScale
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!1 &1024575977
 GameObject:
   m_ObjectHideFlags: 0
@@ -5196,7 +5032,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1155890428}
   - component: {fileID: 1155890430}
-  - component: {fileID: 1155890429}
   - component: {fileID: 1155890431}
   m_Layer: 5
   m_Name: ChangeSizeSlider
@@ -5227,31 +5062,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0.042, y: 0.342}
   m_SizeDelta: {x: 88.2935, y: 15.33641}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1155890429
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1155890427}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Delegates:
-  - eventID: 3
-    callback:
-      m_PersistentCalls:
-        m_Calls: []
-  - eventID: 2
-    callback:
-      m_PersistentCalls:
-        m_Calls: []
-  - eventID: 5
-    callback:
-      m_PersistentCalls:
-        m_Calls: []
 --- !u!114 &1155890430
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5317,6 +5127,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sizeSlider: {fileID: 1155890430}
   sliderName: ShapeRadiusSizeController
+  elementName: Radius
   shapes: {fileID: 372558223}
 --- !u!1 &1173233891
 GameObject:
@@ -5623,7 +5434,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1216770123}
   m_Layer: 0
-  m_Name: ShapeSizeController
+  m_Name: ShapeSideSizeController
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7087,7 +6898,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1707324515}
   - component: {fileID: 1707324517}
-  - component: {fileID: 1707324516}
   - component: {fileID: 1707324518}
   m_Layer: 5
   m_Name: ChangeSizeSlider
@@ -7118,31 +6928,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0.046, y: 0.2877}
   m_SizeDelta: {x: 88.2935, y: 15.33641}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1707324516
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1707324514}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Delegates:
-  - eventID: 3
-    callback:
-      m_PersistentCalls:
-        m_Calls: []
-  - eventID: 2
-    callback:
-      m_PersistentCalls:
-        m_Calls: []
-  - eventID: 5
-    callback:
-      m_PersistentCalls:
-        m_Calls: []
 --- !u!114 &1707324517
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7208,6 +6993,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sizeSlider: {fileID: 1707324517}
   sliderName: ShapeDiameterSizeController
+  elementName: Diameter
   shapes: {fileID: 372558223}
 --- !u!1 &1734502520
 GameObject:
@@ -8327,25 +8113,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1954158987}
   m_CullTransparentMesh: 1
---- !u!1 &1967701118 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 9132100723960602008, guid: 314dd4d1dd9de6c40a0eb5163b014d57, type: 3}
-  m_PrefabInstance: {fileID: 4259109936113680595}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1967701123
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1967701118}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bdfa7849f930056458333871322cae42, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sprites: []
-  controllers: []
 --- !u!1 &1968099654
 GameObject:
   m_ObjectHideFlags: 0
@@ -8801,11 +8568,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2943109691337734572, guid: dd45da45795523746b2de3b96ec52120, type: 3}
       propertyPath: m_LocalScale.x
-      value: 1.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2943109691337734572, guid: dd45da45795523746b2de3b96ec52120, type: 3}
       propertyPath: m_LocalScale.y
-      value: 1.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2943109691337734572, guid: dd45da45795523746b2de3b96ec52120, type: 3}
       propertyPath: m_LocalPosition.x
@@ -8867,6 +8634,14 @@ PrefabInstance:
       propertyPath: m_SortingOrder
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 8600747149964918926, guid: dd45da45795523746b2de3b96ec52120, type: 3}
+      propertyPath: controllers.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8600747149964918926, guid: dd45da45795523746b2de3b96ec52120, type: 3}
+      propertyPath: controllers.Array.data[0]
+      value: 
+      objectReference: {fileID: 1216770122}
     - target: {fileID: 8760025836136553769, guid: dd45da45795523746b2de3b96ec52120, type: 3}
       propertyPath: m_SortingOrder
       value: 4
@@ -9020,6 +8795,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3977811350342717774, guid: b376c8bcd99b74945bf4553e08394f5c, type: 3}
+      propertyPath: controllers.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3977811350342717774, guid: b376c8bcd99b74945bf4553e08394f5c, type: 3}
+      propertyPath: controllers.Array.data[0]
+      value: 
+      objectReference: {fileID: 941820214}
     - target: {fileID: 5697504120428624425, guid: b376c8bcd99b74945bf4553e08394f5c, type: 3}
       propertyPath: m_Enabled
       value: 0
@@ -9189,6 +8972,14 @@ PrefabInstance:
       propertyPath: m_SortingOrder
       value: 4
       objectReference: {fileID: 0}
+    - target: {fileID: 4804583658134581558, guid: 314dd4d1dd9de6c40a0eb5163b014d57, type: 3}
+      propertyPath: controllers.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4804583658134581558, guid: 314dd4d1dd9de6c40a0eb5163b014d57, type: 3}
+      propertyPath: controllers.Array.data[0]
+      value: 
+      objectReference: {fileID: 74362621}
     - target: {fileID: 9132100723960602008, guid: 314dd4d1dd9de6c40a0eb5163b014d57, type: 3}
       propertyPath: m_Name
       value: Square
@@ -9346,6 +9137,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 9054395396919682808, guid: 8b6a2f83f30c72e4690a828c5ff44baf, type: 3}
+      propertyPath: controllers.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9054395396919682808, guid: 8b6a2f83f30c72e4690a828c5ff44baf, type: 3}
+      propertyPath: controllers.Array.data[0]
+      value: 
+      objectReference: {fileID: 397772571}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8b6a2f83f30c72e4690a828c5ff44baf, type: 3}
 --- !u!1001 &7031137776641374587

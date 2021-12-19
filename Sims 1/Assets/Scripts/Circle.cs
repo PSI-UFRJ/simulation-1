@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -23,7 +24,8 @@ public class Circle : MonoBehaviour, IShape
     public List<GameObject> controllers = null;
     public Dictionary<string, GameObject> mappedControllers = new Dictionary<string, GameObject>();
 
-    private Dictionary<string, float> lastMetrics = new Dictionary<string, float>() {
+    private Dictionary<string, float> lastMetrics = new Dictionary<string, float>()
+    {
         {"ShapeRadiusSizeController", initialSizeRadius }, { "ShapeDiameterSizeController", initialSizeDiameter }
     };
 
@@ -76,7 +78,6 @@ public class Circle : MonoBehaviour, IShape
 
     public Dictionary<string, float> GetMetrics(GameObject objectControlled)
     {
-
         return new Dictionary<string, float>()  {
             {"ShapeRadiusSizeController",  CalculateRadius(objectControlled)},
             {"ShapeDiameterSizeController",  CalculateDiameter(objectControlled)}
@@ -110,4 +111,48 @@ public class Circle : MonoBehaviour, IShape
     {
         this.lastMetrics = lastMetrics;
     }
+
+    public void SetScale(string slideName, float size, GameObject objectControlled)
+    {
+        if (slideName.IndexOf("radius", StringComparison.OrdinalIgnoreCase) != -1)
+        {
+            scale = new Vector3(size * sizeScaler * 2, size * sizeScaler * 2, size * sizeScaler * 2); // Gera a nova escala baseado na movimentação do slider (value)
+            objectControlled.transform.localScale = scale; // Muda a escala local do objeto controlado
+        }
+        else if (slideName.IndexOf("diameter", StringComparison.OrdinalIgnoreCase) != -1)
+        {
+            scale = new Vector3(size * sizeScaler, size * sizeScaler, size * sizeScaler); // Gera a nova escala baseado na movimentação do slider (value)
+            objectControlled.transform.localScale = scale; // Muda a escala local do objeto controlado
+        }
+    }
+
+    public float GetReferenceValue()
+    {
+        return lastMetrics["ShapeDiameterSizeController"];
+    }
+
+    public int GetSpriteIndex(string name)
+    {
+        name = name.ToLower();
+
+        switch (name)
+        {
+            case "selected":
+                return (int)CircleSprite.Selected;
+            case "radius":
+                return (int)CircleSprite.Radius;
+            case "diameter":
+                return (int)CircleSprite.Diameter;
+            default:
+                return (int)CircleSprite.Default;
+        }
+    }
+
+    public enum CircleSprite
+    {
+        Default     = 0,
+        Selected    = 1,
+        Radius      = 2,
+        Diameter    = 3
+    } 
 }

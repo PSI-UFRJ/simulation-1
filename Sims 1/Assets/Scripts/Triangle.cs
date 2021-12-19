@@ -6,32 +6,47 @@ using UnityEngine.UI;
 public class Triangle : MonoBehaviour, IShape
 {
     private Color color;
+    private PolygonCollider2D collider;
+    private Transform transform;
     private SpriteRenderer spriteRenderer;
     [SerializeField] private Sprite[] sprites;
+
+    [SerializeField] private Vector3 scale; // Guarda a escala atual
+    public int sizeScaler = 1;
+
+    public static float initialSizeSide = 1;
 
     public List<GameObject> controllers;
     public Dictionary<string, GameObject> mappedControllers = new Dictionary<string, GameObject>();
 
-    private Dictionary<string, float> lastMetrics = new Dictionary<string, float>() {
+    private Dictionary<string, float> lastMetrics = new Dictionary<string, float>()
+    {
+        {"ShapeSideSizeController", initialSizeSide }
     };
+
     // Start is called before the first frame update
     void Start()
     {
+        collider = this.gameObject.GetComponent<PolygonCollider2D>();
+        transform = this.gameObject.GetComponent<Transform>();
         spriteRenderer = this.gameObject.GetComponent<SpriteRenderer>();
         color = spriteRenderer.color;
 
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
+        if (controllers != null)
+        {
+            controllersListToDict(mappedControllers, controllers);
+        }
     }
 
     public float CalculateArea(GameObject objectControlled)
     {
         float area = 0;
         return area;
+    }
+
+    public float CalculateSide(GameObject objectControlled)
+    {
+        return objectControlled.transform.localScale.x;
     }
 
     public float CalculatePerimeter(GameObject objectControlled)
@@ -52,8 +67,17 @@ public class Triangle : MonoBehaviour, IShape
 
     public Dictionary<string, float> GetMetrics(GameObject objectControlled)
     {
+        return new Dictionary<string, float>()  {
+            {"ShapeSideSizeController",  CalculateSide(objectControlled)},
+        };
+    }
 
-        return new Dictionary<string, float>();
+    private void controllersListToDict(Dictionary<string, GameObject> mappedControllers, List<GameObject> controllers)
+    {
+        foreach (GameObject gameObj in controllers)
+        {
+            mappedControllers.Add(gameObj.name.ToString().Replace("ControlPanel", "").Trim(), gameObj);
+        }
     }
 
     public Dictionary<string, GameObject> GetMappedControllers()
@@ -74,5 +98,41 @@ public class Triangle : MonoBehaviour, IShape
     public void SetLastMetrics(Dictionary<string, float> lastMetrics)
     {
         this.lastMetrics = lastMetrics;
+    }
+
+    public void SetScale(string slideName, float size, GameObject objectControlled)
+    {
+        scale = new Vector3(size * sizeScaler, size * sizeScaler, size * sizeScaler); // Gera a nova escala baseado na movimentação do slider (value)
+        objectControlled.transform.localScale = scale; // Muda a escala local do objeto controlado
+    }
+
+    public float GetReferenceValue()
+    {
+        return 1;
+    }
+
+    public int GetSpriteIndex(string name)
+    {
+        name = name.ToLower();
+
+        switch (name)
+        {
+            case "selected":
+                return (int)TriangleSprite.Selected;
+            case "side":
+                return (int)TriangleSprite.Side;
+            case "height":
+                return (int)TriangleSprite.Height;
+            default:
+                return (int)TriangleSprite.Default;
+        }
+    }
+
+    public enum TriangleSprite
+    {
+        Default     = 0,
+        Selected    = 1,
+        Side        = 2,
+        Height      = 3,
     }
 }

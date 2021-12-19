@@ -14,4 +14,7 @@ public interface IShape
     void SetMappedControllers(Dictionary<string, GameObject> mappedControllers);
     Dictionary<string, float> GetLastMetrics();
     void SetLastMetrics(Dictionary<string, float> lastMetrics);
+    int GetSpriteIndex(string name);
+    float GetReferenceValue();
+    void SetScale(string slideName, float size, GameObject objectControlled);
 }
