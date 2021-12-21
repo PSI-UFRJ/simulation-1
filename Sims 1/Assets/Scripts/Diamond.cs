@@ -21,7 +21,7 @@ public class Diamond : MonoBehaviour, IShape
 
     private Dictionary<string, float> lastMetrics = new Dictionary<string, float>()
     {
-        {"ShapeSideSizeController", initialSizeSide }
+        {"ShapeSideSizeController", initialSizeSide },
     };
 
     // Start is called before the first frame update
@@ -126,6 +126,10 @@ public class Diamond : MonoBehaviour, IShape
                 return (int)DiamondSprite.LargerDiagonal;
             case "minordiagonal":
                 return (int)DiamondSprite.MinorDiagonal;
+            case "perimeter":
+                return (int)DiamondSprite.Perimeter;
+            case "area":
+                return (int)DiamondSprite.Area;
             default:
                 return (int)DiamondSprite.Default;
         }
@@ -137,6 +141,8 @@ public class Diamond : MonoBehaviour, IShape
         Selected        = 1,
         Side            = 2,
         LargerDiagonal  = 3,
-        MinorDiagonal   = 4
+        MinorDiagonal   = 4,
+        Perimeter       = 5,
+        Area            = 6
     }
 }

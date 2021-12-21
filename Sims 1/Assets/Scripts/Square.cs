@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -15,13 +16,19 @@ public class Square : MonoBehaviour, IShape
     public int sizeScaler = 1;
 
     public static float initialSizeSide = 1;
+    public static float initialSizeDiagonal = 1;
+    public static float initialSizePerimeter = 3.14f;
+    public static float initialSizeArea = 0.78f;
 
     public List<GameObject> controllers;
     public Dictionary<string, GameObject> mappedControllers = new Dictionary<string, GameObject>();
 
     private Dictionary<string, float> lastMetrics = new Dictionary<string, float>()
     {
-        {"ShapeSideSizeController", initialSizeSide }
+        {"ShapeSideSizeController", initialSizeSide },
+        {"ShapeDiagonalSizeController", initialSizeDiagonal },
+        {"ShapePerimeterSizeController", initialSizePerimeter },
+        {"ShapeAreaSizeController", initialSizeArea }
     };
 
     // Start is called before the first frame update
@@ -40,8 +47,7 @@ public class Square : MonoBehaviour, IShape
 
     public float CalculateArea(GameObject objectControlled)
     {
-        float area = 0;
-        return area;
+        return (float)Math.Pow(objectControlled.transform.localScale.x, 2);
     }
 
     public float CalculateSide(GameObject objectControlled)
@@ -51,8 +57,12 @@ public class Square : MonoBehaviour, IShape
 
     public float CalculatePerimeter(GameObject objectControlled)
     {
-        float perimeter = 0;
-        return perimeter;
+        return 4 * objectControlled.transform.localScale.x;
+    }
+
+    public float CalculateDiagonal(GameObject objectControlled)
+    {
+        return (float)(objectControlled.transform.localScale.x * Math.Sqrt(2)); 
     }
 
     public Sprite[] GetSprites()
@@ -69,6 +79,9 @@ public class Square : MonoBehaviour, IShape
     {
         return new Dictionary<string, float>()  {
             {"ShapeSideSizeController",  CalculateSide(objectControlled)},
+            {"ShapeDiagonalSizeController", CalculateDiagonal(objectControlled) },
+            {"ShapePerimeterSizeController", CalculatePerimeter(objectControlled) },
+            {"ShapeAreaSizeController", CalculateArea(objectControlled) }
         };
     }
 
@@ -102,8 +115,26 @@ public class Square : MonoBehaviour, IShape
 
     public void SetScale(string slideName, float size, GameObject objectControlled)
     {
-        scale = new Vector3(size * sizeScaler, size * sizeScaler, size * sizeScaler); // Gera a nova escala baseado na movimentação do slider (value)
-        objectControlled.transform.localScale = scale; // Muda a escala local do objeto controlado
+        if (slideName.IndexOf("side", StringComparison.OrdinalIgnoreCase) != -1)
+        {
+            scale = new Vector3(size * sizeScaler, size * sizeScaler, size * sizeScaler); // Gera a nova escala baseado na movimentação do slider (value)
+            objectControlled.transform.localScale = scale; // Muda a escala local do objeto controlado
+        }
+        else if(slideName.IndexOf("diagonal", StringComparison.OrdinalIgnoreCase) != -1)
+        {
+            scale = new Vector3((float)(size * sizeScaler/(Math.Sqrt(2))), (float)(size * sizeScaler / (Math.Sqrt(2))), (float)(size * sizeScaler / (Math.Sqrt(2)))); // Gera a nova escala baseado na movimentação do slider (value)
+            objectControlled.transform.localScale = scale; // Muda a escala local do objeto controlado
+        }
+        else if (slideName.IndexOf("perimeter", StringComparison.OrdinalIgnoreCase) != -1)
+        {
+            scale = new Vector3((size * sizeScaler) / 4, (size * sizeScaler) / 4, (size * sizeScaler) / 4); // Gera a nova escala baseado na movimentação do slider (value)
+            objectControlled.transform.localScale = scale; // Muda a escala local do objeto controlado
+        }
+        else if (slideName.IndexOf("area", StringComparison.OrdinalIgnoreCase) != -1)
+        {
+            scale = new Vector3((float)Math.Sqrt(size * sizeScaler), (float)Math.Sqrt(size * sizeScaler), (float)Math.Sqrt(size * sizeScaler)); // Gera a nova escala baseado na movimentação do slider (value)
+            objectControlled.transform.localScale = scale; // Muda a escala local do objeto controlado
+        }
     }
 
     public float GetReferenceValue()
@@ -123,6 +154,10 @@ public class Square : MonoBehaviour, IShape
                 return (int)SquareSprite.Side;
             case "diagonal":
                 return (int)SquareSprite.Diagonal;
+            case "perimeter":
+                return (int)SquareSprite.Perimeter;
+            case "area":
+                return (int)SquareSprite.Area;
             default:
                 return (int)SquareSprite.Default;
         }
@@ -130,9 +165,11 @@ public class Square : MonoBehaviour, IShape
 
     public enum SquareSprite
     {
-        Default  = 0,
-        Selected = 1,
-        Side     = 2,
-        Diagonal = 3
+        Default     = 0,
+        Selected    = 1,
+        Side        = 2,
+        Diagonal    = 3,
+        Perimeter   = 4,
+        Area        = 5
     }
 }

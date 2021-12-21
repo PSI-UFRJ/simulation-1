@@ -70,7 +70,7 @@ public class ObjectControlled : MonoBehaviour
 
         objectControlled = selectedObj; // Guarda a referência para o novo objeto selecionado
 
-        this.ChangeSprite(1); // Ativa o realce do contorno
+        this.ChangeSprite(objectControlledShape.GetSpriteIndex("Selected")); // Ativa o realce do contorno
 
         baseScale = selectedObj.GetComponent<UserClick>().prefab.transform.localScale;
     }
@@ -89,7 +89,7 @@ public class ObjectControlled : MonoBehaviour
         }
 
         ResetColor(); // Reseta a cor
-        this.ChangeSprite(0); // Atualiza para a sprite sem contorno
+        this.ChangeSprite(objectControlledShape.GetSpriteIndex("Default")); // Atualiza para a sprite sem contorno
         objectControlled.GetComponent<SpriteRenderer>().sortingOrder = objectControlled.GetComponent<UserClick>().GetWorkspace().GetComponent<SpriteRenderer>().sortingOrder;//Volta para layer 0
 
         controlPanel.SetActive(false);
@@ -194,17 +194,18 @@ public class ObjectControlled : MonoBehaviour
     /// </summary>
     public void exitSlider()
     {
-        this.ChangeSprite(1); // Ativa o realce do raio
+        this.ChangeSprite(objectControlledShape.GetSpriteIndex("Selected")); // Ativa o realce do raio
         currentSliderName = null;
     }
 
     /// <summary>
     /// Muda a a aparência do objeto após segurar o slider
     /// </summary>
-    public void enterSlider(string sliderName, float newScale)
+    public void enterSlider(string elementName, string sliderName, float newScale)
     {
         currentSliderName = sliderName;
-        this.ChangeSprite(2); // Ativa o realce do raio
+
+        this.ChangeSprite(objectControlledShape.GetSpriteIndex(elementName)); // Ativa o realce do raio
         ChangeScale(sliderName, newScale);
     }
 
@@ -295,7 +296,6 @@ public class ObjectControlled : MonoBehaviour
 
         UpdateSliders();
     }
-
 
     public void UpdateSliders()
     {

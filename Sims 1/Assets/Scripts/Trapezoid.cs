@@ -125,6 +125,10 @@ public class Trapezoid : MonoBehaviour, IShape
                 return (int)TrapezoidSprite.MinorBase;
             case "largerbase":
                 return (int)TrapezoidSprite.LargerBase;
+            case "perimeter":
+                return (int)TrapezoidSprite.Perimeter;
+            case "area":
+                return (int)TrapezoidSprite.Area;
             default:
                 return (int)TrapezoidSprite.Default;
         }
@@ -136,6 +140,9 @@ public class Trapezoid : MonoBehaviour, IShape
         Selected    = 1,
         Height      = 2,
         MinorBase   = 3,
-        LargerBase  = 4
+        LargerBase  = 4,
+        Perimeter   = 5,
+        Area        = 6
+
     }
 }

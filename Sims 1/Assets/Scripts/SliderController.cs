@@ -32,7 +32,7 @@ public class SliderController : MonoBehaviour, IPointerDownHandler, IPointerUpHa
 
     public void OnPointerDown(PointerEventData eventData)
     {
-        objectControlled.enterSlider(sliderName, sizeSlider.value);
+        objectControlled.enterSlider(elementName, sliderName, sizeSlider.value);
     }
 
     public void OnPointerUp(PointerEventData eventData)

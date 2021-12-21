@@ -123,6 +123,10 @@ public class Triangle : MonoBehaviour, IShape
                 return (int)TriangleSprite.Side;
             case "height":
                 return (int)TriangleSprite.Height;
+            case "perimeter":
+                return (int)TriangleSprite.Perimeter;
+            case "area":
+                return (int)TriangleSprite.Area;
             default:
                 return (int)TriangleSprite.Default;
         }
@@ -134,5 +138,7 @@ public class Triangle : MonoBehaviour, IShape
         Selected    = 1,
         Side        = 2,
         Height      = 3,
+        Perimeter   = 4,
+        Area        = 5
     }
 }

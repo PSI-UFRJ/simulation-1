@@ -7,7 +7,6 @@ using UnityEngine.UI;
 public class Circle : MonoBehaviour, IShape
 {
     // Start is called before the first frame update
-    private float radius;
     private Color color;
     private CircleCollider2D collider;
     private Transform transform;
@@ -18,15 +17,20 @@ public class Circle : MonoBehaviour, IShape
     [SerializeField] private Vector3 scale; // Guarda a escala atual
     public int sizeScaler = 1;
 
-    public static float initialSizeRadius = 1;
-    public static float initialSizeDiameter = 2;
+    public static float initialSizeRadius = 0.5f;
+    public static float initialSizeDiameter = 1;
+    public static float initialSizePerimeter = 3.14f;
+    public static float initialSizeArea = 0.78f;
 
     public List<GameObject> controllers = null;
     public Dictionary<string, GameObject> mappedControllers = new Dictionary<string, GameObject>();
 
     private Dictionary<string, float> lastMetrics = new Dictionary<string, float>()
     {
-        {"ShapeRadiusSizeController", initialSizeRadius }, { "ShapeDiameterSizeController", initialSizeDiameter }
+        {"ShapeRadiusSizeController", initialSizeRadius },
+        {"ShapeDiameterSizeController", initialSizeDiameter },
+        {"ShapePerimeterSizeController", initialSizePerimeter },
+        {"ShapeAreaSizeController", initialSizeArea }
     };
 
     void Start()
@@ -35,7 +39,6 @@ public class Circle : MonoBehaviour, IShape
         transform = this.gameObject.GetComponent<Transform>();
         spriteRenderer = this.gameObject.GetComponent<SpriteRenderer>();
 
-        radius = collider.radius * transform.localScale.x;
         color = spriteRenderer.color;
 
         if (controllers != null)
@@ -46,8 +49,8 @@ public class Circle : MonoBehaviour, IShape
 
     public float CalculateArea(GameObject objectControlled)
     {
-        float area = 0;
-        return area;
+        float relativeRadius = collider.radius * objectControlled.transform.localScale.x; // Calcula o raio baseado na escala
+        return Mathf.PI * relativeRadius * relativeRadius;
     }
 
     public float CalculateRadius(GameObject objectControlled)
@@ -57,8 +60,8 @@ public class Circle : MonoBehaviour, IShape
 
     public float CalculatePerimeter(GameObject objectControlled)
     {
-        float perimeter = 0;
-        return perimeter;
+        float relativeRadius = collider.radius * objectControlled.transform.localScale.x; // Calcula o raio baseado na escala
+        return 2 * Mathf.PI * relativeRadius;
     }
 
     public float CalculateDiameter(GameObject objectControlled)
@@ -79,8 +82,10 @@ public class Circle : MonoBehaviour, IShape
     public Dictionary<string, float> GetMetrics(GameObject objectControlled)
     {
         return new Dictionary<string, float>()  {
-            {"ShapeRadiusSizeController",  CalculateRadius(objectControlled)},
-            {"ShapeDiameterSizeController",  CalculateDiameter(objectControlled)}
+            {"ShapeRadiusSizeController",  CalculateRadius(objectControlled) },
+            {"ShapeDiameterSizeController",  CalculateDiameter(objectControlled) },
+            {"ShapePerimeterSizeController",  CalculatePerimeter(objectControlled) },
+            {"ShapeAreaSizeController",  CalculateArea(objectControlled) }
         };
     }
 
@@ -124,6 +129,17 @@ public class Circle : MonoBehaviour, IShape
             scale = new Vector3(size * sizeScaler, size * sizeScaler, size * sizeScaler); // Gera a nova escala baseado na movimentação do slider (value)
             objectControlled.transform.localScale = scale; // Muda a escala local do objeto controlado
         }
+        else if (slideName.IndexOf("perimeter", StringComparison.OrdinalIgnoreCase) != -1)
+        {
+            scale = new Vector3(size * sizeScaler * (1/(float)Math.PI), size * sizeScaler * (1 / (float)Math.PI), size * sizeScaler * (1 / (float)Math.PI)); // Gera a nova escala baseado na movimentação do slider (value)
+            objectControlled.transform.localScale = scale; // Muda a escala local do objeto controlado
+        }
+        else if (slideName.IndexOf("area", StringComparison.OrdinalIgnoreCase) != -1)
+        {
+            double insideSqrt = (size * sizeScaler * 4) / (Math.PI);
+            scale = new Vector3((float)Math.Sqrt(insideSqrt), (float)Math.Sqrt(insideSqrt), (float)Math.Sqrt(insideSqrt)); // Gera a nova escala baseado na movimentação do slider (value)
+            objectControlled.transform.localScale = scale; // Muda a escala local do objeto controlado
+        }
     }
 
     public float GetReferenceValue()
@@ -143,6 +159,10 @@ public class Circle : MonoBehaviour, IShape
                 return (int)CircleSprite.Radius;
             case "diameter":
                 return (int)CircleSprite.Diameter;
+            case "perimeter":
+                return (int)CircleSprite.Perimeter;
+            case "area":
+                return (int)CircleSprite.Area;
             default:
                 return (int)CircleSprite.Default;
         }
@@ -153,6 +173,8 @@ public class Circle : MonoBehaviour, IShape
         Default     = 0,
         Selected    = 1,
         Radius      = 2,
-        Diameter    = 3
+        Diameter    = 3,
+        Perimeter   = 4,
+        Area        = 5
     } 
 }
