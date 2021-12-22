@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -46,13 +47,12 @@ public class Triangle : MonoBehaviour, IShape
 
     public float CalculateArea(GameObject objectControlled)
     {
-        float area = 0;
-        return area;
+        return (objectControlled.transform.localScale.x * objectControlled.transform.localScale.x) * (Mathf.Sqrt(3)/4);
     }
 
     public float CalculateHeight(GameObject objectControlled)
     {
-        return 1.0f;
+        return (objectControlled.transform.localScale.x * Mathf.Sqrt(3))/2;
     }
 
     public float CalculateSide(GameObject objectControlled)
@@ -62,8 +62,7 @@ public class Triangle : MonoBehaviour, IShape
 
     public float CalculatePerimeter(GameObject objectControlled)
     {
-        float perimeter = 0;
-        return perimeter;
+        return 3 * objectControlled.transform.localScale.x;
     }
 
     public Sprite[] GetSprites()
@@ -116,8 +115,27 @@ public class Triangle : MonoBehaviour, IShape
 
     public void SetScale(string slideName, float size, GameObject objectControlled)
     {
-        scale = new Vector3(size * sizeScaler, size * sizeScaler, size * sizeScaler); // Gera a nova escala baseado na movimentação do slider (value)
-        objectControlled.transform.localScale = scale; // Muda a escala local do objeto controlado
+        if (slideName.IndexOf("side", StringComparison.OrdinalIgnoreCase) != -1)
+        {
+            scale = new Vector3(size * sizeScaler, size * sizeScaler, size * sizeScaler); // Gera a nova escala baseado na movimentação do slider (value)
+            objectControlled.transform.localScale = scale; // Muda a escala local do objeto controlado
+        }
+        else if (slideName.IndexOf("height", StringComparison.OrdinalIgnoreCase) != -1)
+        {
+            scale = new Vector3(size * sizeScaler * (2/Mathf.Sqrt(3)), size * sizeScaler * (2 / Mathf.Sqrt(3)), size * sizeScaler * (2 / Mathf.Sqrt(3))); // Gera a nova escala baseado na movimentação do slider (value)
+            objectControlled.transform.localScale = scale; // Muda a escala local do objeto controlado
+        }
+        else if (slideName.IndexOf("perimeter", StringComparison.OrdinalIgnoreCase) != -1)
+        {
+            scale = new Vector3(size * sizeScaler / 3, size * sizeScaler / 3, size * sizeScaler / 3); // Gera a nova escala baseado na movimentação do slider (value)
+            objectControlled.transform.localScale = scale; // Muda a escala local do objeto controlado
+        }
+        else if (slideName.IndexOf("area", StringComparison.OrdinalIgnoreCase) != -1)
+        {
+            double insideSqrt = (size * sizeScaler * 4) / (Math.Sqrt(3));
+            scale = new Vector3((float)Math.Sqrt(insideSqrt), (float)Math.Sqrt(insideSqrt), (float)Math.Sqrt(insideSqrt)); // Gera a nova escala baseado na movimentação do slider (value)
+            objectControlled.transform.localScale = scale; // Muda a escala local do objeto controlado
+        }
     }
 
     public float GetReferenceValue()

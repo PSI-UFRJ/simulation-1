@@ -137,9 +137,9 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: -0.48401523, y: -0.42007494}
-      - {x: 0.48194402, y: -0.42003167}
-      - {x: 0.0049547404, y: 0.4206829}
+    - - {x: -0.49655175, y: -0.4294772}
+      - {x: 0.49604744, y: -0.43100083}
+      - {x: 0.0049547404, y: 0.4285183}
 --- !u!114 &3634976869661159476
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -154,6 +154,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prefab: {fileID: 0}
   isTemplate: 0
+  controlPanels: []
   shape: {fileID: 0}
   workspace: {fileID: 0}
   clickableLayer:
@@ -181,3 +182,6 @@ MonoBehaviour:
   - {fileID: -4793535843617617400, guid: 32b07c3c36d3e1b468a0ba13822a5a23, type: 3}
   - {fileID: 8758918056142558956, guid: 32b07c3c36d3e1b468a0ba13822a5a23, type: 3}
   - {fileID: 2668740709407138333, guid: 32b07c3c36d3e1b468a0ba13822a5a23, type: 3}
+  scale: {x: 0, y: 0, z: 0}
+  sizeScaler: 1
+  controllers: []
