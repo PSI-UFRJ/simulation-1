@@ -290,6 +290,11 @@ public class ObjectControlled : MonoBehaviour
             {
                 objectControlledShape.SetScale(sliderName, newScale, objectControlled); // Ajusta a escala do objeto controlado
                 metrics = objectControlledShape.GetMetrics(objectControlled); // Recalcula as métricas do objeto
+                Debug.Log(sliderName);
+                Debug.Log("metricas calculadas");
+                Debug.Log(metrics["ShapeDiagonalSizeController"]);
+                Debug.Log(metrics["ShapePerimeterSizeController"]);
+                Debug.Log(metrics["ShapeAreaSizeController"]);
                 objectControlledShape.SetLastMetrics(metrics); //Guarda os novos valores das métricas
             }
         }

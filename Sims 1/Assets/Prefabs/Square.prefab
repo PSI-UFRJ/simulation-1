@@ -136,7 +136,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.99264574, y: 1.0001302}
+  m_Size: {x: 0.9926457, y: 1.00013}
   m_EdgeRadius: 0
 --- !u!114 &193843248897488728
 MonoBehaviour:
@@ -152,6 +152,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prefab: {fileID: 0}
   isTemplate: 0
+  controlPanels: []
   shape: {fileID: 0}
   workspace: {fileID: 0}
   clickableLayer:
@@ -179,3 +180,6 @@ MonoBehaviour:
   - {fileID: 712130302477587645, guid: 8777ff28c15ff6945b3634e9c2878127, type: 3}
   - {fileID: 1507113435263308803, guid: 8777ff28c15ff6945b3634e9c2878127, type: 3}
   - {fileID: -6535192884874117730, guid: 8777ff28c15ff6945b3634e9c2878127, type: 3}
+  scale: {x: 0, y: 0, z: 0}
+  sizeScaler: 1
+  controllers: []
