@@ -49,29 +49,55 @@ public class Diamond : MonoBehaviour, IShape
 
     public float CalculateArea(GameObject objectControlled)
     {
-        float area = 0;
-        return area;
+        return (CalculateLargerDiagonal(objectControlled) * CalculateMinorDiagonal(objectControlled)) / 2;
+    }
+
+    private float GetLargerDiagonal(GameObject objectControlled)
+    {
+        Vector2[] points = objectControlled.GetComponent<PolygonCollider2D>().points; // Pega os pontos que foram o collider do polígono
+
+        float diagonalOne = CalculateDistance(points, 0, 2);
+        float diagonalTwo = CalculateDistance(points, 1, 3);
+
+        return (diagonalOne >= diagonalTwo) ? diagonalOne : diagonalTwo;
+    }
+
+    private float GetMinorDiagonal(GameObject objectControlled)
+    {
+        Vector2[] points = objectControlled.GetComponent<PolygonCollider2D>().points; // Pega os pontos que foram o collider do polígono
+
+        float diagonalOne = CalculateDistance(points, 0, 2);
+        float diagonalTwo = CalculateDistance(points, 1, 3);
+
+        return (diagonalOne <= diagonalTwo) ? diagonalOne : diagonalTwo;
+    }
+
+    private float CalculateDistance(Vector2[] points, int firstIndex, int secondIndex)
+    {
+        float distanceX = points[firstIndex].x - points[secondIndex].x;
+        float distanceY = points[firstIndex].y - points[secondIndex].y;
+
+        return (float)Math.Sqrt(Math.Abs(distanceX + distanceY));
     }
 
     public float CalculateLargerDiagonal(GameObject objectControlled)
     {
-        return 1.0f;
+        return objectControlled.transform.localScale.x;
     }
 
     public float CalculateMinorDiagonal(GameObject objectControlled)
     {
-        return 1.0f;
+        return (float)(objectControlled.transform.localScale.x * Math.Sqrt(3)) / 3;
     }
 
     public float CalculateSide(GameObject objectControlled)
     {
-        return objectControlled.transform.localScale.x;
+        return CalculateMinorDiagonal(objectControlled);
     }
 
     public float CalculatePerimeter(GameObject objectControlled)
     {
-        float perimeter = 0;
-        return perimeter;
+        return 4 * CalculateMinorDiagonal(objectControlled);
     }
 
     public Sprite[] GetSprites()
@@ -127,27 +153,27 @@ public class Diamond : MonoBehaviour, IShape
     {
         if (slideName.IndexOf("side", StringComparison.OrdinalIgnoreCase) != -1)
         {
-            scale = new Vector3(size * sizeScaler, size * sizeScaler, size * sizeScaler); // Gera a nova escala baseado na movimentação do slider (value)
+            scale = new Vector3(size * sizeScaler * (float)Math.Sqrt(3), size * sizeScaler * (float)Math.Sqrt(3), size * sizeScaler * (float)Math.Sqrt(3)); // Gera a nova escala baseado na movimentação do slider (value)
             objectControlled.transform.localScale = scale; // Muda a escala local do objeto controlado
         }
         if (slideName.IndexOf("area", StringComparison.OrdinalIgnoreCase) != -1)
         {
-            scale = new Vector3(size * sizeScaler, size * sizeScaler, size * sizeScaler); // Gera a nova escala baseado na movimentação do slider (value)
+            scale = new Vector3((float)Math.Sqrt(size * sizeScaler * 2 * (float)Math.Sqrt(3)), (float)Math.Sqrt(size * sizeScaler * 2 * (float)Math.Sqrt(3)), (float)Math.Sqrt(size * sizeScaler * 2 * (float)Math.Sqrt(3))); // Gera a nova escala baseado na movimentação do slider (value)
             objectControlled.transform.localScale = scale; // Muda a escala local do objeto controlado
         }
-        if (slideName.IndexOf("largediagonal", StringComparison.OrdinalIgnoreCase) != -1)
+        if (slideName.IndexOf("largerdiagonal", StringComparison.OrdinalIgnoreCase) != -1)
         {
             scale = new Vector3(size * sizeScaler, size * sizeScaler, size * sizeScaler); // Gera a nova escala baseado na movimentação do slider (value)
             objectControlled.transform.localScale = scale; // Muda a escala local do objeto controlado
         }
         if (slideName.IndexOf("minordiagonal", StringComparison.OrdinalIgnoreCase) != -1)
         {
-            scale = new Vector3(size * sizeScaler, size * sizeScaler, size * sizeScaler); // Gera a nova escala baseado na movimentação do slider (value)
+            scale = new Vector3(size * sizeScaler * (float)Math.Sqrt(3), size * sizeScaler * (float)Math.Sqrt(3), size * sizeScaler * (float)Math.Sqrt(3)); // Gera a nova escala baseado na movimentação do slider (value)
             objectControlled.transform.localScale = scale; // Muda a escala local do objeto controlado
         }
         if (slideName.IndexOf("perimeter", StringComparison.OrdinalIgnoreCase) != -1)
         {
-            scale = new Vector3(size * sizeScaler, size * sizeScaler, size * sizeScaler); // Gera a nova escala baseado na movimentação do slider (value)
+            scale = new Vector3(size * sizeScaler * (float)Math.Sqrt(3) / 4, size * sizeScaler * (float)Math.Sqrt(3) / 4, size * sizeScaler * (float)Math.Sqrt(3) / 4); // Gera a nova escala baseado na movimentação do slider (value)
             objectControlled.transform.localScale = scale; // Muda a escala local do objeto controlado
         }
     }
