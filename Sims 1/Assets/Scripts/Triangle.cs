@@ -14,14 +14,20 @@ public class Triangle : MonoBehaviour, IShape
     [SerializeField] private Vector3 scale; // Guarda a escala atual
     public int sizeScaler = 1;
 
-    public static float initialSizeSide = 1;
+    public static float initialSizeSide      = 1;
+    public static float initialHeightSide    = 1;
+    public static float initialAreaSide      = 1;
+    public static float initialPerimeterSide = 1;
 
     public List<GameObject> controllers;
     public Dictionary<string, GameObject> mappedControllers = new Dictionary<string, GameObject>();
 
     private Dictionary<string, float> lastMetrics = new Dictionary<string, float>()
     {
-        {"ShapeSideSizeController", initialSizeSide }
+        {"ShapeSideSizeController", initialSizeSide },
+        {"ShapeHeightSizeController", initialHeightSide },
+        {"ShapeAreaSizeController", initialAreaSide },
+        {"ShapePerimeterSizeController", initialPerimeterSide }
     };
 
     // Start is called before the first frame update
@@ -42,6 +48,11 @@ public class Triangle : MonoBehaviour, IShape
     {
         float area = 0;
         return area;
+    }
+
+    public float CalculateHeight(GameObject objectControlled)
+    {
+        return 1.0f;
     }
 
     public float CalculateSide(GameObject objectControlled)
@@ -69,6 +80,9 @@ public class Triangle : MonoBehaviour, IShape
     {
         return new Dictionary<string, float>()  {
             {"ShapeSideSizeController",  CalculateSide(objectControlled)},
+            {"ShapeHeightSizeController", CalculateHeight(objectControlled) },
+            {"ShapeAreaSizeController", CalculateArea(objectControlled) },
+            {"ShapePerimeterSizeController", CalculatePerimeter(objectControlled) }
         };
     }
 

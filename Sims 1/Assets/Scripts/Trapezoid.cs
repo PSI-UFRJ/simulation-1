@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -21,7 +22,12 @@ public class Trapezoid : MonoBehaviour, IShape
 
     private Dictionary<string, float> lastMetrics = new Dictionary<string, float>()
     {
-        {"ShapeSideSizeController", initialSizeSide }
+        {"ShapeSideSizeController", initialSizeSide },
+        {"ShapeLargerBaseSizeController", initialSizeSide },
+        {"ShapeMinorBaseSizeController", initialSizeSide },
+        {"ShapeHeightSizeController", initialSizeSide },
+        {"ShapeAreaSizeController", initialSizeSide },
+        {"ShapePerimeterSizeController", initialSizeSide }
     };
 
     // Start is called before the first frame update
@@ -42,6 +48,21 @@ public class Trapezoid : MonoBehaviour, IShape
     {
         float area = 0;
         return area;
+    }
+
+    public float CalculateMinorBase(GameObject objectControlled)
+    {
+        return 1.0f;
+    }
+
+    public float CalculateLargerBase(GameObject objectControlled)
+    {
+        return 1.0f;
+    }
+
+    public float CalculateHeightBase(GameObject objectControlled)
+    {
+        return 1.0f;
     }
 
     public float CalculateSide(GameObject objectControlled)
@@ -69,6 +90,11 @@ public class Trapezoid : MonoBehaviour, IShape
     {
         return new Dictionary<string, float>()  {
             {"ShapeSideSizeController",  CalculateSide(objectControlled)},
+            {"ShapeLargerBaseSizeController", CalculateLargerBase(objectControlled) },
+            {"ShapeMinorBaseSizeController", CalculateMinorBase(objectControlled) },
+            {"ShapeHeightSizeController", CalculateHeightBase(objectControlled) },
+            {"ShapeAreaSizeController", CalculateArea(objectControlled) },
+            {"ShapePerimeterSizeController", CalculatePerimeter(objectControlled) }
         };
     }
 
@@ -102,8 +128,36 @@ public class Trapezoid : MonoBehaviour, IShape
 
     public void SetScale(string slideName, float size, GameObject objectControlled)
     {
-        scale = new Vector3(size * sizeScaler, size * sizeScaler, size * sizeScaler); // Gera a nova escala baseado na movimentação do slider (value)
-        objectControlled.transform.localScale = scale; // Muda a escala local do objeto controlado
+        if (slideName.IndexOf("side", StringComparison.OrdinalIgnoreCase) != -1)
+        {
+            scale = new Vector3(size * sizeScaler, size * sizeScaler, size * sizeScaler); // Gera a nova escala baseado na movimentação do slider (value)
+            objectControlled.transform.localScale = scale; // Muda a escala local do objeto controlado
+        }
+        if (slideName.IndexOf("largerbase", StringComparison.OrdinalIgnoreCase) != -1)
+        {
+            scale = new Vector3(size * sizeScaler, size * sizeScaler, size * sizeScaler); // Gera a nova escala baseado na movimentação do slider (value)
+            objectControlled.transform.localScale = scale; // Muda a escala local do objeto controlado
+        }
+        if (slideName.IndexOf("minorbase", StringComparison.OrdinalIgnoreCase) != -1)
+        {
+            scale = new Vector3(size * sizeScaler, size * sizeScaler, size * sizeScaler); // Gera a nova escala baseado na movimentação do slider (value)
+            objectControlled.transform.localScale = scale; // Muda a escala local do objeto controlado
+        }
+        if (slideName.IndexOf("height", StringComparison.OrdinalIgnoreCase) != -1)
+        {
+            scale = new Vector3(size * sizeScaler, size * sizeScaler, size * sizeScaler); // Gera a nova escala baseado na movimentação do slider (value)
+            objectControlled.transform.localScale = scale; // Muda a escala local do objeto controlado
+        }
+        if (slideName.IndexOf("area", StringComparison.OrdinalIgnoreCase) != -1)
+        {
+            scale = new Vector3(size * sizeScaler, size * sizeScaler, size * sizeScaler); // Gera a nova escala baseado na movimentação do slider (value)
+            objectControlled.transform.localScale = scale; // Muda a escala local do objeto controlado
+        }
+        if (slideName.IndexOf("perimeter", StringComparison.OrdinalIgnoreCase) != -1)
+        {
+            scale = new Vector3(size * sizeScaler, size * sizeScaler, size * sizeScaler); // Gera a nova escala baseado na movimentação do slider (value)
+            objectControlled.transform.localScale = scale; // Muda a escala local do objeto controlado
+        }
     }
 
     public float GetReferenceValue()
@@ -121,7 +175,7 @@ public class Trapezoid : MonoBehaviour, IShape
                 return (int)TrapezoidSprite.Selected;
             case "height":
                 return (int)TrapezoidSprite.Height;
-            case "minorbases":
+            case "minorbase":
                 return (int)TrapezoidSprite.MinorBase;
             case "largerbase":
                 return (int)TrapezoidSprite.LargerBase;
