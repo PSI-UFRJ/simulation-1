@@ -16,10 +16,10 @@ public class Diamond : MonoBehaviour, IShape
     public int sizeScaler = 1;
 
     public static float initialSizeSide             = 1;
-    public static float initialAreaSide             = 1;
-    public static float initialLargerDiagonalSide   = 1;
+    public static float initialAreaSide             = 0.87f;
+    public static float initialLargerDiagonalSide   = 1.73f;
     public static float initialMinorDiagonalSide    = 1;
-    public static float initialPerimeterSide        = 1;
+    public static float initialPerimeterSide        = 4;
 
     public List<GameObject> controllers;
     public Dictionary<string, GameObject> mappedControllers = new Dictionary<string, GameObject>();

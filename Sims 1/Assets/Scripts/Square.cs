@@ -16,9 +16,9 @@ public class Square : MonoBehaviour, IShape
     public int sizeScaler = 1;
 
     public static float initialSizeSide = 1;
-    public static float initialSizeDiagonal = 1;
-    public static float initialSizePerimeter = 3.14f;
-    public static float initialSizeArea = 0.78f;
+    public static float initialSizeDiagonal = 1.41f;
+    public static float initialSizePerimeter = 4f;
+    public static float initialSizeArea = 1f;
 
     public List<GameObject> controllers;
     public Dictionary<string, GameObject> mappedControllers = new Dictionary<string, GameObject>();

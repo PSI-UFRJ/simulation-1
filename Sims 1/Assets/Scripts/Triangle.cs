@@ -16,9 +16,9 @@ public class Triangle : MonoBehaviour, IShape
     public int sizeScaler = 1;
 
     public static float initialSizeSide      = 1;
-    public static float initialHeightSide    = 1;
-    public static float initialAreaSide      = 1;
-    public static float initialPerimeterSide = 1;
+    public static float initialHeightSide    = 0.87f;
+    public static float initialAreaSide      = 0.43f;
+    public static float initialPerimeterSide = 3;
 
     public List<GameObject> controllers;
     public Dictionary<string, GameObject> mappedControllers = new Dictionary<string, GameObject>();
