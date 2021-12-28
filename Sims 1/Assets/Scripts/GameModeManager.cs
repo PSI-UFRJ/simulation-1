@@ -23,17 +23,17 @@ public class GameModeManager : MonoBehaviour
         Scene currentScene = SceneManager.GetActiveScene();
         string sceneName = currentScene.name;
 
-        UnityEngine.UI.Button introBtn = GameObject.Find("IntroductionModeBtn").GetComponent<UnityEngine.UI.Button>();
+        //UnityEngine.UI.Button introBtn = GameObject.Find("IntroductionModeBtn").GetComponent<UnityEngine.UI.Button>();
         UnityEngine.UI.Button gameBtn = GameObject.Find("GameModeBtn").GetComponent<UnityEngine.UI.Button>();
         UnityEngine.UI.Button labBtn = GameObject.Find("LabModeBtn").GetComponent<UnityEngine.UI.Button>();
 
         if (sceneName == "SampleScene")
         {
-            SetBtnColor(introBtn, Color.yellow);
+            SetBtnColor(labBtn, Color.yellow);
         }
         else
         {
-            ResetBtnColor(introBtn);
+            //ResetBtnColor(introBtn);
             ResetBtnColor(gameBtn);
             ResetBtnColor(labBtn);
         }
