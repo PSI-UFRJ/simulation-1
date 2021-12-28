@@ -155,6 +155,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prefab: {fileID: 0}
   isTemplate: 0
+  controlPanels: []
   shape: {fileID: 0}
   workspace: {fileID: 0}
   clickableLayer:
@@ -183,3 +184,6 @@ MonoBehaviour:
   - {fileID: -1183672099979045354, guid: 93c9635045af9a34a87f83e5b89cd4d6, type: 3}
   - {fileID: -1352017035797053106, guid: 93c9635045af9a34a87f83e5b89cd4d6, type: 3}
   - {fileID: 2461035708857170348, guid: 93c9635045af9a34a87f83e5b89cd4d6, type: 3}
+  scale: {x: 0, y: 0, z: 0}
+  sizeScaler: 1
+  controllers: []
