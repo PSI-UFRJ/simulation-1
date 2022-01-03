@@ -25,6 +25,16 @@ public class Circle : MonoBehaviour, IShape
     public List<GameObject> controllers = null;
     public Dictionary<string, GameObject> mappedControllers = new Dictionary<string, GameObject>();
 
+    private List<string> curiosityCollection = new List<string>() 
+    {
+        "Círculos são ditos congruentes quando os mesmos possuem raios iguais",
+        "O diâmetro de um círculo é o maior segmento de reta entre dois pontos do círculo",
+        "Um círculo pode ser circunscrito em um retângulo, trapézio, losango, triângulo",
+        "Um círculo pode ser inscrito dentro de um quadrado, triângulo e losango",
+        "Todos os pontos da circunferência apresentam a mesma distância em relação ao centro"
+
+    } ; 
+
     private Dictionary<string, float> lastMetrics = new Dictionary<string, float>()
     {
         {"ShapeRadiusSizeController", initialSizeRadius },
@@ -166,6 +176,15 @@ public class Circle : MonoBehaviour, IShape
             default:
                 return (int)CircleSprite.Default;
         }
+    }
+
+    public string GetCuriosity()
+    {
+        System.Random r = new System.Random();
+
+        int index = r.Next(curiosityCollection.Count);
+
+        return curiosityCollection[index];
     }
 
     public enum CircleSprite

@@ -20,10 +20,18 @@ public class Trapezoid : MonoBehaviour, IShape
     public static float initialMinorBaseSize    = 0.53f;
     public static float initialHeightSize       = 0.78f;
     public static float initialPerimeterSize    = 3.17f;
-    public static float initialAreaSize         = 0.6f;
+    public static float initialAreaSize         = 0.6f; 
 
     public List<GameObject> controllers;
     public Dictionary<string, GameObject> mappedControllers = new Dictionary<string, GameObject>();
+
+    private List<string> curiosityCollection = new List<string>()
+    {
+        "O tamanho das duas diagonais são iguais",
+        "Ângulos interiores que são adjacentes somam 180°",
+        "A palavra trapézio vem do grego 'trapézion' que significa 'uma pequena mesa'. Também se refere a quadrilátero irregular.",
+        "Ao rotacionar um trapézio isósceles em em torno do seu eixo vertical que o divide em partes iguais gera-se um tronco de cone no 3D"
+    };
 
     private Dictionary<string, float> lastMetrics = new Dictionary<string, float>()
     {
@@ -146,15 +154,23 @@ public class Trapezoid : MonoBehaviour, IShape
         }
         else if (slideName.IndexOf("area", StringComparison.OrdinalIgnoreCase) != -1)
         {
-            scale = new Vector3((size * sizeScaler * 2 / initialHeightSize) - initialMinorBaseSize, (size * sizeScaler * 2 / initialHeightSize) - initialMinorBaseSize, (size * sizeScaler * 2 / initialHeightSize) - initialMinorBaseSize); // Gera a nova escala baseado na movimentação do slider (value)
+            Debug.Log("size and sizeScaler" + size + " " + sizeScaler);
+
+            // scale = new Vector3((size * sizeScaler * 2 / CalculateHeightBase(objectControlled)) - CalculateMinorBase(objectControlled), (size * sizeScaler * 2 / CalculateHeightBase(objectControlled)) - CalculateMinorBase(objectControlled), (size * sizeScaler * 2 / CalculateHeightBase(objectControlled)) - CalculateMinorBase(objectControlled)); // Gera a nova escala baseado na movimentação do slider (value)
+
+            scale = new Vector3(((size * sizeScaler / initialHeightSize) * 2 ) - initialMinorBaseSize, ((size * sizeScaler / initialHeightSize) * 2) - initialMinorBaseSize, ((size * sizeScaler / initialHeightSize) * 2) - initialMinorBaseSize); // Gera a nova escala baseado na movimentação do slider (value)
+            Debug.Log("scale " + scale);
             objectControlled.transform.localScale = scale; // Muda a escala local do objeto controlado
         }
         else if (slideName.IndexOf("perimeter", StringComparison.OrdinalIgnoreCase) != -1)
         {
+            Debug.Log("passou pelo perimetro");
             scale = new Vector3(size * sizeScaler / initialPerimeterSize, size * sizeScaler / initialPerimeterSize, size * sizeScaler / initialPerimeterSize); // Gera a nova escala baseado na movimentação do slider (value)
             objectControlled.transform.localScale = scale; // Muda a escala local do objeto controlado
         }
     }
+
+
 
     public float GetReferenceValue()
     {
@@ -182,6 +198,15 @@ public class Trapezoid : MonoBehaviour, IShape
             default:
                 return (int)TrapezoidSprite.Default;
         }
+    }
+
+    public string GetCuriosity()
+    {
+        System.Random r = new System.Random();
+
+        int index = r.Next(curiosityCollection.Count);
+
+        return curiosityCollection[index];
     }
 
     public enum TrapezoidSprite

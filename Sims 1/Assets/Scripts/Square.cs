@@ -23,6 +23,14 @@ public class Square : MonoBehaviour, IShape
     public List<GameObject> controllers;
     public Dictionary<string, GameObject> mappedControllers = new Dictionary<string, GameObject>();
 
+    private List<string> curiosityCollection = new List<string>()
+    {
+        "Todo quadrado é um losango mas nem todo losango é um quadrado",
+        "A relação de proporção entre o perímetro e a área é quadrática: a área é igual a 1/16 do quadrado do perímetro",
+        "Um quadrado tem uma área maior que qualquer outro quadrilátero de mesmo perímetro",
+        "Existem 4 formas de dividir um quadrado em partes iguais"
+    };
+
     private Dictionary<string, float> lastMetrics = new Dictionary<string, float>()
     {
         {"ShapeSideSizeController", initialSizeSide },
@@ -161,6 +169,15 @@ public class Square : MonoBehaviour, IShape
             default:
                 return (int)SquareSprite.Default;
         }
+    }
+
+    public string GetCuriosity()
+    {
+        System.Random r = new System.Random();
+
+        int index = r.Next(curiosityCollection.Count);
+
+        return curiosityCollection[index];
     }
 
     public enum SquareSprite

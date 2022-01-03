@@ -24,6 +24,14 @@ public class Diamond : MonoBehaviour, IShape
     public List<GameObject> controllers;
     public Dictionary<string, GameObject> mappedControllers = new Dictionary<string, GameObject>();
 
+    private List<string> curiosityCollection = new List<string>()
+    {
+        "A soma de todos os ângulos internos de um losango é de 360°",
+        "As duas diagonais de um losango são sempre perpendiculares",
+        "Losangos possuem todos os lados com o mesmo comprimento",
+        "O losango possui lados e ângulos opostos congruentes"
+    };
+
     private Dictionary<string, float> lastMetrics = new Dictionary<string, float>()
     {
         {"ShapeSideSizeController", initialSizeSide },
@@ -204,6 +212,15 @@ public class Diamond : MonoBehaviour, IShape
             default:
                 return (int)DiamondSprite.Default;
         }
+    }
+
+    public string GetCuriosity()
+    {
+        System.Random r = new System.Random();
+
+        int index = r.Next(curiosityCollection.Count);
+
+        return curiosityCollection[index];
     }
 
     public enum DiamondSprite

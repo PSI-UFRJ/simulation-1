@@ -24,6 +24,9 @@ public class ObjectControlled : MonoBehaviour
 
     private UnityEngine.UI.Text changeSizeText;
 
+    [SerializeField]
+    private UnityEngine.UI.Text curiosityTextbox;
+
     private UnityEngine.UI.Image colorDisplayImg;
 
     private static float newSizeValue;
@@ -67,6 +70,10 @@ public class ObjectControlled : MonoBehaviour
         ChangeColorSelected(selectedObj); // Muda a cor do objeto selecionado;
         
         objectControlledShape = selectedObj.GetComponent<IShape>(); // Guarda a classe Shape em específico desse GameObject (Circle, Triangle, etc)
+
+        string shapeCuriosity = objectControlledShape.GetCuriosity();
+
+        curiosityTextbox.text = shapeCuriosity;
 
         objectControlled = selectedObj; // Guarda a referência para o novo objeto selecionado
 
@@ -205,6 +212,8 @@ public class ObjectControlled : MonoBehaviour
     {
         currentSliderName = sliderName;
 
+        Debug.Log("enter slider -> " + sliderName);
+
         this.ChangeSprite(objectControlledShape.GetSpriteIndex(elementName)); // Ativa o realce do raio
         ChangeScale(sliderName, newScale);
     }
@@ -252,6 +261,7 @@ public class ObjectControlled : MonoBehaviour
             currentSliderName == null || 
             currentSliderName != sliderName)
         {
+            Debug.Log("aconteceu nada!");
             return;
         }
 

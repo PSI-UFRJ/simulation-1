@@ -17,4 +17,6 @@ public interface IShape
     int GetSpriteIndex(string name);
     float GetReferenceValue();
     void SetScale(string slideName, float size, GameObject objectControlled);
+
+    string GetCuriosity();
 }
