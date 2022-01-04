@@ -212,7 +212,6 @@ public class ObjectControlled : MonoBehaviour
     {
         currentSliderName = sliderName;
 
-        Debug.Log("enter slider -> " + sliderName);
 
         this.ChangeSprite(objectControlledShape.GetSpriteIndex(elementName)); // Ativa o realce do raio
         ChangeScale(sliderName, newScale);
@@ -261,7 +260,6 @@ public class ObjectControlled : MonoBehaviour
             currentSliderName == null || 
             currentSliderName != sliderName)
         {
-            Debug.Log("aconteceu nada!");
             return;
         }
 

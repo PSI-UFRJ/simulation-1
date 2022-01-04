@@ -154,17 +154,11 @@ public class Trapezoid : MonoBehaviour, IShape
         }
         else if (slideName.IndexOf("area", StringComparison.OrdinalIgnoreCase) != -1)
         {
-            Debug.Log("size and sizeScaler" + size + " " + sizeScaler);
-
-            // scale = new Vector3((size * sizeScaler * 2 / CalculateHeightBase(objectControlled)) - CalculateMinorBase(objectControlled), (size * sizeScaler * 2 / CalculateHeightBase(objectControlled)) - CalculateMinorBase(objectControlled), (size * sizeScaler * 2 / CalculateHeightBase(objectControlled)) - CalculateMinorBase(objectControlled)); // Gera a nova escala baseado na movimentação do slider (value)
-
-            scale = new Vector3(((size * sizeScaler / initialHeightSize) * 2 ) - initialMinorBaseSize, ((size * sizeScaler / initialHeightSize) * 2) - initialMinorBaseSize, ((size * sizeScaler / initialHeightSize) * 2) - initialMinorBaseSize); // Gera a nova escala baseado na movimentação do slider (value)
-            Debug.Log("scale " + scale);
+            scale = new Vector3((float)Math.Sqrt((2 * size * sizeScaler) / (initialHeightSize * (1 + initialMinorBaseSize))), (float)Math.Sqrt((2 * size * sizeScaler) / (initialHeightSize * (1 + initialMinorBaseSize))), (float)Math.Sqrt((2 * size * sizeScaler) / (initialHeightSize * (1 + initialMinorBaseSize)))); // Gera a nova escala baseado na movimentação do slider (value)
             objectControlled.transform.localScale = scale; // Muda a escala local do objeto controlado
         }
         else if (slideName.IndexOf("perimeter", StringComparison.OrdinalIgnoreCase) != -1)
         {
-            Debug.Log("passou pelo perimetro");
             scale = new Vector3(size * sizeScaler / initialPerimeterSize, size * sizeScaler / initialPerimeterSize, size * sizeScaler / initialPerimeterSize); // Gera a nova escala baseado na movimentação do slider (value)
             objectControlled.transform.localScale = scale; // Muda a escala local do objeto controlado
         }

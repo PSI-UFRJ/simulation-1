@@ -6597,7 +6597,7 @@ MonoBehaviour:
   m_MinValue: 0.6
   m_MaxValue: 9.55
   m_WholeNumbers: 0
-  m_Value: 1
+  m_Value: 0.6
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -18988,6 +18988,10 @@ PrefabInstance:
     - target: {fileID: 4220915019753683168, guid: 8b6a2f83f30c72e4690a828c5ff44baf, type: 3}
       propertyPath: m_Name
       value: Trapezoid
+      objectReference: {fileID: 0}
+    - target: {fileID: 4220915019753683168, guid: 8b6a2f83f30c72e4690a828c5ff44baf, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 6374704810641158364, guid: 8b6a2f83f30c72e4690a828c5ff44baf, type: 3}
       propertyPath: m_Pivot.x
