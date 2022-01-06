@@ -79,7 +79,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 5
+  m_SortingOrder: 500
   m_Sprite: {fileID: 701022369157521235, guid: 8777ff28c15ff6945b3634e9c2878127, type: 3}
   m_Color: {r: 0.4791824, g: 0.99215686, b: 0.46274507, a: 1}
   m_FlipX: 0
@@ -152,6 +152,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prefab: {fileID: 0}
   isTemplate: 0
+  controlPanels: []
   shape: {fileID: 0}
   workspace: {fileID: 0}
   clickableLayer:
@@ -179,3 +180,6 @@ MonoBehaviour:
   - {fileID: 712130302477587645, guid: 8777ff28c15ff6945b3634e9c2878127, type: 3}
   - {fileID: 1507113435263308803, guid: 8777ff28c15ff6945b3634e9c2878127, type: 3}
   - {fileID: -6535192884874117730, guid: 8777ff28c15ff6945b3634e9c2878127, type: 3}
+  scale: {x: 0, y: 0, z: 0}
+  sizeScaler: 1
+  controllers: []

@@ -97,7 +97,7 @@ public class ObjectControlled : MonoBehaviour
 
         ResetColor(); // Reseta a cor
         this.ChangeSprite(objectControlledShape.GetSpriteIndex("Default")); // Atualiza para a sprite sem contorno
-        objectControlled.GetComponent<SpriteRenderer>().sortingOrder = objectControlled.GetComponent<UserClick>().GetWorkspace().GetComponent<SpriteRenderer>().sortingOrder;//Volta para layer 0
+        //objectControlled.GetComponent<SpriteRenderer>().sortingOrder = objectControlled.GetComponent<UserClick>().GetWorkspace().GetComponent<SpriteRenderer>().sortingOrder;//Volta para layer 0
 
         controlPanel.SetActive(false);
 
@@ -434,6 +434,23 @@ public class ObjectControlled : MonoBehaviour
     }
 
     #endregion
+
+    public void ReduceLayer()
+    {
+        Transform[] allChildren = this.gameObject.GetComponentsInChildren<Transform>();
+
+        foreach (Transform children in allChildren)
+        {
+
+            if(children.gameObject != this.gameObject &&
+                children.gameObject.GetComponent<UserClick>().isTemplate == false &&
+               children.gameObject != objectControlled &&
+                children.gameObject.GetComponent<SpriteRenderer>().sortingOrder != 1)
+            {
+                children.gameObject.GetComponent<SpriteRenderer>().sortingOrder = children.gameObject.GetComponent<SpriteRenderer>().sortingOrder - 1;
+            }
+        }
+    }
 
     #region Auxiliary Methods
     /// <summary>

@@ -69,7 +69,7 @@ public class UserClick : MonoBehaviour
             if (enteredWorkspace && control.GetObjectControlled() == this.gameObject)
             {
                 // Alterar order in layer quando entrar no workspace. Usamos isso para o sprite se manter sobre a estrutura da simulação.
-                this.GetComponent<SpriteRenderer>().sortingOrder = workspace.GetComponent<SpriteRenderer>().sortingOrder + 3;
+                this.GetComponent<SpriteRenderer>().sortingOrder = workspace.GetComponent<SpriteRenderer>().sortingOrder + 498;
             }
         }
 
@@ -90,11 +90,16 @@ public class UserClick : MonoBehaviour
             return;
         }
 
-        if (collider == Physics2D.OverlapPoint(mousePos))
+
+        Collider2D selectedObject = Physics2D.OverlapPointAll(mousePos).OrderByDescending(x => x.gameObject.GetComponent<SpriteRenderer>().sortingOrder).First<Collider2D>();
+
+        //Physics2D.OverlapPoint(mousePos)
+        if (collider == selectedObject)
         {
 
             control.UnselectObject(this.gameObject, false);
             control.SelectObject(this.gameObject); // Informa ao controller que ele é o objeto selecionado e troca a cor do obj
+            control.ReduceLayer(); //Reduz a layer em uma casa
 
             #region SizeControllers
             UpdateControlPanel();
