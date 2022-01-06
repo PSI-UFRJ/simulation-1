@@ -27,16 +27,21 @@ public class GameModeManager : MonoBehaviour
         UnityEngine.UI.Button gameBtn = GameObject.Find("GameModeBtn").GetComponent<UnityEngine.UI.Button>();
         UnityEngine.UI.Button labBtn = GameObject.Find("LabModeBtn").GetComponent<UnityEngine.UI.Button>();
 
-        if (sceneName == "SampleScene")
+        if (sceneName == "Introduction")
         {
             SetBtnColor(labBtn, Color.yellow);
         }
+        else if(sceneName == "Game")
+        {
+            SetBtnColor(gameBtn, Color.yellow);
+        }
         else
         {
-            //ResetBtnColor(introBtn);
             ResetBtnColor(gameBtn);
             ResetBtnColor(labBtn);
         }
+
+
     }
 
     private void ResetBtnColor(UnityEngine.UI.Button btn)
@@ -61,4 +66,15 @@ public class GameModeManager : MonoBehaviour
         Application.Quit();
     }
     #endregion
+
+    public void changeScene(string sceneName)
+    {
+        if (sceneName == "Game") {
+            SceneManager.LoadScene("Game");
+        }
+        else if (sceneName == "Introduction")
+        {
+            SceneManager.LoadScene("Introduction");
+        }
+    }
 }
