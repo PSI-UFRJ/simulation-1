@@ -419,7 +419,7 @@ public class ObjectControlled : MonoBehaviour
             return;
         }
 
-        objectControlled.transform.eulerAngles += (Vector3.forward * 45);
+        objectControlled.transform.eulerAngles += (Vector3.forward * 15);
     }
 
     public void RotateRight()
@@ -430,7 +430,7 @@ public class ObjectControlled : MonoBehaviour
             return;
         }
 
-        objectControlled.transform.eulerAngles += (Vector3.forward * -45);
+        objectControlled.transform.eulerAngles += (Vector3.forward * -15);
     }
 
     #endregion
