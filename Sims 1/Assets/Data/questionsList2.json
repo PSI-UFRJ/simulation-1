@@ -1,0 +1,182 @@
+[
+	{
+		"statementText": "Um vidraceiro precisa construir tampos de vidro com formatos diferentes, porém com medidas de áreas iguais. Para isso, pede a um amigo que o ajude a determinar o raio, aproximado, R de um tampo de vidro circular com área equivalente à de um tampo de vidro quadrado de lado aproximadamente igual à 2. O valor de R encontrado pelo amigo é aproximadamente:",
+		"source": "INEP - 2021 - ENEM - Exame Nacional do Ensino Médio - Primeiro e Segundo Dia - PPL - Edital 2020",
+		"answersOptions": ["1.27", "7.13", "2.27", "1.13"],
+		"correctAnswer": "1.13",
+		"resolutionTime": 60,
+		"score": 10,
+		"image": null
+	},
+	{
+		"statementText": "Um marceneiro precisa construir tampos de madeira com formatos diferentes, porém com medidas de perímetros iguais. Para isso, pede ao seu funcionário que o ajude a determinar a altura (H), a base maior (BM) e a base menor (Bm), aproximadas, de um tampo de madeira na forma de um trapézio isósceles com perímetro equivalente à de um tampo de madeira no formato de um losango equilátero com lados aproximadamente iguais à 1.58. O valor de H, BM e Bm encontrado pelo funcionário é aproximadamente:",
+		"source": "INEP - 2021 - ENEM - Exame Nacional do Ensino Médio - Primeiro e Segundo Dia - PPL - Edital 2020",
+		"answersOptions": ["H = 1.55; BM = 1.06; Bm = 1,99", "H = 2.53; BM = 3.25; Bm = 1.72", "H = 1.62; BM = 2.08; Bm = 1.1", "H = 1,55; BM = 1,99; Bm = 1,06"],
+		"correctAnswer": "H = 1,55; BM = 1,99; Bm = 1,06",
+		"resolutionTime": 60,
+		"score": 10,
+		"image": null
+	},
+	{
+		"statementText": "O polígono da figura a seguir representa um terreno. A figura não foi construída obedecendo a uma escala. A área desse terreno, em metro quadrado, é aproximadamente:",
+		"source": "VUNESP - 2021 - Prefeitura de Várzea Paulista - SP - Professor de Educação Básica - Ensino Fundamental",
+		"answersOptions": ["22.74", "15.88", "5.8", "8.46"],
+		"correctAnswer": "8.46",
+		"resolutionTime": 30,
+		"score": 5,
+		"image": null
+	},
+	{
+		"statementText": "Um losango cuja diagonal maior é 6.68 e diagonal menor é 3.86, apresenta um perímetro de:",
+		"source": "FUNDATEC - 2021 - Prefeitura de Vacaria - RS - Técnico em Contabilidade",
+		"answersOptions": ["12.87", "10.54", "25.98", "15.42"],
+		"correctAnswer": "15.42",
+		"resolutionTime": 30,
+		"score": 5,
+		"image": null
+	},
+	{
+		"statementText": "Um losango cuja diagonal maior é 3.3 e diagonal menor é 1.91, apresenta uma área de:",
+		"source": "FUNDATEC - 2021 - Prefeitura de Vacaria - RS - Técnico em Contabilidade",
+		"answersOptions": ["7.63", "5.21", "12.85", "3.15"],
+		"correctAnswer": "3.15",
+		"resolutionTime": 30,
+		"score": 5,
+		"image": null
+	},
+	{
+		"statementText": "Um retângulo de lados 6.3 e 3.15 apresenta, aproximadamente, quanto de área?",
+		"source": "CESPE / CEBRASPE - 2021 - SEDUC-AL - Professor - Matemática",
+		"answersOptions": ["18.9", "9.45", "20.45", "19.845"],
+		"correctAnswer": "19.845",
+		"resolutionTime": 30,
+		"score": 5,
+		"image": null
+	},
+	{
+		"statementText": "Considere que, na figura a seguir, os raios dos círculos internos C1, C2 e C3 sejam, respectivamente, iguais a 0.9, 0.6 e 0.5. Nesse caso, a área da parte em cinza é igual a:",
+		"source": "CESPE / CEBRASPE - 2021 - SEDUC-AL - Professor - Matemática",
+		"answersOptions": ["12.57", "4", "0", "8.1"],
+		"correctAnswer": "8.1",
+		"resolutionTime": 60,
+		"score": 10,
+		"image": "question 5"
+	},
+	{
+		"statementText": "Uma pessoa precisa fazer um anúncio em um jornal e possui 100 reais. A editora cobra o valor de R$ 3.00 por centímetro quadrado de publicidade. Qual será o valor cobrado para publicar um anúncio caso ele tenha um formato retangular de 1.49 cm x 2.98 cm e por quantos anúncios desse mesmo tamanho a pessoa conseguirá pagar?",
+		"source": "Avança SP - 2021 - Prefeitura de Laranjal Paulista - SP - Agente de Trânsito",
+		"answersOptions": ["1.48 reais; 67 anúncios", "26.82 reais; 3 anúncios", "33.67 reais; 3 anúncios", "13.32 reais; 7 anúncios"],
+		"correctAnswer": "13.32 reais; 7 anúncios",
+		"resolutionTime": 60,
+		"score": 10,
+		"image": null
+	},
+	{
+		"statementText": "Um pintor leu no rótulo de uma lata de tinta que o rendimento dela é de 50 metros quadrados. Quantos azulejos com o formato de um triângulo equilátero de lado 2.71 serão pintados com uma única lata de tinta?",
+		"source": "Avança SP - 2021 - Prefeitura de Laranjal Paulista - SP - Inspetor de Alunos",
+		"answersOptions": ["16", "14", "17", "15"],
+		"correctAnswer": "15",
+		"resolutionTime": 30,
+		"score": 5,
+		"image": null
+	},
+	{
+		"statementText": "A loja de Bernardo é de forma quadrada, de lado medindo 4. Ele utilizou 1/3 da área da mesma, então a área que ficou livre, é de aproximadamente:",
+		"source": "MetroCapital Soluções - 2021 - Prefeitura de Nova Odessa - SP - Professor de Educação Básica - PEB I",
+		"answersOptions": ["5.3", "16", "12", "10.7"],
+		"correctAnswer": "10.7",
+		"resolutionTime": 60,
+		"score": 10,
+		"image": null
+	},
+	{
+		"statementText": "Uma caixa de garrafas possui o formato de um quadrado de lado 3. Supondo que cada garrafa cilíndrica possua um raio igual a 0.5. Quantas garrafas, aproximadamente, é possível carregar na mesma?",
+		"source": "FUNDEP (Gestão de Concursos) - 2021 - Prefeitura de Santa Vitória - MG - Assistente Administrativo",
+		"answersOptions": ["11", "18", "6", "9"],
+		"correctAnswer": "9",
+		"resolutionTime": 30,
+		"score": 5,
+		"image": null
+	},
+	{
+		"statementText": "Uma transportadora possui o desafio de utilizar um container triangular e equilátero de lado 3,35 para carregar barris cilíndricos de raio igual a 0,5. Responda, quantos barris são possíveis carregar, qual a área total utilizada pelos mesmos e qual a área desperdiçada?",
+		"source": "FUNDEP (Gestão de Concursos) - 2021 - Prefeitura de Santa Vitória - MG - Assistente Administrativo",
+		"answersOptions": ["2 Barris; 0.78 de área total utilizada; 7.72 de área disperdiçada", "2 Barris; 0.78 de área total utilizada; 7.72 de área disperdiçada", "3 Barris; 2.34 de área total utilizada; 10.06 de área desperdiçada", "3 Barris; 2.34 de área total utilizada; 7.72 de área disperdiçada"],
+		"correctAnswer": "3 Barris; 2.34 de área total utilizada; 7.72 de área disperdiçada",
+		"resolutionTime": 30,
+		"score": 5,
+		"image": null
+	},
+	{
+		"statementText": "Em uma jogada ensaiada o Jogador A passa a bola para o jogador B que passa para o jogador C que por fim passa a bola para o jogador D. Considerando que a trajetória da bola é linear e eles estão parados em seus lugares, qual é área total criada por essa jogada? Todas as medidas apresentadas estão em metros",
+		"source": "Avança SP - 2021 - Prefeitura de Laranjal Paulista - SP - Assistente Social",
+		"answersOptions": ["2.23 metro quadrado", "5.63 metro quadrado", "1.87 metro quadrado", "3.59 metro quadrado"],
+		"correctAnswer": "2,23 metro quadrado",
+		"resolutionTime": 60,
+		"score": 10,
+		"image": "question 17"
+	},
+	{
+		"statementText": "Uma pessoa levou 3h30min para carpir o Terreno A da figura a seguir. Sabendo que o Terreno A e o Terreno B são iguais, se essa mesma pessoa manter o mesmo ritmo, quanto tempo ela levará para carpir o Terreno C?",
+		"source": "Avança SP - 2021 - Prefeitura de Laranjal Paulista - SP - Inspetor de Alunos",
+		"answersOptions": ["7h", "7h e 10 min", "7h e 05 min", "10h e 15 min"],
+		"correctAnswer": "7h",
+		"resolutionTime": 60,
+		"score": 5,
+		"image": "question 16"
+	},
+	{
+		"statementText": "A figura a seguir é formada por um triângulo equilátero e um quadrado, sabendo que o lado do triângulo é igual 2.5 m, responda: \n\n Qual o perímetro P da figura?\nQual a área A da figura?",
+		"source": "Avança SP - 2021 - Prefeitura de Laranjal Paulista - SP - Inspetor de Alunos",
+		"answersOptions": ["P = 15 metros; A = 13.77 metros quadrados", "P = 17.5 metros; A = 12.5 metros quadrados", "P = 12.5 metros; A = 13.77 metros quadrados", "P = 15 metros; A = 12.5 metros quadrados"],
+		"correctAnswer": "P = 12.5 metros; A = 13.77 metros quadrados",
+		"resolutionTime": 60,
+		"score": 10,
+		"image": "question 15"
+	},
+	{
+		"statementText": "Em um quarteirão de formato quadrado foi construída uma calçada com 0.7 metros de largura em todos os lados do quarteirão. Dessa maneira, a medida da área para construção no quarteirão foi reduzida e passou a ser de 2.23 metro quadrado. A medida da área original do quarteirão, que inclui a calçada, era igual a:",
+		"source": "VUNESP - 2021 - Prefeitura de Várzea Paulista - SP - Professor de Educação Básica - Ensino Fundamental",
+		"answersOptions": ["8.37", "8.04", "8.8", "9.1"],
+		"correctAnswer": "8.37",
+		"resolutionTime": 90,
+		"score": 15,
+		"image": null
+	},
+	{
+		"statementText": "O proprietário de um apartamento decidiu instalar adesivo para piso em parte da sala. A área de instalação do piso tem formado de um quadrado de lado 4 metros. Os adesivos têm formato de um círculo com raio medindo 0,5 metros. Este adesivo é vendido em dois tipos de caixas, com os preços indicados a seguir.\n\n• Caixas do tipo A: 4 unidades de piso, R$ 15.00;\n• Caixas do tipo B: 8 unidades de piso, R$ 27.00.\n\n Qual tipo de caixa gera o menor custo para o proprietário caso ele queira cobrir o máximo possível da área com adesivos inteiros? Qual é esse custo?",
+		"source": "INEP - 2021 - ENEM - Exame Nacional do Ensino Médio - Primeiro Dia e Segundo Dia - Edital 2020",
+		"answersOptions": ["Tipo A custando R$ 60", "Tipo B custando R$ 57", "Tipo B custando R$ 108", "Tipo A custando R$ 30"],
+		"correctAnswer": "Tipo B custando R$ 57",
+		"resolutionTime": 90,
+		"score": 15,
+		"image": null
+	},
+	{
+		"statementText": "A área de um triângulo equilátero aumentou 20%. Em relação à altura do triângulo original, a altura atual é aproximadamente:",
+		"source": "FGV - 2021 - FUNSAÚDE - CE - Analista Administrativo - Administração",
+		"answersOptions": ["0.9% maior", "10.5% maior", "15.4% maior", "20.3% maior"],
+		"correctAnswer": "0.9% maior",
+		"resolutionTime": 90,
+		"score": 15,
+		"image": null
+	},
+	{
+		"statementText": "Um terreno retangular, cuja largura é igual à terça parte do comprimento, terá o seu perímetro cercado com uma tela. Se a área desse terreno é igual a 12 metros quadrados, quantos metros de tela são necessários para a construção da cerca?",
+		"source": "FUNDEP (Gestão de Concursos) - 2021 - Prefeitura de Itapecerica da Serra - SP - Cargos de Nível Médio",
+		"answersOptions": ["12", "16", "10", "18"],
+		"correctAnswer": "16",
+		"resolutionTime": 60,
+		"score": 10,
+		"image": null
+	},
+	{
+		"statementText": "Dado um círculo com diâmetro igual a 3, qual é a área aproximada correspondente à 40% deste círculo?",
+		"source": "NBS - 2018 - Prefeitura de Lagoa Vermelha - RS - Advogado",
+		"answersOptions": ["2.8", "3.2", "2.6", "1.8"],
+		"correctAnswer": "2.8",
+		"resolutionTime": 60,
+		"score": 10,
+		"image": null
+	}
+]
