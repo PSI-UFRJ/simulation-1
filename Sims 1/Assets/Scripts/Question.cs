@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 [System.Serializable]
@@ -51,6 +52,10 @@ public class Question
         return score;
     }
 
+    public List<string> GetWrongAnswers()
+    {
+        return answersOptions.Where(x => correctAnswer != x).ToList();
+    }
     #endregion
 
 

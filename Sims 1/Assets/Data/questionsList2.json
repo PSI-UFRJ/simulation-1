@@ -99,9 +99,9 @@
 		"image": null
 	},
 	{
-		"statementText": "Uma transportadora possui o desafio de utilizar um container triangular e equilátero de lado 3,35 para carregar barris cilíndricos de raio igual a 0,5. Responda, quantos barris são possíveis carregar, qual a área total utilizada pelos mesmos e qual a área desperdiçada?",
+		"statementText": "Uma transportadora possui o desafio de utilizar um container triangular e equilátero de lado 3.35 para carregar barris cilíndricos de raio igual a 0.5. Responda, quantos barris são possíveis carregar, qual a área total utilizada pelos mesmos e qual a área desperdiçada?",
 		"source": "FUNDEP (Gestão de Concursos) - 2021 - Prefeitura de Santa Vitória - MG - Assistente Administrativo",
-		"answersOptions": ["2 Barris; 0.78 de área total utilizada; 7.72 de área disperdiçada", "2 Barris; 0.78 de área total utilizada; 7.72 de área disperdiçada", "3 Barris; 2.34 de área total utilizada; 10.06 de área desperdiçada", "3 Barris; 2.34 de área total utilizada; 7.72 de área disperdiçada"],
+		"answersOptions": ["2 Barris; 0.78 de área total utilizada; 10.06 de área disperdiçada", "2 Barris; 0.78 de área total utilizada; 7.72 de área disperdiçada", "3 Barris; 2.34 de área total utilizada; 10.06 de área desperdiçada", "3 Barris; 2.34 de área total utilizada; 7.72 de área disperdiçada"],
 		"correctAnswer": "3 Barris; 2.34 de área total utilizada; 7.72 de área disperdiçada",
 		"resolutionTime": 30,
 		"score": 5,

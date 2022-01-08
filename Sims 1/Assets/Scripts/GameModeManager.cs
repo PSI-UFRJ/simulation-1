@@ -18,6 +18,15 @@ public class GameModeManager : MonoBehaviour
     private UnityEngine.UI.Text questionTitleTextbox;
 
     [SerializeField]
+    private UnityEngine.UI.Text scoreTextbox;
+
+    [SerializeField]
+    private UnityEngine.UI.Text timeTextbox;
+
+    [SerializeField]
+    private UnityEngine.UI.Text currentWrongAnswersTextbox;
+
+    [SerializeField]
     private UnityEngine.UI.Button aBtn;
     [SerializeField]
     private UnityEngine.UI.Button bBtn;
@@ -26,8 +35,22 @@ public class GameModeManager : MonoBehaviour
     [SerializeField]
     private UnityEngine.UI.Button dBtn;
 
+    [SerializeField]
+    private UnityEngine.UI.Button hintBtn;
+
+    [SerializeField]
+    private UnityEngine.UI.Button passBtn;
+
+    [SerializeField]
+    private UnityEngine.UI.Button addTimeBtn;
+
     private const int NOFQUESTIONS = 8;
     private const int NOFANSWEROPTS = 4;
+    private const int NOFWRONGQUESTIONS = 3;
+    private const int NOFHINTS = 2;
+    private const float DISABLEDOPACITY = 0.1490196f;
+    private const float ENABLEDOPACITY = 1f;
+    private const int ADDTIME = 30;
 
     private List<Question> sessionQuestions;
     private Question currentQuestion;
@@ -36,17 +59,52 @@ public class GameModeManager : MonoBehaviour
     [SerializeField]
     private TextAsset questionsFile;
 
+    private int playerScore = 0;
+    private int resolutionTime = 0;
+    private int wrongQuestions = 0;
+
+    private float timer = 0.0f;
+
+    private bool isPopupOn = false;
+
+    private List<UnityEngine.UI.Button> optionButtons;
 
     void Start()
     {
         ActivateModeBtn();
         InitSessionQuestions();
+        InitPlayerInfo();
+        optionButtons = new List<UnityEngine.UI.Button>() { aBtn, bBtn, cBtn, dBtn };
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        TickTimer();
+
+        if (wrongQuestions >= 3)
+        {
+            Debug.Log("Deu ruim pra ti");
+        }
+    }
+
+    /// <summary>
+    /// Atualiza o tempo da questão atual
+    /// </summary>
+    public void TickTimer()
+    {
+        if (isPopupOn)
+        {
+            return;
+        }
+
+        timer += Time.deltaTime;
+        int seconds = (int)timer % 120;
+
+        if (resolutionTime - seconds >= 0)
+        {
+            timeTextbox.text = resolutionTime - seconds + "";
+        }
     }
 
     #region Mode Btns
@@ -72,14 +130,13 @@ public class GameModeManager : MonoBehaviour
             ResetBtnColor(gameBtn);
             ResetBtnColor(labBtn);
         }
-
-
     }
 
     private void ResetBtnColor(UnityEngine.UI.Button btn)
     {
         UnityEngine.UI.ColorBlock colorBlock = btn.colors;
         colorBlock.normalColor = Color.white;
+        colorBlock.selectedColor = Color.white;
         btn.colors = colorBlock;
     }
 
@@ -87,6 +144,7 @@ public class GameModeManager : MonoBehaviour
     {
         UnityEngine.UI.ColorBlock colorBlock = btn.colors;
         colorBlock.normalColor = color;
+        colorBlock.selectedColor = color;
         btn.colors = colorBlock;
     }
     #endregion
@@ -116,12 +174,17 @@ public class GameModeManager : MonoBehaviour
 
         questions = JsonConvert.DeserializeObject<List<Question>>(questionsFile.text);
 
+        foreach (Question q in questions)
+        {
+            Debug.Log($"Score das questoes {q.GetScore()}");
+        }
+
         return questions;
     }
 
+    #region Init methods
     public void InitSessionQuestions()
     {
-
         List<Question> questions = LoadQuestions();
         sessionQuestions = GetRandomElements<Question>(questions, NOFQUESTIONS);
 
@@ -129,12 +192,32 @@ public class GameModeManager : MonoBehaviour
         {
             SetQuestionOnWindow(sessionQuestions[0], currentQIndex.ToString());
         }
-        
     }
+
+    public void InitPlayerInfo()
+    {
+        this.scoreTextbox.text = "0";
+        this.timeTextbox.text = "0";
+        this.currentWrongAnswersTextbox.text = "0/3";
+    }
+    #endregion
 
     public List<T> GetRandomElements<T>(IEnumerable<T> list, int elementsCount)
     {
         return list.OrderBy(arg => Guid.NewGuid()).Take(elementsCount).ToList();
+    }
+
+    public void CallNextQuestion()
+    {
+        currentQIndex++;
+
+        SetQuestionOnWindow(sessionQuestions[currentQIndex - 1], currentQIndex.ToString());
+
+        foreach (UnityEngine.UI.Button btn in optionButtons)
+        {
+            ResetBtnColor(btn);
+            EnableBtn(btn);
+        }
     }
 
     public void SetQuestionOnWindow(Question q, string qNumber)
@@ -159,15 +242,112 @@ public class GameModeManager : MonoBehaviour
             }
 
             currentQuestion = q;
+
+            timer = 0.0f;
+
+            resolutionTime = q.resolutionTime;
         }
     }
 
+    public void CheckOnClickAnswer(UnityEngine.UI.Button btn)
+    {
+        if(IsCorrectAnswer(btn))
+        {
+            SetBtnColor(btn, Color.green);
+            playerScore += currentQuestion.GetScore();
+        }
+        else
+        {
+            SetBtnColor(btn, Color.red);
 
-    private void printCollection(List<string> list)
+            int tempPlayerScore = playerScore - currentQuestion.GetScore();
+
+            playerScore = (tempPlayerScore < 0) ? 0 : tempPlayerScore;
+
+            wrongQuestions += 1;
+
+            currentWrongAnswersTextbox.text = $"{wrongQuestions}/{NOFWRONGQUESTIONS}";
+        }
+
+        // Atualiza o score do jogador
+        scoreTextbox.text = playerScore.ToString();
+
+        CallNextQuestion();
+    }
+
+    public bool IsCorrectAnswer(UnityEngine.UI.Button btn)
+    {
+        return btn.GetComponentInChildren<UnityEngine.UI.Text>().text == currentQuestion.GetCorrectAnswer();
+    }
+
+    private void PrintCollection(List<string> list)
     {
         foreach (string item in list)
         {
             Debug.Log(item);
         }
+    }
+
+    public void GiveHint()
+    {
+        List<string> wrongAnswers = GetRandomElements<string>(currentQuestion.GetWrongAnswers(), NOFHINTS);
+
+        PrintCollection(wrongAnswers);
+
+        foreach (string wrongAnswer in wrongAnswers)
+        {
+            if (aBtn.GetComponentInChildren<UnityEngine.UI.Text>().text == wrongAnswer)
+            {
+                DisableBtn(aBtn);
+            }
+            else if(bBtn.GetComponentInChildren<UnityEngine.UI.Text>().text == wrongAnswer)
+            {
+                DisableBtn(bBtn);
+            }
+            else if (cBtn.GetComponentInChildren<UnityEngine.UI.Text>().text == wrongAnswer)
+            {
+                DisableBtn(cBtn);
+            }
+            else if (dBtn.GetComponentInChildren<UnityEngine.UI.Text>().text == wrongAnswer)
+            {
+                DisableBtn(dBtn);
+            }
+        }
+
+        DisableBtn(hintBtn);
+    }
+
+    public void AddMoreTime()
+    {
+        DisableBtn(addTimeBtn);
+        resolutionTime += ADDTIME;
+    }
+
+    public void PassQuestion()
+    {
+        DisableBtn(passBtn);
+        CallNextQuestion();
+    }
+
+    public void DisableBtn(UnityEngine.UI.Button btn)
+    {
+        btn.interactable = false;
+
+        UnityEngine.UI.ColorBlock colorBlock = btn.colors;
+        colorBlock.disabledColor = new Color(colorBlock.disabledColor.r, colorBlock.disabledColor.g, colorBlock.disabledColor.b, DISABLEDOPACITY);
+        btn.colors = colorBlock;
+
+        Color btnColor = btn.GetComponentInChildren<UnityEngine.UI.Text>().color;
+        btnColor.a = DISABLEDOPACITY;
+        btn.GetComponentInChildren<UnityEngine.UI.Text>().color = btnColor;
+    }
+
+    public void EnableBtn(UnityEngine.UI.Button btn)
+    {
+        btn.interactable = true;
+
+        Color btnColor = btn.GetComponentInChildren<UnityEngine.UI.Text>().color;
+        btnColor.a = ENABLEDOPACITY;
+        btn.GetComponentInChildren<UnityEngine.UI.Text>().color = btnColor;
     }
 }
