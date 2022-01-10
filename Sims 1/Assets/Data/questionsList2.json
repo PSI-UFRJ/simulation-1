@@ -20,8 +20,8 @@
 	{
 		"statementText": "O polígono da figura a seguir representa um terreno. A figura não foi construída obedecendo a uma escala. A área desse terreno, em metro quadrado, é aproximadamente:",
 		"source": "VUNESP - 2021 - Prefeitura de Várzea Paulista - SP - Professor de Educação Básica - Ensino Fundamental",
-		"answersOptions": ["22.74", "15.88", "5.8", "8.46"],
-		"correctAnswer": "8.46",
+		"answersOptions": ["22.74", "15.88", "5.8", "7.71"],
+		"correctAnswer": "7.71",
 		"resolutionTime": 30,
 		"score": 5,
 		"image": null
@@ -54,9 +54,9 @@
 		"image": null
 	},
 	{
-		"statementText": "Considere que, na figura a seguir, os raios dos círculos internos C1, C2 e C3 sejam, respectivamente, iguais a 0.9, 0.6 e 0.5. Nesse caso, a área da parte em cinza é igual a:",
+		"statementText": "Considere que, na figura a seguir (meramente ilustrativa), os raios dos círculos internos C1, C2 e C3 sejam, respectivamente, iguais a 0.9, 0.6 e 0.5. Nesse caso, a área da parte em cinza é igual a:",
 		"source": "CESPE / CEBRASPE - 2021 - SEDUC-AL - Professor - Matemática",
-		"answersOptions": ["12.57", "4", "0", "8.1"],
+		"answersOptions": [ "12.57", "4", "0", "8.1" ],
 		"correctAnswer": "8.1",
 		"resolutionTime": 60,
 		"score": 10,
@@ -108,27 +108,27 @@
 		"image": null
 	},
 	{
-		"statementText": "Em uma jogada ensaiada o Jogador A passa a bola para o jogador B que passa para o jogador C que por fim passa a bola para o jogador D. Considerando que a trajetória da bola é linear e eles estão parados em seus lugares, qual é área total criada por essa jogada? Todas as medidas apresentadas estão em metros",
+		"statementText": "Em uma jogada ensaiada o Jogador A passa a bola para o jogador B que passa para o jogador C que por fim passa a bola para o jogador D. Considerando que a trajetória da bola é linear e eles estão parados em seus lugares, qual é área total criada por essa jogada? A imagem é meramente ilustrativa. Todas as medidas apresentadas estão em metros.",
 		"source": "Avança SP - 2021 - Prefeitura de Laranjal Paulista - SP - Assistente Social",
-		"answersOptions": ["2.23 metro quadrado", "5.63 metro quadrado", "1.87 metro quadrado", "3.59 metro quadrado"],
+		"answersOptions": [ "2.23 metro quadrado", "5.63 metro quadrado", "1.87 metro quadrado", "3.59 metro quadrado" ],
 		"correctAnswer": "2,23 metro quadrado",
 		"resolutionTime": 60,
 		"score": 10,
 		"image": "question 17"
 	},
 	{
-		"statementText": "Uma pessoa levou 3h30min para carpir o Terreno A da figura a seguir. Sabendo que o Terreno A e o Terreno B são iguais, se essa mesma pessoa manter o mesmo ritmo, quanto tempo ela levará para carpir o Terreno C?",
+		"statementText": "Uma pessoa levou 3h30min para carpir o Terreno A da figura a seguir. Sabendo que o Terreno A e o Terreno B são iguais, se essa mesma pessoa manter o mesmo ritmo, quanto tempo ela levará para carpir o Terreno C? A imagem é meramente ilustrativa.",
 		"source": "Avança SP - 2021 - Prefeitura de Laranjal Paulista - SP - Inspetor de Alunos",
-		"answersOptions": ["7h", "7h e 10 min", "7h e 05 min", "10h e 15 min"],
+		"answersOptions": [ "7h", "7h e 10 min", "7h e 05 min", "10h e 15 min" ],
 		"correctAnswer": "7h",
 		"resolutionTime": 60,
 		"score": 5,
 		"image": "question 16"
 	},
 	{
-		"statementText": "A figura a seguir é formada por um triângulo equilátero e um quadrado, sabendo que o lado do triângulo é igual 2.5 m, responda: \n\n Qual o perímetro P da figura?\nQual a área A da figura?",
+		"statementText": "A figura a seguir é formada por um triângulo equilátero e um quadrado, sabendo que o lado do triângulo é igual 2.5 m, responda: \n\n Qual o perímetro P da figura?\nQual a área A da figura? Considere que a imagem é meramente ilustrativa.",
 		"source": "Avança SP - 2021 - Prefeitura de Laranjal Paulista - SP - Inspetor de Alunos",
-		"answersOptions": ["P = 15 metros; A = 13.77 metros quadrados", "P = 17.5 metros; A = 12.5 metros quadrados", "P = 12.5 metros; A = 13.77 metros quadrados", "P = 15 metros; A = 12.5 metros quadrados"],
+		"answersOptions": [ "P = 15 metros; A = 13.77 metros quadrados", "P = 17.5 metros; A = 12.5 metros quadrados", "P = 12.5 metros; A = 13.77 metros quadrados", "P = 15 metros; A = 12.5 metros quadrados" ],
 		"correctAnswer": "P = 12.5 metros; A = 13.77 metros quadrados",
 		"resolutionTime": 60,
 		"score": 10,

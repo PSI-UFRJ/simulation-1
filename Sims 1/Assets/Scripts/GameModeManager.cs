@@ -44,6 +44,18 @@ public class GameModeManager : MonoBehaviour
     [SerializeField]
     private UnityEngine.UI.Button addTimeBtn;
 
+    [SerializeField]
+    private GameObject popupCheckAnswers;
+
+    [SerializeField]
+    private GameObject popupSummary;
+
+    [SerializeField]
+    private GameObject popupExit;
+
+    [SerializeField]
+    private GameObject questionImage;
+
     private const int NOFQUESTIONS = 8;
     private const int NOFANSWEROPTS = 4;
     private const int NOFWRONGQUESTIONS = 3;
@@ -82,9 +94,11 @@ public class GameModeManager : MonoBehaviour
     {
         TickTimer();
 
-        if (wrongQuestions >= 3)
+        if (wrongQuestions >= NOFWRONGQUESTIONS)
         {
-            Debug.Log("Deu ruim pra ti");
+            SetPopup(popupCheckAnswers, false, "");
+            string summary = "FIM DE JOGO\n\n PONTUAÇÃO: " + scoreTextbox.text + "\nQUESTÕES ACERTADAS: " + (NOFQUESTIONS - wrongQuestions) + "/" + NOFQUESTIONS + "\nQUESTÕES ERRADAS: " + wrongQuestions;
+            SetPopup(popupSummary, true, summary);
         }
     }
 
@@ -104,6 +118,12 @@ public class GameModeManager : MonoBehaviour
         if (resolutionTime - seconds >= 0)
         {
             timeTextbox.text = resolutionTime - seconds + "";
+        }
+        else
+        {
+            UpdateScore(-currentQuestion.GetScore());
+            IncreaseWrongAnswer();
+            CallNextQuestion();
         }
     }
 
@@ -150,8 +170,13 @@ public class GameModeManager : MonoBehaviour
     #endregion
 
     #region Close App
-    public void QuitApplication()
+    public void QuitApplication(bool popup = false)
     {
+        if (popup)
+        {
+            SetPopup(popupExit, true, "VOCÊ REALMENTE DESEJA SAIR?");
+            return;
+        }
         Debug.Log("Closed application");
         Application.Quit();
     }
@@ -218,6 +243,8 @@ public class GameModeManager : MonoBehaviour
             ResetBtnColor(btn);
             EnableBtn(btn);
         }
+
+        SetPopup(popupCheckAnswers, false, "");
     }
 
     public void SetQuestionOnWindow(Question q, string qNumber)
@@ -246,7 +273,37 @@ public class GameModeManager : MonoBehaviour
             timer = 0.0f;
 
             resolutionTime = q.resolutionTime;
+
+            if (q.GetStatementImage() == null)
+            {
+                questionImage.SetActive(false);
+            }
+            else
+            {
+
+                Debug.Log(q.GetStatementImage());
+                Sprite image = Resources.Load(q.GetStatementImage(), typeof(Sprite)) as Sprite;
+                questionImage.GetComponent<SpriteRenderer>().sprite = image;
+                questionImage.SetActive(true);
+            }     
+
         }
+    }
+
+    public void UpdateScore(int score)
+    {
+
+        int tempPlayerScore = playerScore + score;
+        playerScore = (tempPlayerScore < 0) ? 0 : tempPlayerScore;
+
+        // Atualiza o score do jogador
+        scoreTextbox.text = playerScore.ToString();
+    }
+
+    public void IncreaseWrongAnswer()
+    {
+        wrongQuestions += 1;
+        currentWrongAnswersTextbox.text = $"{wrongQuestions}/{NOFWRONGQUESTIONS}";
     }
 
     public void CheckOnClickAnswer(UnityEngine.UI.Button btn)
@@ -254,25 +311,40 @@ public class GameModeManager : MonoBehaviour
         if(IsCorrectAnswer(btn))
         {
             SetBtnColor(btn, Color.green);
-            playerScore += currentQuestion.GetScore();
+            UpdateScore(currentQuestion.GetScore());
+
+            SetPopup(popupCheckAnswers, true, "ACERTOU!");
         }
         else
         {
             SetBtnColor(btn, Color.red);
 
-            int tempPlayerScore = playerScore - currentQuestion.GetScore();
+            UpdateScore(-currentQuestion.GetScore());
+            IncreaseWrongAnswer();
 
-            playerScore = (tempPlayerScore < 0) ? 0 : tempPlayerScore;
-
-            wrongQuestions += 1;
-
-            currentWrongAnswersTextbox.text = $"{wrongQuestions}/{NOFWRONGQUESTIONS}";
+            SetPopup(popupCheckAnswers, true, "ERROU!");
         }
 
-        // Atualiza o score do jogador
-        scoreTextbox.text = playerScore.ToString();
+        if (currentQIndex == 8)
+        {
+            SetPopup(popupCheckAnswers, false, "");
+            string summary = "FIM DE JOGO\n\n PONTUAÇÃO: "+ scoreTextbox.text + "\nQUESTÕES ACERTADAS: "+ (NOFQUESTIONS - wrongQuestions) +"/"+ NOFQUESTIONS + "\nQUESTÕES ERRADAS: " + wrongQuestions;
+            SetPopup(popupSummary, true, summary);
+        }
+    }
 
-        CallNextQuestion();
+    public void SetPopup(GameObject popup, bool active, string popupMessage)
+    {
+        isPopupOn = active;
+        Transform popupText = popup.GetComponent<Transform>().Find("Image").Find("Text");
+        popupText.GetComponent<UnityEngine.UI.Text>().text = popupMessage;
+        popup.SetActive(active);
+    }
+
+    public void DisablePopup(GameObject popup)
+    {
+        isPopupOn = false;
+        popup.SetActive(false);
     }
 
     public bool IsCorrectAnswer(UnityEngine.UI.Button btn)

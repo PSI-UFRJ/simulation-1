@@ -73,7 +73,10 @@ public class ObjectControlled : MonoBehaviour
 
         string shapeCuriosity = objectControlledShape.GetCuriosity();
 
-        curiosityTextbox.text = shapeCuriosity;
+        if(curiosityTextbox != null)
+        {
+            curiosityTextbox.text = shapeCuriosity;
+        }
 
         objectControlled = selectedObj; // Guarda a referência para o novo objeto selecionado
 
