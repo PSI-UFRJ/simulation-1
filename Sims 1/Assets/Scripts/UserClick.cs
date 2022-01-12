@@ -82,6 +82,8 @@ public class UserClick : MonoBehaviour
     /// </summary>
     private void ExecuteMouseButtonDownActions()
     {
+        Collider2D selectedObject = null;
+
         Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
         // Sanity check
@@ -90,13 +92,14 @@ public class UserClick : MonoBehaviour
             return;
         }
 
-
-        Collider2D selectedObject = Physics2D.OverlapPointAll(mousePos).OrderByDescending(x => x.gameObject.GetComponent<SpriteRenderer>().sortingOrder).First<Collider2D>();
+        if (Physics2D.OverlapPointAll(mousePos).Any())
+        {
+            selectedObject = Physics2D.OverlapPointAll(mousePos).OrderByDescending(x => x.gameObject.GetComponent<SpriteRenderer>().sortingOrder).First<Collider2D>();
+        }
 
         //Physics2D.OverlapPoint(mousePos)
         if (collider == selectedObject)
         {
-
             control.UnselectObject(this.gameObject, false);
             control.SelectObject(this.gameObject); // Informa ao controller que ele é o objeto selecionado e troca a cor do obj
             control.ReduceLayer(); //Reduz a layer em uma casa
