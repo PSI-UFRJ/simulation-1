@@ -27,19 +27,19 @@ public class IntroductionModeManager : MonoBehaviour
         UnityEngine.UI.Button gameBtn = GameObject.Find("GameModeBtn").GetComponent<UnityEngine.UI.Button>();
         UnityEngine.UI.Button labBtn = GameObject.Find("LabModeBtn").GetComponent<UnityEngine.UI.Button>();
 
-        if (sceneName == "Introduction")
-        {
-            SetBtnColor(labBtn, Color.yellow);
-        }
-        else if(sceneName == "Game")
-        {
-            SetBtnColor(gameBtn, Color.yellow);
-        }
-        else
-        {
-            ResetBtnColor(gameBtn);
-            ResetBtnColor(labBtn);
-        }
+        //if (sceneName == "Introduction")
+        //{
+        //    SetBtnColor(labBtn, Color.yellow);
+        //}
+        //else if(sceneName == "Game")
+        //{
+        //    SetBtnColor(gameBtn, Color.yellow);
+        //}
+        //else
+        //{
+        //    ResetBtnColor(gameBtn);
+        //    ResetBtnColor(labBtn);
+        //}
 
 
     }
