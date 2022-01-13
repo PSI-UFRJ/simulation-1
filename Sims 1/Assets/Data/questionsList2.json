@@ -20,11 +20,11 @@
 	{
 		"statementText": "O polígono da figura a seguir representa um terreno. A figura não foi construída obedecendo a uma escala. A área desse terreno, em metro quadrado, é aproximadamente:",
 		"source": "VUNESP - 2021 - Prefeitura de Várzea Paulista - SP - Professor de Educação Básica - Ensino Fundamental",
-		"answersOptions": ["22.74", "15.88", "5.8", "7.71"],
+		"answersOptions": [ "22.74", "15.88", "5.8", "7.71" ],
 		"correctAnswer": "7.71",
 		"resolutionTime": 30,
 		"score": 5,
-		"image": null
+		"image": "question 2.1"
 	},
 	{
 		"statementText": "Um losango cuja diagonal maior é 6.68 e diagonal menor é 3.86, apresenta um perímetro de:",

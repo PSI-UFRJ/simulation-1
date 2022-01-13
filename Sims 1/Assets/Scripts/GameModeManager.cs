@@ -74,6 +74,7 @@ public class GameModeManager : MonoBehaviour
     private int playerScore = 0;
     private int resolutionTime = 0;
     private int wrongQuestions = 0;
+    private int rightQuestions = 0;
 
     private float timer = 0.0f;
 
@@ -97,8 +98,7 @@ public class GameModeManager : MonoBehaviour
         if (wrongQuestions >= NOFWRONGQUESTIONS)
         {
             SetPopup(popupCheckAnswers, false, "");
-            string summary = "FIM DE JOGO\n\n PONTUAÇÃO: " + scoreTextbox.text + "\nQUESTÕES ACERTADAS: " + (NOFQUESTIONS - wrongQuestions) + "/" + NOFQUESTIONS + "\nQUESTÕES ERRADAS: " + wrongQuestions;
-            SetPopup(popupSummary, true, summary);
+            SetPopup(popupSummary, true, new List<string>() { scoreTextbox.text, rightQuestions + "/" + NOFQUESTIONS, wrongQuestions + "/" + NOFWRONGQUESTIONS });
         }
     }
 
@@ -137,19 +137,19 @@ public class GameModeManager : MonoBehaviour
         UnityEngine.UI.Button gameBtn = GameObject.Find("GameModeBtn").GetComponent<UnityEngine.UI.Button>();
         UnityEngine.UI.Button labBtn = GameObject.Find("LabModeBtn").GetComponent<UnityEngine.UI.Button>();
 
-        if (sceneName == "Introduction")
-        {
-            SetBtnColor(labBtn, Color.yellow);
-        }
-        else if(sceneName == "Game")
-        {
-            SetBtnColor(gameBtn, Color.yellow);
-        }
-        else
-        {
-            ResetBtnColor(gameBtn);
-            ResetBtnColor(labBtn);
-        }
+        //if (sceneName == "Introduction")
+        //{
+        //    SetBtnColor(labBtn, Color.yellow);
+        //}
+        //else if(sceneName == "Game")
+        //{
+        //    SetBtnColor(gameBtn, Color.yellow);
+        //}
+        //else
+        //{
+        //    ResetBtnColor(gameBtn);
+        //    ResetBtnColor(labBtn);
+        //}
     }
 
     private void ResetBtnColor(UnityEngine.UI.Button btn)
@@ -253,7 +253,7 @@ public class GameModeManager : MonoBehaviour
         {
             statementTextbox.text = q.GetStatementText();
 
-            questionTitleTextbox.text = "Pergunta " + qNumber;
+            questionTitleTextbox.text = "PERGUNTA " + qNumber;
 
             List<string> answerOptions = GetRandomElements<string>(q.GetAnswersOptions(), NOFANSWEROPTS);
 
@@ -306,14 +306,19 @@ public class GameModeManager : MonoBehaviour
         currentWrongAnswersTextbox.text = $"{wrongQuestions}/{NOFWRONGQUESTIONS}";
     }
 
+    public void IncreaseRightAnswer()
+    {
+        rightQuestions += 1;
+    }
+
     public void CheckOnClickAnswer(UnityEngine.UI.Button btn)
     {
         if(IsCorrectAnswer(btn))
         {
             SetBtnColor(btn, Color.green);
             UpdateScore(currentQuestion.GetScore());
-
-            SetPopup(popupCheckAnswers, true, "ACERTOU!");
+            IncreaseRightAnswer();
+            SetPopup(popupCheckAnswers, true, "Parabéns, você acertou esta questão!");
         }
         else
         {
@@ -322,14 +327,13 @@ public class GameModeManager : MonoBehaviour
             UpdateScore(-currentQuestion.GetScore());
             IncreaseWrongAnswer();
 
-            SetPopup(popupCheckAnswers, true, "ERROU!");
+            SetPopup(popupCheckAnswers, true, "Poxa, você errou esta questão!");
         }
 
         if (currentQIndex == 8)
         {
             SetPopup(popupCheckAnswers, false, "");
-            string summary = "FIM DE JOGO\n\n PONTUAÇÃO: "+ scoreTextbox.text + "\nQUESTÕES ACERTADAS: "+ (NOFQUESTIONS - wrongQuestions) +"/"+ NOFQUESTIONS + "\nQUESTÕES ERRADAS: " + wrongQuestions;
-            SetPopup(popupSummary, true, summary);
+            SetPopup(popupSummary, true, new List<string>() { scoreTextbox.text, rightQuestions + "/" + NOFQUESTIONS, wrongQuestions + "/" + NOFWRONGQUESTIONS });
         }
     }
 
@@ -338,6 +342,21 @@ public class GameModeManager : MonoBehaviour
         isPopupOn = active;
         Transform popupText = popup.GetComponent<Transform>().Find("Image").Find("Text");
         popupText.GetComponent<UnityEngine.UI.Text>().text = popupMessage;
+        popup.SetActive(active);
+    }
+
+    public void SetPopup(GameObject popup, bool active, List<string> popupMessage)
+    {
+
+        isPopupOn = active;
+        Transform popupScoreText = popup.GetComponent<Transform>().Find("PopupImage").Find("ScoreImage").Find("ScoreText");
+        popupScoreText.GetComponent<UnityEngine.UI.Text>().text = popupMessage[0];
+
+        Transform popupRightAnswerText = popup.GetComponent<Transform>().Find("PopupImage").Find("RightAnswerImage").Find("RightAnswerText");
+        popupRightAnswerText.GetComponent<UnityEngine.UI.Text>().text = popupMessage[1];
+
+        Transform popupWrongAnswerText = popup.GetComponent<Transform>().Find("PopupImage").Find("WrongAnswerImage").Find("WrongAnswerText");
+        popupWrongAnswerText.GetComponent<UnityEngine.UI.Text>().text = popupMessage[2];
         popup.SetActive(active);
     }
 
@@ -409,17 +428,17 @@ public class GameModeManager : MonoBehaviour
         colorBlock.disabledColor = new Color(colorBlock.disabledColor.r, colorBlock.disabledColor.g, colorBlock.disabledColor.b, DISABLEDOPACITY);
         btn.colors = colorBlock;
 
-        Color btnColor = btn.GetComponentInChildren<UnityEngine.UI.Text>().color;
-        btnColor.a = DISABLEDOPACITY;
-        btn.GetComponentInChildren<UnityEngine.UI.Text>().color = btnColor;
+        //Color btnColor = btn.GetComponentInChildren<UnityEngine.UI.Text>().color;
+        //btnColor.a = DISABLEDOPACITY;
+        //btn.GetComponentInChildren<UnityEngine.UI.Text>().color = btnColor;
     }
 
     public void EnableBtn(UnityEngine.UI.Button btn)
     {
         btn.interactable = true;
 
-        Color btnColor = btn.GetComponentInChildren<UnityEngine.UI.Text>().color;
-        btnColor.a = ENABLEDOPACITY;
-        btn.GetComponentInChildren<UnityEngine.UI.Text>().color = btnColor;
+        //Color btnColor = btn.GetComponentInChildren<UnityEngine.UI.Text>().color;
+        //btnColor.a = ENABLEDOPACITY;
+        //btn.GetComponentInChildren<UnityEngine.UI.Text>().color = btnColor;
     }
 }
