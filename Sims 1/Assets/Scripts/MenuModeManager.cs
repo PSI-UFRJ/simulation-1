@@ -34,4 +34,14 @@ public class MenuModeManager : MonoBehaviour
         Debug.Log("Closed application");
         Application.Quit();
     }
+
+    public void CloseModal(GameObject modal)
+    {
+        modal.SetActive(false);
+    }
+
+    public void OpenModal(GameObject modal)
+    {
+        modal.SetActive(true);
+    }
 }
