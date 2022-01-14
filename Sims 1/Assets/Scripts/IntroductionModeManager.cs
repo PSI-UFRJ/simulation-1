@@ -5,6 +5,9 @@ using UnityEngine.SceneManagement;
 
 public class IntroductionModeManager : MonoBehaviour
 {
+    [SerializeField]
+    private GameObject popupExit;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -60,12 +63,25 @@ public class IntroductionModeManager : MonoBehaviour
     #endregion
 
     #region Close App
-    public void QuitApplication()
+    public void QuitApplication(bool popup = false)
     {
+        if (popup)
+        {
+            Transform popupText = popupExit.GetComponent<Transform>().Find("Image").Find("Text");
+            popupText.GetComponent<UnityEngine.UI.Text>().text = "Tem certeza que deseja sair?";
+            popupExit.SetActive(true);
+            return;
+        }
+
         Debug.Log("Closed application");
         Application.Quit();
     }
     #endregion
+
+    public void DisablePopup(GameObject popup)
+    {
+        popup.SetActive(false);
+    }
 
     public void changeScene(string sceneName)
     {

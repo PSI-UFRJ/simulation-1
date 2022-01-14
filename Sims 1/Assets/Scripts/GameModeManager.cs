@@ -9,7 +9,7 @@ using UnityEngine.SceneManagement;
 
 public class GameModeManager : MonoBehaviour
 {
-    // Start is called before the first frame update
+    
 
     [SerializeField]
     private UnityEngine.UI.Text statementTextbox;
@@ -82,6 +82,7 @@ public class GameModeManager : MonoBehaviour
 
     private List<UnityEngine.UI.Button> optionButtons;
 
+    // Start is called before the first frame update
     void Start()
     {
         ActivateModeBtn();
@@ -174,7 +175,7 @@ public class GameModeManager : MonoBehaviour
     {
         if (popup)
         {
-            SetPopup(popupExit, true, "VOCÊ REALMENTE DESEJA SAIR?");
+            SetPopup(popupExit, true, "Tem certeza que deseja sair?");
             return;
         }
         Debug.Log("Closed application");
