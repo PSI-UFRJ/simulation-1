@@ -11,13 +11,20 @@ public class IntroductionModeManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        ActivateModeBtn();
+        InitializeIntroduction();
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
+    }
+
+    public void InitializeIntroduction()
+    {
+        ActivateModeBtn();
+
+        this.gameObject.GetComponent<SoundManagerScript>().PlaySound("Environment");
     }
 
     #region Mode Btns
@@ -68,7 +75,7 @@ public class IntroductionModeManager : MonoBehaviour
         if (popup)
         {
             Transform popupText = popupExit.GetComponent<Transform>().Find("Image").Find("Text");
-            popupText.GetComponent<UnityEngine.UI.Text>().text = "Tem certeza que deseja sair?";
+            popupText.GetComponent<UnityEngine.UI.Text>().text = "Tem certeza que deseja voltar ao menu?";
             popupExit.SetActive(true);
             return;
         }
@@ -92,5 +99,14 @@ public class IntroductionModeManager : MonoBehaviour
         {
             SceneManager.LoadScene("Introduction");
         }
+        else if (sceneName == "Menu")
+        {
+            SceneManager.LoadScene("Menu");
+        }
+    }
+
+    public void StartClickSound()
+    {
+        this.gameObject.GetComponent<SoundManagerScript>().PlaySound("Click");
     }
 }

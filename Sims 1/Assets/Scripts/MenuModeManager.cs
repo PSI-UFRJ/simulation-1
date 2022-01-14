@@ -8,13 +8,18 @@ public class MenuModeManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        InitializeMenu();
     }
 
     // Update is called once per frame
     void Update()
     {
         
+    }
+
+    public void InitializeMenu()
+    {
+        this.gameObject.GetComponent<SoundManagerScript>().PlaySound("Environment");
     }
 
     public void LoadScene(string sceneName)
@@ -43,5 +48,10 @@ public class MenuModeManager : MonoBehaviour
     public void OpenModal(GameObject modal)
     {
         modal.SetActive(true);
+    }
+
+    public void StartClickSound()
+    {
+        this.gameObject.GetComponent<SoundManagerScript>().PlaySound("Click");
     }
 }

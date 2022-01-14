@@ -175,11 +175,11 @@ public class GameModeManager : MonoBehaviour
     {
         if (popup)
         {
-            SetPopup(popupExit, true, "Tem certeza que deseja sair?");
+            SetPopup(popupExit, true, "Tem certeza que deseja voltar ao menu?");
             return;
         }
-        Debug.Log("Closed application");
-        Application.Quit();
+        //Debug.Log("Closed application");
+        //Application.Quit();
     }
     #endregion
 
@@ -191,6 +191,10 @@ public class GameModeManager : MonoBehaviour
         else if (sceneName == "Introduction")
         {
             SceneManager.LoadScene("Introduction");
+        }
+        else if (sceneName == "Menu")
+        {
+            SceneManager.LoadScene("Menu");
         }
     }
 
