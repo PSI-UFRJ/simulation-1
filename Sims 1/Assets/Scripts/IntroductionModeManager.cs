@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.InteropServices;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -7,6 +9,14 @@ public class IntroductionModeManager : MonoBehaviour
 {
     [SerializeField]
     private GameObject popupExit;
+
+    [SerializeField]
+    private UnityEngine.UI.Button muteBtn;
+
+    [DllImport("user32.dll")]
+    private static extern bool ShowWindow(IntPtr hwnd, int nCmdShow);
+    [DllImport("user32.dll")]
+    private static extern IntPtr GetActiveWindow();
 
     // Start is called before the first frame update
     void Start()
@@ -24,7 +34,22 @@ public class IntroductionModeManager : MonoBehaviour
     {
         ActivateModeBtn();
 
+        this.gameObject.GetComponent<SoundManagerScript>().StartSound();
         this.gameObject.GetComponent<SoundManagerScript>().PlaySound("Environment");
+
+        IniteMuteBtnSprite();
+    }
+
+    public void IniteMuteBtnSprite()
+    {
+        if (AudioListener.pause)
+        {
+            muteBtn.GetComponent<UnityEngine.UI.Image>().sprite = Resources.Load("UI Components/Header_MuteBtn_Off", typeof(Sprite)) as Sprite;
+        }
+        else
+        {
+            muteBtn.GetComponent<UnityEngine.UI.Image>().sprite = Resources.Load("UI Components/Header_MuteBtn_On", typeof(Sprite)) as Sprite;
+        }
     }
 
     #region Mode Btns
@@ -103,6 +128,11 @@ public class IntroductionModeManager : MonoBehaviour
         {
             SceneManager.LoadScene("Menu");
         }
+    }
+
+    public void OnMinimizeButtonClick()
+    {
+        ShowWindow(GetActiveWindow(), 2);
     }
 
     public void StartClickSound()

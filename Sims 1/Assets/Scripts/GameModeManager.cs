@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Runtime.InteropServices;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -82,13 +83,25 @@ public class GameModeManager : MonoBehaviour
 
     private List<UnityEngine.UI.Button> optionButtons;
 
+    [SerializeField]
+    private UnityEngine.UI.Button muteBtn;
+
+    [DllImport("user32.dll")]
+    private static extern bool ShowWindow(IntPtr hwnd, int nCmdShow);
+    [DllImport("user32.dll")]
+    private static extern IntPtr GetActiveWindow();
+
     // Start is called before the first frame update
     void Start()
     {
         ActivateModeBtn();
         InitSessionQuestions();
+        IniteMuteBtnSprite();
         InitPlayerInfo();
         optionButtons = new List<UnityEngine.UI.Button>() { aBtn, bBtn, cBtn, dBtn };
+
+        this.gameObject.GetComponent<SoundManagerScript>().StartSound();
+        this.gameObject.GetComponent<SoundManagerScript>().PlaySound("Environment");
     }
 
     // Update is called once per frame
@@ -96,11 +109,29 @@ public class GameModeManager : MonoBehaviour
     {
         TickTimer();
 
-        if (wrongQuestions >= NOFWRONGQUESTIONS)
+        CallSummaryPopup();
+    }
+
+    public void CallSummaryPopup()
+    {
+        if (!HasReachWrongQuestions())
         {
-            SetPopup(popupCheckAnswers, false, "");
-            SetPopup(popupSummary, true, new List<string>() { scoreTextbox.text, rightQuestions + "/" + NOFQUESTIONS, wrongQuestions + "/" + NOFWRONGQUESTIONS });
+            return;
         }
+
+        SetPopup(popupCheckAnswers, false, "");
+
+        if (!popupSummary.activeSelf)
+        {
+            StartSummarySound();
+        }
+
+        SetPopup(popupSummary, true, new List<string>() { scoreTextbox.text, rightQuestions + "/" + NOFQUESTIONS, wrongQuestions + "/" + NOFWRONGQUESTIONS });
+    }
+
+    public bool HasReachWrongQuestions()
+    {
+        return wrongQuestions >= NOFWRONGQUESTIONS;
     }
 
     /// <summary>
@@ -224,6 +255,18 @@ public class GameModeManager : MonoBehaviour
         }
     }
 
+    public void IniteMuteBtnSprite()
+    {
+        if (AudioListener.pause)
+        {
+            muteBtn.GetComponent<UnityEngine.UI.Image>().sprite = Resources.Load("UI Components/Header_MuteBtn_Off", typeof(Sprite)) as Sprite;
+        }
+        else
+        {
+            muteBtn.GetComponent<UnityEngine.UI.Image>().sprite = Resources.Load("UI Components/Header_MuteBtn_On", typeof(Sprite)) as Sprite;
+        }
+    }
+
     public void InitPlayerInfo()
     {
         this.scoreTextbox.text = "0";
@@ -259,6 +302,10 @@ public class GameModeManager : MonoBehaviour
             statementTextbox.text = q.GetStatementText();
 
             questionTitleTextbox.text = "PERGUNTA " + qNumber;
+
+            Debug.Log(q.GetCorrectAnswer());
+
+            Debug.Log($"Score questão: {q.GetScore()}");
 
             List<string> answerOptions = GetRandomElements<string>(q.GetAnswersOptions(), NOFANSWEROPTS);
 
@@ -324,6 +371,11 @@ public class GameModeManager : MonoBehaviour
             UpdateScore(currentQuestion.GetScore());
             IncreaseRightAnswer();
             SetPopup(popupCheckAnswers, true, "Parabéns, você acertou esta questão!");
+
+            if (currentQIndex < NOFQUESTIONS)
+            {
+                StartSuccessSound();
+            }
         }
         else
         {
@@ -332,6 +384,11 @@ public class GameModeManager : MonoBehaviour
             UpdateScore(-currentQuestion.GetScore());
             IncreaseWrongAnswer();
 
+            if (!HasReachWrongQuestions() && currentQIndex < NOFQUESTIONS)
+            {
+                StartFailSound();
+            }
+            
             SetPopup(popupCheckAnswers, true, "Poxa, você errou esta questão!");
         }
 
@@ -339,6 +396,7 @@ public class GameModeManager : MonoBehaviour
         {
             SetPopup(popupCheckAnswers, false, "");
             SetPopup(popupSummary, true, new List<string>() { scoreTextbox.text, rightQuestions + "/" + NOFQUESTIONS, wrongQuestions + "/" + NOFWRONGQUESTIONS });
+            StartSummarySound();
         }
     }
 
@@ -422,6 +480,15 @@ public class GameModeManager : MonoBehaviour
     public void PassQuestion()
     {
         DisableBtn(passBtn);
+
+        if (currentQIndex == 8)
+        {
+            SetPopup(popupCheckAnswers, false, "");
+            SetPopup(popupSummary, true, new List<string>() { scoreTextbox.text, rightQuestions + "/" + NOFQUESTIONS, wrongQuestions + "/" + NOFWRONGQUESTIONS });
+            StartSummarySound();
+            return;
+        }
+
         CallNextQuestion();
     }
 
@@ -445,5 +512,35 @@ public class GameModeManager : MonoBehaviour
         //Color btnColor = btn.GetComponentInChildren<UnityEngine.UI.Text>().color;
         //btnColor.a = ENABLEDOPACITY;
         //btn.GetComponentInChildren<UnityEngine.UI.Text>().color = btnColor;
+    }
+
+    public void StartClickSound()
+    {
+        this.gameObject.GetComponent<SoundManagerScript>().PlaySound("Click");
+    }
+
+    public void StartSpecialSound()
+    {
+        this.gameObject.GetComponent<SoundManagerScript>().PlaySound("Special");
+    }
+
+    public void StartSuccessSound()
+    {
+        this.gameObject.GetComponent<SoundManagerScript>().PlaySound("Success");
+    }
+
+    public void StartFailSound()
+    {
+        this.gameObject.GetComponent<SoundManagerScript>().PlaySound("Fail");
+    }
+
+    public void StartSummarySound()
+    {
+        this.gameObject.GetComponent<SoundManagerScript>().PlaySound("Summary");
+    }
+
+    public void OnMinimizeButtonClick()
+    {
+        ShowWindow(GetActiveWindow(), 2);
     }
 }

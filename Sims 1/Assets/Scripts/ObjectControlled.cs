@@ -154,6 +154,12 @@ public class ObjectControlled : MonoBehaviour
     /// </summary>
     public void ChangeColorPickerUp()
     {
+        // Sanity check
+        if(objectControlled == null)
+        {
+            return;
+        }
+
         int colorIndex = possibleObjColors.Length - 1;
 
         for (int i = 0; i < possibleObjColors.Length; i++) // Encontra o index da cor atual na lista
@@ -179,6 +185,12 @@ public class ObjectControlled : MonoBehaviour
     /// </summary>
     public void ChangeColorPickerDown()
     {
+        // Sanity check
+        if(objectControlled == null)
+        {
+            return;
+        }
+
         int colorIndex = 0;
 
         for (int i = 0; i < possibleObjColors.Length; i++) // Encontra o index da cor atual na lista
@@ -234,6 +246,13 @@ public class ObjectControlled : MonoBehaviour
                 Destroy(childGameObj);
             }
         }
+
+        // Sanity check
+        if(controlPanel == null)
+        {
+            return;
+        }
+
         controlPanel.SetActive(false);
     }
 

@@ -48,16 +48,19 @@ public class SoundManagerScript : MonoBehaviour
 
     void Start()
     {
-        for(int i = 0; i < sounds.Length; i++)
-        {
-            GameObject _sound = new GameObject("Sound_" + i + "_" + sounds[i].name);
-            _sound.transform.SetParent(this.transform);
-            sounds[i].SetSource(_sound.AddComponent<AudioSource>());
-        }
+        StartSound();
     }
 
-    public void PlaySound(string _name){
-        for (int i = 0; i < sounds.Length; i++){
+    public void PlaySound(string _name)
+    {
+        for (int i = 0; i < sounds.Length; i++)
+        {
+            // Sanity check
+            if(string.IsNullOrEmpty(_name) || sounds[i].audiosrc == null)
+            {
+                continue;
+            }
+
             if (sounds[i].name.Equals(_name) && !sounds[i].audiosrc.isPlaying)
             {
                 sounds[i].Play();
@@ -79,4 +82,27 @@ public class SoundManagerScript : MonoBehaviour
         Debug.LogWarning("O nome " + _name + " não foi encontrado.");
     }
 
+    public void MuteAllSounds(UnityEngine.UI.Button btn)
+    {
+        if (AudioListener.pause)
+        {
+            btn.GetComponent<UnityEngine.UI.Image>().sprite = Resources.Load("UI Components/Header_MuteBtn_On", typeof(Sprite)) as Sprite;
+        }
+        else
+        {
+            btn.GetComponent<UnityEngine.UI.Image>().sprite = Resources.Load("UI Components/Header_MuteBtn_Off", typeof(Sprite)) as Sprite;
+        }
+
+        AudioListener.pause = !AudioListener.pause;
+    }
+
+    public void StartSound()
+    {
+        for (int i = 0; i < sounds.Length; i++)
+        {
+            GameObject _sound = new GameObject("Sound_" + i + "_" + sounds[i].name);
+            _sound.transform.SetParent(this.transform);
+            sounds[i].SetSource(_sound.AddComponent<AudioSource>());
+        }
+    }
 }

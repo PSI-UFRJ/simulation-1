@@ -100,7 +100,18 @@ public class UserClick : MonoBehaviour
         //Physics2D.OverlapPoint(mousePos)
         if (collider == selectedObject)
         {
-            GameObject.Find("IntroductionManager").GetComponent<SoundManagerScript>().PlaySound("Click");
+            Scene currentScene = SceneManager.GetActiveScene();
+            string sceneName = currentScene.name;
+
+            if(sceneName == "Introduction")
+            {
+                GameObject.Find("IntroductionManager").GetComponent<SoundManagerScript>().PlaySound("Click");
+            }
+            else if(sceneName == "Game")
+            {
+                GameObject.Find("GameManager").GetComponent<SoundManagerScript>().PlaySound("Click");
+            }
+            
             control.UnselectObject(this.gameObject, false);
             control.SelectObject(this.gameObject); // Informa ao controller que ele é o objeto selecionado e troca a cor do obj
             control.ReduceLayer(); //Reduz a layer em uma casa

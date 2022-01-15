@@ -5496,8 +5496,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 449077439}
-  - component: {fileID: 449077440}
   - component: {fileID: 449077441}
+  - component: {fileID: 449077440}
   m_Layer: 0
   m_Name: MenuManager
   m_TagString: Untagged
@@ -5545,9 +5545,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sounds:
   - name: Environment
-    clip: {fileID: 8300000, guid: 9b62e26a7f0fedb41b7aa9211bc6ff57, type: 3}
+    clip: {fileID: 8300000, guid: f72bb322d3dad5d4fb6a5261bca98380, type: 3}
     loop: 1
-    volume: 0.0005
+    volume: 0.1
     priority: 0
     audiosrc: {fileID: 0}
   - name: Click
@@ -5555,30 +5555,6 @@ MonoBehaviour:
     loop: 0
     volume: 0.1
     priority: 1
-    audiosrc: {fileID: 0}
-  - name: 
-    clip: {fileID: 0}
-    loop: 0
-    volume: 0
-    priority: 0
-    audiosrc: {fileID: 0}
-  - name: 
-    clip: {fileID: 0}
-    loop: 0
-    volume: 0
-    priority: 0
-    audiosrc: {fileID: 0}
-  - name: 
-    clip: {fileID: 0}
-    loop: 0
-    volume: 0
-    priority: 0
-    audiosrc: {fileID: 0}
-  - name: 
-    clip: {fileID: 0}
-    loop: 0
-    volume: 0
-    priority: 0
     audiosrc: {fileID: 0}
 --- !u!1 &458202107
 GameObject:

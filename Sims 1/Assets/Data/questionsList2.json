@@ -111,7 +111,7 @@
 		"statementText": "Em uma jogada ensaiada o Jogador A passa a bola para o jogador B que passa para o jogador C que por fim passa a bola para o jogador D. Considerando que a trajetória da bola é linear e eles estão parados em seus lugares, qual é área total criada por essa jogada? A imagem é meramente ilustrativa. Todas as medidas apresentadas estão em metros.",
 		"source": "Avança SP - 2021 - Prefeitura de Laranjal Paulista - SP - Assistente Social",
 		"answersOptions": [ "2.23 metro quadrado", "5.63 metro quadrado", "1.87 metro quadrado", "3.59 metro quadrado" ],
-		"correctAnswer": "2,23 metro quadrado",
+		"correctAnswer": "2.23 metro quadrado",
 		"resolutionTime": 60,
 		"score": 10,
 		"image": "question 17"

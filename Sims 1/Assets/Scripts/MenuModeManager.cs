@@ -19,6 +19,9 @@ public class MenuModeManager : MonoBehaviour
 
     public void InitializeMenu()
     {
+        Debug.Log("toca o som DJ");
+
+        this.gameObject.GetComponent<SoundManagerScript>().StartSound();
         this.gameObject.GetComponent<SoundManagerScript>().PlaySound("Environment");
     }
 
