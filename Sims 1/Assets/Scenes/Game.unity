@@ -1907,7 +1907,7 @@ MonoBehaviour:
   - name: Environment
     clip: {fileID: 8300000, guid: f72bb322d3dad5d4fb6a5261bca98380, type: 3}
     loop: 1
-    volume: 0.1
+    volume: 0
     priority: 0
     audiosrc: {fileID: 0}
   - name: Click
