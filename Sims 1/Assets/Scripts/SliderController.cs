@@ -27,11 +27,13 @@ public class SliderController : MonoBehaviour, IPointerDownHandler, IPointerUpHa
     // Invoked when the value of the slider changes.
     public void ValueChangeCheck()
     {
+        Debug.Log("o valor do slider mudou" + sliderName);
         objectControlled.ChangeScale(sliderName, sizeSlider.value);
     }
 
     public void OnPointerDown(PointerEventData eventData)
     {
+        Debug.Log("cliquei no slider" + sliderName);
         objectControlled.enterSlider(elementName, sliderName, sizeSlider.value);
     }
 

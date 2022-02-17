@@ -31,6 +31,8 @@ ScriptsOnlyBuild:
     - UnityEditor.Tilemaps.TilemapPrefabStageHelper
     Unity.Rider.Editor.dll:
     - Packages.Rider.Editor.UnitTesting.CallbackData
+    Unity.Timeline.Editor.dll:
+    - TimelineProjectSettings
     UnityEditor.TestRunner.dll:
     - UnityEditor.TestTools.TestRunner.Api.CallbacksHolder
     - UnityEditor.TestTools.TestRunner.TestListCacheData
@@ -77,39 +79,39 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 1454}
     - Class: 114
-      Script: {instanceID: 1702}
+      Script: {instanceID: 1722}
     - Class: 114
-      Script: {instanceID: 1752}
+      Script: {instanceID: 1772}
     - Class: 114
-      Script: {instanceID: 2206}
+      Script: {instanceID: 2226}
     - Class: 114
-      Script: {instanceID: 2438}
+      Script: {instanceID: 2458}
     - Class: 114
-      Script: {instanceID: 2462}
+      Script: {instanceID: 2482}
     - Class: 114
-      Script: {instanceID: 2624}
+      Script: {instanceID: 2644}
     - Class: 114
-      Script: {instanceID: 2784}
+      Script: {instanceID: 2804}
     - Class: 114
-      Script: {instanceID: 2920}
+      Script: {instanceID: 2940}
     - Class: 114
-      Script: {instanceID: 3004}
+      Script: {instanceID: 3024}
     - Class: 114
-      Script: {instanceID: 3052}
+      Script: {instanceID: 3072}
     - Class: 114
-      Script: {instanceID: 3234}
+      Script: {instanceID: 3254}
     - Class: 114
-      Script: {instanceID: 3252}
+      Script: {instanceID: 3272}
     - Class: 114
-      Script: {instanceID: 3364}
+      Script: {instanceID: 3384}
     - Class: 114
-      Script: {instanceID: 3422}
+      Script: {instanceID: 3442}
     - Class: 114
-      Script: {instanceID: 4180}
+      Script: {instanceID: 4200}
     - Class: 114
-      Script: {instanceID: 4312}
+      Script: {instanceID: 4332}
     - Class: 114
-      Script: {instanceID: 4352}
+      Script: {instanceID: 4372}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -158,39 +160,39 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 1454}
     - Class: 114
-      Script: {instanceID: 1702}
+      Script: {instanceID: 1722}
     - Class: 114
-      Script: {instanceID: 1752}
+      Script: {instanceID: 1772}
     - Class: 114
-      Script: {instanceID: 2206}
+      Script: {instanceID: 2226}
     - Class: 114
-      Script: {instanceID: 2438}
+      Script: {instanceID: 2458}
     - Class: 114
-      Script: {instanceID: 2624}
+      Script: {instanceID: 2644}
     - Class: 114
-      Script: {instanceID: 2784}
+      Script: {instanceID: 2804}
     - Class: 114
-      Script: {instanceID: 2920}
+      Script: {instanceID: 2940}
     - Class: 114
-      Script: {instanceID: 2934}
+      Script: {instanceID: 2954}
     - Class: 114
-      Script: {instanceID: 3004}
+      Script: {instanceID: 3024}
     - Class: 114
-      Script: {instanceID: 3052}
+      Script: {instanceID: 3072}
     - Class: 114
-      Script: {instanceID: 3234}
+      Script: {instanceID: 3254}
     - Class: 114
-      Script: {instanceID: 3252}
+      Script: {instanceID: 3272}
     - Class: 114
-      Script: {instanceID: 3364}
+      Script: {instanceID: 3384}
     - Class: 114
-      Script: {instanceID: 3422}
+      Script: {instanceID: 3442}
     - Class: 114
-      Script: {instanceID: 4180}
+      Script: {instanceID: 4200}
     - Class: 114
-      Script: {instanceID: 4312}
+      Script: {instanceID: 4332}
     - Class: 114
-      Script: {instanceID: 4352}
+      Script: {instanceID: 4372}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -239,23 +241,23 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 1454}
     - Class: 114
-      Script: {instanceID: 1732}
+      Script: {instanceID: 1752}
     - Class: 114
-      Script: {instanceID: 2206}
+      Script: {instanceID: 2226}
     - Class: 114
-      Script: {instanceID: 2624}
+      Script: {instanceID: 2644}
     - Class: 114
-      Script: {instanceID: 2784}
+      Script: {instanceID: 2804}
     - Class: 114
-      Script: {instanceID: 3004}
+      Script: {instanceID: 3024}
     - Class: 114
-      Script: {instanceID: 3234}
+      Script: {instanceID: 3254}
     - Class: 114
-      Script: {instanceID: 3252}
+      Script: {instanceID: 3272}
     - Class: 114
-      Script: {instanceID: 3364}
+      Script: {instanceID: 3384}
     - Class: 114
-      Script: {instanceID: 5608}
+      Script: {instanceID: 5628}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -884,4 +886,4 @@ ScriptsOnlyBuild:
   - Assets/Scenes/Menu.unity
   - Assets/Scenes/Introduction.unity
   - Assets/Scenes/Game.unity
-  playerPath: C:/Users/eduar/Documents/GitHub/simulation-1/Sims 1/Build/Sims 1.exe
+  playerPath: D:/Meus Arquivos/Documents/Study/UFRJ/TCC/Sims Builds/Sims 1.exe
