@@ -25,10 +25,10 @@ public class Square : MonoBehaviour, IShape
 
     private List<string> curiosityCollection = new List<string>()
     {
-        "Todo quadrado é um losango mas nem todo losango é um quadrado",
-        "A relação de proporção entre o perímetro e a área é quadrática: a área é igual a 1/16 do quadrado do perímetro",
-        "Um quadrado tem uma área maior que qualquer outro quadrilátero de mesmo perímetro",
-        "Existem 4 formas de dividir um quadrado em partes iguais"
+        "Todo quadrado é um losango mas nem todo losango é um quadrado.",
+        "A relação de proporção entre o perímetro e a área é quadrática: a área é igual a 1/16 do quadrado do perímetro.",
+        "Um quadrado tem uma área maior que qualquer outro quadrilátero de mesmo perímetro.",
+        "Existem 4 formas de dividir um quadrado em partes iguais."
     };
 
     private Dictionary<string, float> lastMetrics = new Dictionary<string, float>()

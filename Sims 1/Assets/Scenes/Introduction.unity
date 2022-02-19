@@ -4523,7 +4523,7 @@ MonoBehaviour:
     m_BestFit: 1
     m_MinSize: 0
     m_MaxSize: 80
-    m_Alignment: 3
+    m_Alignment: 4
     m_AlignByGeometry: 1
     m_RichText: 1
     m_HorizontalOverflow: 0
@@ -18190,7 +18190,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 28606eb704cab214b8868b996cd59f79, type: 3}
+  m_Sprite: {fileID: 21300000, guid: d73b1df94909cdd4598e6b9ab5466b75, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

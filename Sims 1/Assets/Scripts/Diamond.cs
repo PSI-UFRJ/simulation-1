@@ -26,10 +26,10 @@ public class Diamond : MonoBehaviour, IShape
 
     private List<string> curiosityCollection = new List<string>()
     {
-        "A soma de todos os ângulos internos de um losango é de 360°",
-        "As duas diagonais de um losango são sempre perpendiculares",
-        "Losangos possuem todos os lados com o mesmo comprimento",
-        "O losango possui lados e ângulos opostos congruentes"
+        "A soma de todos os ângulos internos de um losango é de 360°.",
+        "As duas diagonais de um losango são sempre perpendiculares.",
+        "Losangos possuem todos os lados com o mesmo comprimento.",
+        "O losango possui lados e ângulos opostos congruentes."
     };
 
     private Dictionary<string, float> lastMetrics = new Dictionary<string, float>()

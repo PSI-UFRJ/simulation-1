@@ -27,10 +27,10 @@ public class Trapezoid : MonoBehaviour, IShape
 
     private List<string> curiosityCollection = new List<string>()
     {
-        "O tamanho das duas diagonais são iguais",
-        "Ângulos interiores que são adjacentes somam 180°",
+        "O tamanho das duas diagonais são iguais.",
+        "Ângulos interiores que são adjacentes somam 180°.",
         "A palavra trapézio vem do grego 'trapézion' que significa 'uma pequena mesa'. Também se refere a quadrilátero irregular.",
-        "Ao rotacionar um trapézio isósceles em torno do seu eixo vertical que o divide em partes iguais gera-se um tronco de cone no 3D"
+        "Ao rotacionar um trapézio isósceles em torno do seu eixo vertical que o divide em partes iguais gera-se um tronco de cone no 3D."
     };
 
     private Dictionary<string, float> lastMetrics = new Dictionary<string, float>()

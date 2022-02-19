@@ -27,11 +27,11 @@ public class Circle : MonoBehaviour, IShape
 
     private List<string> curiosityCollection = new List<string>() 
     {
-        "Círculos são ditos congruentes quando os mesmos possuem raios iguais",
-        "O diâmetro de um círculo é o maior segmento de reta entre dois pontos do círculo",
-        "Um círculo pode ser circunscrito em um retângulo, trapézio, losango, triângulo",
-        "Um círculo pode ser inscrito dentro de um quadrado, triângulo e losango",
-        "Todos os pontos da circunferência apresentam a mesma distância em relação ao centro"
+        "Círculos são ditos congruentes quando os mesmos possuem raios iguais.",
+        "O diâmetro de um círculo é o maior segmento de reta entre dois pontos do círculo.",
+        "Um círculo pode ser circunscrito em um retângulo, trapézio, losango, triângulo.",
+        "Um círculo pode ser inscrito dentro de um quadrado, triângulo e losango.",
+        "Todos os pontos da circunferência apresentam a mesma distância em relação ao centro."
 
     } ; 
 
