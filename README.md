@@ -1,6 +1,6 @@
-# Simulação de Grandezas
+# Simulação de Grandezas Geométricas
 
-> A Simulação de Grandezas é uma simulação computacional cujo objetivo é que o aluno possa explorar as formas geométricas e observar as relações entre suas propriedades e conceitos matemáticos como perímetro e área. As simulações do PSI possuem 2 modos: o modo "Lab" e o modo "Jogo".
+> A Simulação de Grandezas Geométricas é uma simulação computacional cujo objetivo é que o aluno possa explorar as formas geométricas e observar as relações entre suas propriedades e conceitos matemáticos como perímetro e área. As simulações do PSI possuem 2 modos: o modo "Lab" e o modo "Jogo".
 
 ## Modos
 ### Lab
