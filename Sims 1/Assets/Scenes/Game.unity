@@ -1513,14 +1513,15 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "O propriet\xE1rio de um apartamento decidiu instalar adesivo para piso
-    em parte da sala. A \xE1rea de instala\xE7\xE3o do piso tem formado de um quadrado
-    de lado 4m. Os adesivos t\xEAm formato de um c\xEDrculo com raio medindo 0,5m.
-    Este adesivo \xE9 vendido em dois tipos de caixas, com os pre\xE7os indicados
-    a seguir.\r\n\n\u2022 Caixas do tipo A: 4 unidades de piso, R$ 15,00; \r\n\u2022
-    Caixas do tipo B: 8 unidades de piso, R$ 27,00.\r\n\nQual tipo de caixa gera
-    o menor custo para o propriet\xE1rio caso ele queira cobrir o m\xE1ximo poss\xEDvel
-    da \xE1rea com adesivos inteiros? Qual \xE9 esse custo?"
+  m_Text: "(Adaptado de ENEM - 2021) O propriet\xE1rio de um apartamento decidiu
+    instalar adesivo para piso em parte da sala. A \xE1rea de instala\xE7\xE3o do
+    piso tem formado de um quadrado de lado 4m. Os adesivos t\xEAm formato de um
+    c\xEDrculo com raio medindo 0,5m. Este adesivo \xE9 vendido em dois tipos de
+    caixas, com os pre\xE7os indicados a seguir.\r\n\n\u2022 Caixas do tipo A: 4
+    unidades de piso, R$ 15,00; \r\n\u2022 Caixas do tipo B: 8 unidades de piso,
+    R$ 27,00.\r\n\nQual tipo de caixa gera o menor custo para o propriet\xE1rio caso
+    ele queira cobrir o m\xE1ximo poss\xEDvel da \xE1rea com adesivos inteiros? Qual
+    \xE9 esse custo?"
 --- !u!222 &84954467
 CanvasRenderer:
   m_ObjectHideFlags: 0

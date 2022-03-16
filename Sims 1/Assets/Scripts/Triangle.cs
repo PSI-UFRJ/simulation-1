@@ -26,11 +26,11 @@ public class Triangle : MonoBehaviour, IShape
     private List<string> curiosityCollection = new List<string>()
     {
        "Os triângulos são os polígonos com o menor número de lados.",
-        "Os triângulos equiláteros possuem todos os lados iguais.",
-        "Já percebeu que uma pirâmide possui faces triangulares?",
-        "Você sabia que os triângulos são uma das formas mais resistentes e por isso a mesma é comumente utilizada na construção civil? Exemplo: Construção de pontes e edifícios.",
-        "O triângulo é uma forma utilizada normalmente para trazer estabilidade a outras formas."
-
+       "Os triângulos equiláteros possuem todos os lados iguais.",
+       "A soma de todos os ângulos internos do triângulo é 180°.",
+       "Já percebeu que uma pirâmide possui faces triangulares?",
+       "Você sabia que os triângulos são uma das formas mais resistentes e por isso a mesma é comumente utilizada na construção civil? Exemplo: Construção de pontes e edifícios.",
+       "O triângulo é uma forma utilizada normalmente para trazer estabilidade a outras formas."
     };
 
     private Dictionary<string, float> lastMetrics = new Dictionary<string, float>()
