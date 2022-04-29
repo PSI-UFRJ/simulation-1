@@ -70,7 +70,7 @@ public class Square : MonoBehaviour, IShape
 
     public float CalculateDiagonal(GameObject objectControlled)
     {
-        return (float)(objectControlled.transform.localScale.x * Math.Sqrt(2)); 
+        return (float)(objectControlled.transform.localScale.x * (float)Math.Sqrt(2)); 
     }
 
     public Sprite[] GetSprites()

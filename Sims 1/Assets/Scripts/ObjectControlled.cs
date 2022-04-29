@@ -338,10 +338,10 @@ public class ObjectControlled : MonoBehaviour
             objectControlledShape.SetLastMetrics(metrics); //Guarda os novos valores das métricas
 
             changeSizeText = controller.Value.transform.Find("ChangeSizeValueTxt").GetComponent<UnityEngine.UI.Text>();
-            changeSizeText.text = "" + Math.Round(metrics[controller.Key], 2); // Atualiza o texto do slider para o novo valor
+            changeSizeText.text = "" + String.Format("{0:0.00}", (Math.Truncate(metrics[controller.Key] * 100) / 100)); // Atualiza o texto do slider para o novo valor
 
             sizeSlider = controller.Value.transform.Find("ChangeSizeSlider").GetComponent<UnityEngine.UI.Slider>();
-            sizeSlider.value = metrics[controller.Key]; // Altera o slider para o novo valor
+            sizeSlider.value = float.Parse((String.Format("{0:0.00}", Math.Truncate(metrics[controller.Key]*100) / 100))); // Altera o slider para o novo valor
         }
     }
 
