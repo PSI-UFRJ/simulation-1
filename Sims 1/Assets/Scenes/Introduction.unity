@@ -9830,10 +9830,10 @@ MonoBehaviour:
   m_FillRect: {fileID: 21398519}
   m_HandleRect: {fileID: 1876793717}
   m_Direction: 0
-  m_MinValue: 1.41
+  m_MinValue: 1.42
   m_MaxValue: 5.66
   m_WholeNumbers: 0
-  m_Value: 1.41
+  m_Value: 1.42
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []

@@ -55,22 +55,22 @@ public class Square : MonoBehaviour, IShape
 
     public float CalculateArea(GameObject objectControlled)
     {
-        return (float)Math.Pow(objectControlled.transform.localScale.x, 2);
+        return (float)Math.Pow(Math.Truncate(objectControlled.transform.localScale.x * 100) / 100, 2);
     }
 
     public float CalculateSide(GameObject objectControlled)
     {
-        return objectControlled.transform.localScale.x;
+        return (float)Math.Truncate(objectControlled.transform.localScale.x * 100) / 100;
     }
 
     public float CalculatePerimeter(GameObject objectControlled)
     {
-        return 4 * objectControlled.transform.localScale.x;
+        return 4 * (float)Math.Truncate(objectControlled.transform.localScale.x * 100) / 100;
     }
 
     public float CalculateDiagonal(GameObject objectControlled)
     {
-        return (float)(objectControlled.transform.localScale.x * (float)Math.Sqrt(2)); 
+        return (float)((Math.Truncate(objectControlled.transform.localScale.x * 100) / 100) * (float)Math.Sqrt(2));
     }
 
     public Sprite[] GetSprites()
